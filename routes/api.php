@@ -38,3 +38,18 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 	Route::post('reset-password', 'ForgetPasswordController@resetPassword');
 	
 });
+
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+	Route::group(['prefix' => 'notification'], function () {
+		Route::get('show', 'NotificationController@index');
+	});
+
+	Route::group(['prefix' => 'events'], function () {
+		Route::get('show', 'EventController@index');
+	});
+
+	Route::group(['prefix' => 'dashboard'], function () {
+		Route::get('/', 'EventController@dashboard');
+	});
+});
