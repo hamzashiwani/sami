@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\EventTimelineController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -60,10 +62,22 @@ Route::name('admin.')->group(
         Route::resource('faq', 'FaqController');
         Route::resource('notification', 'NotificationController');
         Route::resource('quiz', 'QuizController');
+        Route::resource('event', 'EventController');
         Route::resource('testimonial', 'TestimonialController');
         Route::resource('contact-us', 'ContactUsController');
         Route::resource('newsletters', 'NewsLettersController');
         Route::resource('users', 'UserController');
+        Route::resource('quiz-view', 'QuizViewController');
+
+        Route::get('event-timeline/{id}', [EventTimelineController::class, 'index'])->name('event-timeline.index');
+        Route::get('event-timeline/create/{id}', [EventTimelineController::class, 'create'])->name('event-timeline.create');
+        Route::post('event-timeline/store/{id}', [EventTimelineController::class, 'store'])->name('event-timeline.store');
+        Route::get('event-timeline/edit/{id}', [EventTimelineController::class, 'edit'])->name('event-timeline.edit');
+        Route::post('event-timeline/update/{id}', [EventTimelineController::class, 'update'])->name('event-timeline.update');
+        Route::put('event-timeline/update/{id}', [EventTimelineController::class, 'update'])->name('event-timeline.update');
+        Route::get('event-timeline/destroy/{id}', [EventTimelineController::class, 'destroy'])->name('event-timeline.destroy');
+
+
         Route::post('upload-image', [
             'uses'  => 'IndexController@uploadImage',
             'as'    => 'upload-image-from-editor'
