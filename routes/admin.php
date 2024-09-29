@@ -59,6 +59,7 @@ Route::name('admin.')->group(
         Route::resource('blog', 'BlogController');
         Route::resource('faq', 'FaqController');
         Route::resource('notification', 'NotificationController');
+        Route::resource('quiz', 'QuizController');
         Route::resource('testimonial', 'TestimonialController');
         Route::resource('contact-us', 'ContactUsController');
         Route::resource('newsletters', 'NewsLettersController');
