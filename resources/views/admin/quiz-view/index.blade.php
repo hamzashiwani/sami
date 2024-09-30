@@ -1,82 +1,86 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
     <style>
-        /* body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        } */
         #timer {
-            font-size: 2em;
-            color: red;
+            font-size: 2.5em;
+            color: #ff5733;
+            font-weight: bold;
         }
         .question {
             margin: 20px 0;
-            font-size: 1.5em;
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #333;
         }
         .answers {
             list-style: none;
             padding: 0;
+            margin: 20px 0;
         }
         .answers li {
             margin: 10px 0;
             cursor: pointer;
-            background: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background 0.3s;
+            background: #e7f3fe;
+            padding: 15px;
+            border-radius: 8px;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .answers li:hover {
-            background: #ddd;
+            background: #d1e8ff;
+            transform: scale(1.02);
         }
         .button-container {
-            margin: 20px 0;
+            margin: 30px 0;
         }
         button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             margin: 5px;
             cursor: pointer;
             border: none;
             border-radius: 5px;
             background-color: #007bff;
             color: white;
-            font-size: 1em;
-            transition: background 0.3s;
+            font-size: 1.1em;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         button:hover {
             background-color: #0056b3;
+            transform: translateY(-2px);
         }
         #chart {
             margin: 20px auto;
-            width: 80%;
+            width: 90%;
             max-width: 600px;
             display: none; /* Initially hidden */
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
     </style>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-content collapse show">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                            <div id="timer">30</div>
-                                <div class="question">What is the capital of France?</div>
-                                <ul class="answers">
-                                    <li onclick="selectAnswer('A')">A. Berlin</li>
-                                    <li onclick="selectAnswer('B')">B. Madrid</li>
-                                    <li onclick="selectAnswer('C')">C. Paris</li>
-                                    <li onclick="selectAnswer('D')">D. Rome</li>
-                                </ul>
-                                <div class="button-container">
-                                    <button id="nextButton" onclick="nextQuestion()">Next</button>
-                                    <button id="finishButton" onclick="finishQuiz()">Finish</button>
-                                </div>
-                                <canvas id="chart"></canvas>
-                            </div>
+                    <div class="card-body text-center">
+                        <div id="timer">30</div>
+                        <div class="question">What is the capital of France?</div>
+                        <ul class="answers">
+                            <li onclick="selectAnswer('A')">A. Berlin</li>
+                            <li onclick="selectAnswer('B')">B. Madrid</li>
+                            <li onclick="selectAnswer('C')">C. Paris</li>
+                            <li onclick="selectAnswer('D')">D. Rome</li>
+                        </ul>
+                        <div class="button-container">
+                            <button id="nextButton" onclick="nextQuestion()">Next</button>
+                            <button id="finishButton" onclick="finishQuiz()">Finish</button>
                         </div>
+                        <canvas id="chart"></canvas>
                     </div>
                 </div>
             </div>

@@ -15,6 +15,9 @@ class CreateEventAttendancesTable extends Migration
     {
         Schema::create('event_attendances', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id')->nullable();
+            $table->string('event_id')->nullable();
+            $table->string('event_attendance_id')->nullable();
             $table->timestamps();
         });
     }
