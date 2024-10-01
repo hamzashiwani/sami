@@ -30,6 +30,19 @@ class EventController extends BaseController
         }
     }
 
+    public function detail(Request $request)
+    {
+        try {
+            if($request->id) {
+                $getUserData = Event::with('eventListings')->where('id',$request->id)
+                ->first();
+            }
+            return $this->respond($getUserData, [], true, 'Success');
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
     public function dashboard(Request $request)
     {
         try {
@@ -66,6 +79,8 @@ class EventController extends BaseController
                 } else {
                     return $this->respondBadRequest([], false, 'Code Not Found');        
                 }
+            } else {
+                return $this->respondBadRequest([], false, 'Event Not Found');
             }
             return $this->respond($getUserData, [], true, 'Success');
         } catch (\Exception $e) {
