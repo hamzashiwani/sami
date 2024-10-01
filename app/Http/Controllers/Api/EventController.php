@@ -17,7 +17,7 @@ class EventController extends BaseController
                 $getUserData = Event::with('eventListings')->whereHas('eventListings',function ($que) use ($request){
                     $que->where('date',$request->date);
                 })->where(function ($query) use ($request) {
-                    $query->where('start_date', '<=', $request->date)
+                    $query->where('date', '<=', $request->date)
                           ->where('end_date', '>=', $request->date);
                 })->first();
             }
