@@ -79,7 +79,7 @@ class EventController extends BaseController
             } else {
                 return $this->respondBadRequest([], false, 'Code Not Found');        
             }
-            return $this->respond($getUserData, [], true, 'Success');
+            return $this->respond([], [], true, 'Success');
         } catch (\Exception $e) {
             return $this->respondInternalError($e->getMessage());
         }
