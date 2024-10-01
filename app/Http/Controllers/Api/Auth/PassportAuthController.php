@@ -89,7 +89,7 @@ class PassportAuthController extends BaseController
 
             $user->update(['otp' => null]);
 
-            $token = $user->createToken('LaravelAuthApp');
+            $token = $this->createUserToken($user, 'login');
             $response = ['token' => $token, 'user' => $user];
             DB::commit();
             return $this->respond(
