@@ -23,7 +23,9 @@ class EventController extends BaseController
     public function dashboard(Request $request)
     {
         try {
-            $getUserData['event'] = Event::where('date', '>=', Carbon::now())->first();
+            $getUserData['event'] = Event::with(['hotel', 'flights', 'transports'])
+            ->where('end_date', '<=', Carbon::now())
+            ->first();
             $getUserData['notification'] = Notification::orderBy('created_at', 'desc')->get();
             return $this->respond($getUserData, [], true, 'Success');
         } catch (\Exception $e) {
