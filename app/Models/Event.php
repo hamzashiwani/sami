@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\EventHotel;
 use App\Models\EventFlight;
 use App\Models\EventTransport;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class Event extends Model
 {
