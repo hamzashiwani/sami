@@ -14,11 +14,11 @@ class EventController extends BaseController
     {
         try {
             if($request->date) {
-                $getUserData = Event::with('eventListings')->whereHas('eventListings',function ($que) use ($request){
-                    $que->where('date',$request->date);
-                })->where(function ($query) use ($request) {
+                $getUserData = Event::with('eventListings')->where(function ($query) use ($request) {
                     $query->where('date', '<=', $request->date)
                           ->where('end_date', '>=', $request->date);
+                })->orwhereHas('eventListings',function ($que) use ($request){
+                    $que->where('date',$request->date);
                 })->first();
             }
             return $this->respond($getUserData, [], true, 'Success');
