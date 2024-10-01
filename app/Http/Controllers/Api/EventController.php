@@ -59,7 +59,7 @@ class EventController extends BaseController
     public function attendance(Request $request)
     {
         try {
-            $getUserData = Event::where('date', '=', Carbon::now())->first();
+            $getUserData = Event::where('date', '>=', Carbon::now())->first();
             if($getUserData) {
                 $data = EventListing::where('event_id',$getUserData->id)->where('code',$request->code)->first();
                 if($data) {
