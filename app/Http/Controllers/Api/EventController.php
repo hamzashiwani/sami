@@ -14,12 +14,15 @@ class EventController extends BaseController
     {
         try {
             if($request->date) {
-                $getUserData = Event::with('eventListings')->where(function ($query) use ($request) {
-                    $query->where('date', '<=', $request->date)
-                          ->where('end_date', '>=', $request->date);
-                })->orwhereHas('eventListings',function ($que) use ($request){
-                    $que->where('date',$request->date);
-                })->first();
+                $specificDate = $request->date;
+                $getUserData = Event::with(['eventListings' => function($query) use ($specificDate) {
+                    $query->where('date', $specificDate); // Filter event listings by the requested date
+                }])
+                ->where(function ($query) use ($specificDate) {
+                    $query->where('date', '<=', $specificDate)
+                          ->where('end_date', '>=', $specificDate);
+                })
+                ->first();
             }
             return $this->respond($getUserData, [], true, 'Success');
         } catch (\Exception $e) {
