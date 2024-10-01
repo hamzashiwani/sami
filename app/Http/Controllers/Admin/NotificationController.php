@@ -87,7 +87,7 @@ class NotificationController extends Controller
                      $videoFullPath = storage_path('app/public/' . $path);
                     // dd($videoFullPath);
                     $data['file_type'] = 'video';
-                    $screenshotPath = $this->generateScreenshot('/home/u464301526/domains/icelltechnology.com/public_html/sami/storage/app/public/uploads/'.$filename);
+                    $screenshotPath = $this->generateScreenshot($videoFullPath);
                     $data['file_screenshot'] = $screenshotPath;
                     // Save screenshot logic here
                 } elseif (strpos($request->file('file')->getMimeType(), 'image/') === 0) {
@@ -115,7 +115,8 @@ class NotificationController extends Controller
         $screenshotFullPath = storage_path('app/public/' . $screenshotPath);
 
         // Execute FFmpeg command to generate a screenshot
-        $command = "ffmpeg -i " . escapeshellarg($videoFile) . " -ss 00:00:10 -vframes 1 " . escapeshellarg($screenshotFullPath);
+        $ffmpegPath = 'C:/ffmpeg/bin/ffmpeg';
+        $command = $ffmpegPath . " -i " . escapeshellarg($videoFile) . " -ss 00:00:02 -vframes 1 " . escapeshellarg($screenshotFullPath);
         
         exec($command, $output, $return_var);
 
