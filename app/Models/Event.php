@@ -9,8 +9,6 @@ use App\Models\EventFlight;
 use App\Models\EventTransport;
 use Illuminate\Support\Facades\Auth;
 
-
-
 class Event extends Model
 {
     use HasFactory;
