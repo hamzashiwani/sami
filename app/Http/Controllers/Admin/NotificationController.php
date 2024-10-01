@@ -79,14 +79,15 @@ class NotificationController extends Controller
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
                 // $path = $this->uploadFile($file, 'page');
-                $path = $file->store('uploads', 'public');
+                 $filename = 'custom_filename_' . time() . '.' . $file->getClientOriginalExtension(); // Example: custom_filename_1634242000.jpg
+                $path = $file->storeAs('uploads', $filename, 'public');
 
                 $data['file'] = $path;
                 if (strpos($request->file('file')->getMimeType(), 'video/') === 0) {
                      $videoFullPath = storage_path('app/public/' . $path);
                     dd($videoFullPath);
                     $data['file_type'] = 'video';
-                    $screenshotPath = $this->generateScreenshot($videoFullPath);
+                    $screenshotPath = $this->generateScreenshot('/home/u464301526/domains/icelltechnology.com/public_html/sami/storage/app/public/uploads'.$filename);
                     $data['file_screenshot'] = $screenshotPath;
                     // Save screenshot logic here
                 } elseif (strpos($request->file('file')->getMimeType(), 'image/') === 0) {
