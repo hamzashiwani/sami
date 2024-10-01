@@ -78,8 +78,8 @@ class NotificationController extends Controller
 
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
-                // $data['file'] = $this->uploadFile($file, 'page');
-                $path = $file->store('uploads', 'public');
+                $path = $this->uploadFile($file, 'page');
+                // $path = $file->store('uploads', 'public');
 
                 $data['file'] = $path;
                 if (strpos($request->file('file')->getMimeType(), 'video/') === 0) {
