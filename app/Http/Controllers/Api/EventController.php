@@ -63,7 +63,7 @@ class EventController extends BaseController
         try {
             $data = EventListing::where('code',$request->code)->first();
             if($data) {
-                $check = EventAttendance::where('user_id',auth()->user()->id)->where('event_id',$getUserData->id)->
+                $check = EventAttendance::where('user_id',auth()->user()->id)->
                 where('event_attendance_id',$data->id)->first(); 
                 if(!$check) {
                     $create = [
