@@ -24,7 +24,7 @@ class EventController extends BaseController
     {
         try {
             $getUserData['event'] = Event::with(['hotel', 'flights', 'transports'])
-            ->where('end_date', '<=', Carbon::now())
+            ->where('end_date', '>=', Carbon::now())
             ->first();
             $getUserData['notification'] = Notification::orderBy('created_at', 'desc')->get();
             return $this->respond($getUserData, [], true, 'Success');
