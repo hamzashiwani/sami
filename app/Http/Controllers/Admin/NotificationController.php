@@ -129,7 +129,7 @@ class NotificationController extends Controller
             return response()->json(['error' => 'FFmpeg error: ' . implode("\n", $output)], 500);
         }
     
-        return $screenshotPath; // Return the path of the screenshot
+        return $name; // Return the path of the screenshot
     }
     
 
