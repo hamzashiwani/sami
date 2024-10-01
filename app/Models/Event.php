@@ -4,6 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\EventHotel;
+use App\Models\EventFlight;
+use App\Models\EventListing;
+use App\Models\EventTransport;
+use Illuminate\Support\Facades\Auth;
 
 class Event extends Model
 {
@@ -11,18 +16,23 @@ class Event extends Model
 
     protected $guarded = [];
 
+    public function eventListings()
+    {
+        return $this->hasMany(EventListing::class);
+    }
+
     public function hotel()
     {
-        return $this->hasOne(Hotel::class)->where('user_id', Auth::id());
+        return $this->hasOne(EventHotel::class)->where('user_id', Auth::id());
     }
 
     public function flights()
     {
-        return $this->hasOne(Flight::class)->where('user_id', Auth::id());
+        return $this->hasOne(EventFlight::class)->where('user_id', Auth::id());
     }
 
     public function transports()
     {
-        return $this->hasOne(Transport::class)->where('user_id', Auth::id());
+        return $this->hasOne(EventTransport::class)->where('user_id', Auth::id());
     }
 }
