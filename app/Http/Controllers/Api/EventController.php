@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Event;
+use App\Models\EventListing;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
