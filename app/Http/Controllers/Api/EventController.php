@@ -14,7 +14,7 @@ class EventController extends BaseController
     {
         try {
             if($request->date) {
-                $getUserData = Event::with('eventListings')->whereHas('eventListings',function ($que){
+                $getUserData = Event::with('eventListings')->whereHas('eventListings',function ($que) use ($request){
                     $que->where('date',$request->date);
                 })->where(function ($query) use ($request) {
                     $query->where('start_date', '<=', $request->date)
