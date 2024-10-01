@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Hotel;
+use App\Models\Flight;
+use App\Models\Transport;
 
 class Event extends Model
 {
