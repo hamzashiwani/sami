@@ -87,7 +87,7 @@ class PassportAuthController extends BaseController
                 return $this->respondNotFound([], false, 'Invalid code');
             }
 
-            $user->update(['otp' => null, 'email_verified_at' => 1]);
+            $user->update(['otp' => null]);
 
             $token = $user->createToken('LaravelAuthApp')->accessToken;
             $response = ['token' => $token, 'user' => $user];
