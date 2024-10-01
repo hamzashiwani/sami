@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EventHotel;
 use App\Models\EventFlight;
+use App\Models\EventListing;
 use App\Models\EventTransport;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,6 +15,11 @@ class Event extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function eventListings()
+    {
+        return $this->hasMany(EventListing::class);
+    }
 
     public function hotel()
     {

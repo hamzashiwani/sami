@@ -13,7 +13,14 @@ class EventController extends BaseController
     public function index(Request $request)
     {
         try {
-            $getUserData = Event::orderBy('created_at', 'desc')->get();
+            if($request->date) {
+                $getUserData = Event::with('eventListings')->whereHas('eventListings',function ($que){
+                    $que->where('date',$request->date);
+                })->where(function ($query) use ($request) {
+                    $query->where('start_date', '<=', $request->date)
+                          ->where('end_date', '>=', $request->date);
+                })->first();
+            }
             return $this->respond($getUserData, [], true, 'Success');
         } catch (\Exception $e) {
             return $this->respondInternalError($e->getMessage());
