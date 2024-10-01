@@ -84,7 +84,7 @@ class NotificationController extends Controller
                 $data['file'] = $path;
                 if (strpos($request->file('file')->getMimeType(), 'video/') === 0) {
                     $data['file_type'] = 'video';
-                    $screenshotPath = $this->generateScreenshot($file);
+                    $screenshotPath = $this->generateScreenshot($path);
                     $data['file_screenshot'] = $screenshotPath;
                     // Save screenshot logic here
                 } elseif (strpos($request->file('file')->getMimeType(), 'image/') === 0) {
@@ -112,7 +112,7 @@ class NotificationController extends Controller
         $screenshotFullPath = storage_path('app/public/' . $screenshotPath);
 
         // Execute FFmpeg command to generate a screenshot
-        $command = "ffmpeg -i " . escapeshellarg($videoPath) . " -ss 00:00:10 -vframes 1 " . escapeshellarg($screenshotFullPath);
+        $command = "ffmpeg -i " . escapeshellarg($videoFile) . " -ss 00:00:10 -vframes 1 " . escapeshellarg($screenshotFullPath);
         
         exec($command, $output, $return_var);
 
