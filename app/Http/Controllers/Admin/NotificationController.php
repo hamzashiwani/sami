@@ -107,29 +107,20 @@ class NotificationController extends Controller
     }
 
     private function generateScreenshot($videoFile) {
-        $name = pathinfo($videoFile->getClientOriginalName(), PATHINFO_FILENAME); // Get original file name without extension
-        $screenshotPath = uploadsDir('front').$name.'.jpg';
-    
-        // Ensure the uploads directory exists
-        if (!file_exists(dirname($screenshotPath))) {
-            mkdir(dirname($screenshotPath), 0755, true);
+        $screenshotName = 'screenshot_' . time() . '.png';
+        $screenshotPath = 'screenshots/' . $screenshotName;
+        $screenshotFullPath = storage_path('app/public/' . $screenshotPath);
+
+        // Execute FFmpeg command to generate a screenshot
+        $command = "ffmpeg -i " . escapeshellarg($videoPath) . " -ss 00:00:10 -vframes 1 " . escapeshellarg($screenshotFullPath);
+        
+        exec($command, $output, $return_var);
+
+        if ($return_var !== 0) {
+            return response()->json(['success' => false, 'error' => 'Could not generate screenshot.'], 500);
         }
-    
-        $videoPath = $videoFile->getRealPath(); // Get the uploaded video path
-    
-        // FFmpeg command to generate a screenshot
-        $command = "ffmpeg -i \"{$videoPath}\" -ss 00:00:01.000 -vframes 1 \"{$screenshotPath}\" 2>&1";
-    
-        // Execute the command
-        $output = [];
-        $returnVar = 0;
-        exec($command, $output, $returnVar);
-    
-        if ($returnVar !== 0) {
-            return response()->json(['error' => 'FFmpeg error: ' . implode("\n", $output)], 500);
-        }
-    
-        return $name; // Return the path of the screenshot
+
+        return $screenshotName;
     }
     
 
