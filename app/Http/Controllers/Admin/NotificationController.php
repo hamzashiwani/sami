@@ -83,8 +83,9 @@ class NotificationController extends Controller
 
                 $data['file'] = $path;
                 if (strpos($request->file('file')->getMimeType(), 'video/') === 0) {
+                     $videoFullPath = storage_path('app/public/' . $path);
                     $data['file_type'] = 'video';
-                    $screenshotPath = $this->generateScreenshot($path);
+                    $screenshotPath = $this->generateScreenshot($videoFullPath);
                     $data['file_screenshot'] = $screenshotPath;
                     // Save screenshot logic here
                 } elseif (strpos($request->file('file')->getMimeType(), 'image/') === 0) {
