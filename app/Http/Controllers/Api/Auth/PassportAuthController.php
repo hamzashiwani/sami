@@ -52,7 +52,7 @@ class PassportAuthController extends BaseController
                 'email' => $request->email
             ];
 
-            if (isset($user) && auth()->attempt($data) && $user->otp == null) {
+            if (isset($user) && $user->otp == null) {
                 $user->update(['otp'=>'12345']);
                 dispatch(new \App\Jobs\UserRegistration($user, $user->email));
                 // $token = auth()->user()->createToken('LaravelAuthApp')->accessToken;
