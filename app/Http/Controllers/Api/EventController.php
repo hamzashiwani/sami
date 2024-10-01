@@ -60,28 +60,23 @@ class EventController extends BaseController
     public function attendance(Request $request)
     {
         try {
-            $getUserData = Event::where('date', '<=', Carbon::now())->first();
-            if($getUserData) {
-                $data = EventListing::where('event_id',$getUserData->id)->where('code',$request->code)->first();
-                if($data) {
-                    $check = EventAttendance::where('user_id',auth()->user()->id)->where('event_id',$getUserData->id)->
-                    where('event_attendance_id',$data->id)->first(); 
-                    if(!$check) {
-                        $create = [
-                            'user_id' => auth()->user()->id,
-                            'event_id' => $getUserData->id,
-                            'event_attendance_id' => $data->id,
-                        ];
-    
-                        EventAttendance::create($create);
-                    } else {
-                        return $this->respondBadRequest([], false, 'Already Check In');    
-                    }
+            $data = EventListing::where('code',$request->code)->first();
+            if($data) {
+                $check = EventAttendance::where('user_id',auth()->user()->id)->where('event_id',$getUserData->id)->
+                where('event_attendance_id',$data->id)->first(); 
+                if(!$check) {
+                    $create = [
+                        'user_id' => auth()->user()->id,
+                        'event_id' => $data->event_id,
+                        'event_attendance_id' => $data->id,
+                    ];
+
+                    EventAttendance::create($create);
                 } else {
-                    return $this->respondBadRequest([], false, 'Code Not Found');        
+                    return $this->respondBadRequest([], false, 'Already Check In');    
                 }
             } else {
-                return $this->respondBadRequest([], false, 'Event Not Found');
+                return $this->respondBadRequest([], false, 'Code Not Found');        
             }
             return $this->respond($getUserData, [], true, 'Success');
         } catch (\Exception $e) {
