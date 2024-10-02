@@ -43,6 +43,8 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 Route::group(['middleware' => 'auth:sanctum'], function () {
 	Route::group(['prefix' => 'notification'], function () {
 		Route::get('show', 'NotificationController@index');
+		Route::get('detail', 'NotificationController@detail');
+		Route::get('mark-all-read', 'NotificationController@markAllAsRead');
 	});
 
 	Route::group(['prefix' => 'events'], function () {
