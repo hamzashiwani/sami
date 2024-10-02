@@ -44,6 +44,7 @@ class NotificationController extends BaseController
         try {
             $user = $request->user();
             $allNotifications = Notification::where('id', $request->id)->first();
+            $user->notifications()->syncWithoutDetaching([$request->id]);
             return $this->respond($allNotifications, [], true, 'Success');
         } catch (\Exception $e) {
             return $this->respondInternalError($e->getMessage());
