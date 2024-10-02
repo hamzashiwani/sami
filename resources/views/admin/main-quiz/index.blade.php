@@ -6,8 +6,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Events</h4>
-                        <span><a href="{{ route('admin.event.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a></span>
+                        <h4 class="card-title">Quiz</h4>
+                        <span><a href="{{ route('admin.main-quiz.create',$id) }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a></span>
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard">
@@ -16,6 +16,7 @@
                                     <thead>
                                         <tr>
                                             <th>Title</th>
+                                            <th>Description</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -24,17 +25,14 @@
                                         @foreach ($data as $key => $result)
                                             <tr>
                                                 <td>{!! Str::limit($result->title, 20, '...') !!}</td>
+                                                <td>{!! $result->description !!}</td>
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
-                                                <!-- <td><small><span class="badge badge-{!! $result->status == 'published' ? 'success' : 'danger' !!}">{!! strtoupper($result->status) !!}</span></small></td> -->
                                                 <td>
-                                                <a href="{!! route('admin.main-quiz.index', $result->id) !!}"
-                                                        class="btn btn-info btn-sm waves-effect waves-light"><i
-                                                            class="feather icon-eye"></i></a>
-                                                    <a href="{!! route('admin.event-timeline.index', $result->id) !!}"
+                                                    <a href="{!! route('admin.quiz.index', $result->id) !!}"
                                                         class="btn btn-info btn-sm waves-effect waves-light"><i
                                                             class="feather icon-search"></i></a>
 
-                                                    <a href="{!! route('admin.event.edit', $result->id) !!}"
+                                                    <a href="{!! route('admin.main-quiz.edit', $result->id) !!}"
                                                         class="btn btn-primary btn-sm waves-effect waves-light"><i
                                                             class="feather icon-edit"></i></a>
 
@@ -43,7 +41,7 @@
                                                         onclick="deleteConfirmation({!! $result->id !!})"><i
                                                             class="feather icon-trash"></i></button>
 
-                                                    <form action="{!! URL::route('admin.event.destroy', $result->id) !!}" method="POST"
+                                                    <form action="{!! URL::route('admin.main-quiz.destroy', $result->id) !!}" method="POST"
                                                         id="deleteForm{!! $result->id !!}">
                                                         @csrf
                                                         @method('DELETE')

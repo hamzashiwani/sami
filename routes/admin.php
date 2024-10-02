@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\EventTimelineController;
 use App\Http\Controllers\Admin\QuizController;
+use App\Http\Controllers\Admin\MainQuizController;
 
 
 /*
@@ -86,6 +87,15 @@ Route::name('admin.')->group(
         Route::post('quiz/update/{id}', [QuizController::class, 'update'])->name('quiz.update');
         Route::put('quiz/update/{id}', [QuizController::class, 'update'])->name('quiz.update');
         Route::get('quiz/destroy/{id}', [QuizController::class, 'destroy'])->name('quiz.destroy');
+
+
+        Route::get('main-quiz/{id}', [MainQuizController::class, 'index'])->name('main-quiz.index');
+        Route::get('main-quiz/create/{id}', [MainQuizController::class, 'create'])->name('main-quiz.create');
+        Route::post('main-quiz/store/{id}', [MainQuizController::class, 'store'])->name('main-quiz.store');
+        Route::get('main-quiz/edit/{id}', [MainQuizController::class, 'edit'])->name('main-quiz.edit');
+        Route::post('main-quiz/update/{id}', [MainQuizController::class, 'update'])->name('main-quiz.update');
+        Route::put('main-quiz/update/{id}', [MainQuizController::class, 'update'])->name('main-quiz.update');
+        Route::get('main-quiz/destroy/{id}', [MainQuizController::class, 'destroy'])->name('main-quiz.destroy');
 
 
         Route::post('upload-image', [
