@@ -51,7 +51,25 @@ class EventController extends BaseController
             $getUserData['event'] = Event::with(['hotel', 'flights', 'transports'])
             ->where('end_date', '>=', Carbon::now())
             ->first();
-            $getUserData['notification'] = Notification::orderBy('created_at', 'desc')->get();
+            $user = $request->user();
+
+            // Retrieve all notifications
+            $allNotifications = Notification::orderBy('created_at', 'desc')->limit(10)->get();
+
+            // Map through notifications and check if the user has read them
+            $notifications = $allNotifications->map(function ($notification) use ($user) {
+                return [
+                    'id' => $notification->id,
+                    'title' => $notification->title,
+                    'description' => $notification->description,
+                    'file' => $notification->file,
+                    'file_screenshot' => $notification->file_screenshot,
+                    'file_type' => $notification->file_type,
+                    'created_at' => $notification->created_at,
+                    'is_read' => $user->notifications()->where('notification_id', $notification->id)->exists(), // Check if read
+                ];
+            });
+            $getUserData['notification'] = $notifications;
             return $this->respond($getUserData, [], true, 'Success');
         } catch (\Exception $e) {
             return $this->respondInternalError($e->getMessage());
