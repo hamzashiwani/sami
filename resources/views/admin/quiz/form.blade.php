@@ -15,6 +15,7 @@
                                 <input type="hidden" name="id" value="{{ $data->id }}">
                                 @csrf
                                 <input type="hidden" name="_method" value="{!! $form['method'] !!}">
+                                <input type="hidden" name="event_id" value="{!! $id !!}">
                                 <fieldset>
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -26,13 +27,9 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="event_id">Event *</label>
-                                                <select id="event_id" name="event_id" class="form-control" required>
-                                                    <option value="">Select Event</option>
-                                                    @foreach($events as $event)
-                                                        <option value="{{ $event->id }}" {!! ($data && ($data->event_id == $event->id)) ? 'selected' : '' !!}>{{ $event->title }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <label for="event_id">Code *</label>
+                                                <input readonly type="text" id="code" name="code"
+                                                value="{{ old('code', $data->code) }}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -91,6 +88,22 @@
 @endsection
 @section('footer-js')
     <script>
+        @if(!$data->code)
+        $(document).ready(function(){
+            function generateRandomCode(length) {
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return result;
+            }
+
+            // Set the generated code to the input field
+            const randomCode = generateRandomCode(5); // Adjust length as needed
+            document.getElementById('code').value = randomCode;
+        })
+        @endif
         $("#title").on('blur', function (){
             var value = $( this ).val();
             $('#slug').val(slugify(value));

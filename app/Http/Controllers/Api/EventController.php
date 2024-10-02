@@ -76,6 +76,23 @@ class EventController extends BaseController
         }
     }
 
+
+    public function getAttendance(Request $request)
+    {
+        try {
+            $event = Event::where('end_date', '>=', Carbon::now())->first();
+            if($event) {
+                $getUserData = EventListing::where('date',date('Y-m-d'))->get();
+                $user = $request->user();
+            } else {
+                $getUserData = [];
+            }
+            return $this->respond($getUserData, [], true, 'Success');
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
     public function attendance(Request $request)
     {
         try {

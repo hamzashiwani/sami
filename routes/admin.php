@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\EventTimelineController;
+use App\Http\Controllers\Admin\QuizController;
 
 
 /*
@@ -61,7 +62,7 @@ Route::name('admin.')->group(
         Route::resource('blog', 'BlogController');
         Route::resource('faq', 'FaqController');
         Route::resource('notification', 'NotificationController');
-        Route::resource('quiz', 'QuizController');
+        // Route::resource('quiz', 'QuizController');
         Route::resource('event', 'EventController');
         Route::resource('testimonial', 'TestimonialController');
         Route::resource('contact-us', 'ContactUsController');
@@ -76,6 +77,15 @@ Route::name('admin.')->group(
         Route::post('event-timeline/update/{id}', [EventTimelineController::class, 'update'])->name('event-timeline.update');
         Route::put('event-timeline/update/{id}', [EventTimelineController::class, 'update'])->name('event-timeline.update');
         Route::get('event-timeline/destroy/{id}', [EventTimelineController::class, 'destroy'])->name('event-timeline.destroy');
+
+
+        Route::get('quiz/{id}', [QuizController::class, 'index'])->name('quiz.index');
+        Route::get('quiz/create/{id}', [QuizController::class, 'create'])->name('quiz.create');
+        Route::post('quiz/store/{id}', [QuizController::class, 'store'])->name('quiz.store');
+        Route::get('quiz/edit/{id}', [QuizController::class, 'edit'])->name('quiz.edit');
+        Route::post('quiz/update/{id}', [QuizController::class, 'update'])->name('quiz.update');
+        Route::put('quiz/update/{id}', [QuizController::class, 'update'])->name('quiz.update');
+        Route::get('quiz/destroy/{id}', [QuizController::class, 'destroy'])->name('quiz.destroy');
 
 
         Route::post('upload-image', [

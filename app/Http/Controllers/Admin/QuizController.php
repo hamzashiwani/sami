@@ -28,11 +28,11 @@ class QuizController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         try{
-            $data = Quiz::get();
-            return view('admin.quiz.index', compact('data'));
+            $data = Quiz::where('event_id',$id)->get();
+            return view('admin.quiz.index', compact('data','id'));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
             return redirect()->back();
@@ -44,7 +44,7 @@ class QuizController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $data = new Quiz();
 
@@ -52,13 +52,13 @@ class QuizController extends Controller
             'type' => 'create',
             'heading' => 'Create Quiz',
             'method' => 'POST',
-            'action' => route('admin.quiz.store'),
-            'cancel_url' => route('admin.quiz.index')
+            'action' => route('admin.quiz.store',$id),
+            'cancel_url' => route('admin.quiz.index',$id)
         ];
 
         $events = Event::where('end_date', '>=', date('Y-m-d'))->get();
 
-        return view('admin.quiz.form', compact('data', 'form', 'events'));
+        return view('admin.quiz.form', compact('data', 'form', 'events','id'));
     }
 
     /**
@@ -67,7 +67,7 @@ class QuizController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
         try{
             DB::beginTransaction();
@@ -88,7 +88,7 @@ class QuizController extends Controller
                 ->with('error', $exception->getMessage());
         }
         return redirect()
-            ->route('admin.quiz.index')
+            ->route('admin.quiz.index',$id)
             ->with('success', 'Quiz has been added successfully.');
     }
     
@@ -111,19 +111,20 @@ class QuizController extends Controller
      * @param  int  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($ids)
     {
-        $data = Quiz::find($id);
+        $data = Quiz::find($ids);
+        $id = $data->event_id;
         $form = [
             'type' => 'create',
             'heading' => 'Edit Quiz',
             'method' => 'PUT',
-            'action' => route('admin.quiz.update', $id),
-            'cancel_url' => route('admin.quiz.index')
+            'action' => route('admin.quiz.update', $ids),
+            'cancel_url' => route('admin.quiz.index',$id)
         ];
         $events = Event::where('end_date', '>=', date('Y-m-d'))->get();
 
-        return view('admin.quiz.form', compact('data', 'form', 'events'));
+        return view('admin.quiz.form', compact('data', 'form','id', 'events'));
     }
 
     /**
@@ -151,7 +152,7 @@ class QuizController extends Controller
 
             DB::commit();
             return redirect()
-                ->route('admin.quiz.index')
+                ->route('admin.quiz.index',$quiz->event_id)
                 ->with('success', 'Quiz has been updated successfully.');
         } catch (\Exception $exception) {
             DB::rollBack();
