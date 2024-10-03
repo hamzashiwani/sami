@@ -1,0 +1,53 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Event Broadcasting</title>
+    <!-- Load Socket.IO client library -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io(); // Initialize the socket connection
+
+        async function quiz() {
+            const response = await fetch('http://localhost/sami/public/api/events/get-questions', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const result = await response.json();
+
+            socket.emit('quiz', result);
+        }
+
+        function submitAnswer() {
+            socket.emit('SubmitAnswer');
+        }
+
+        function nextQuestion() {
+            socket.emit('NextQuestion');
+        }
+
+        // Listen for events broadcasted from the server
+        socket.on('quiz', () => {
+            console.log('Quiz has started!');
+        });
+
+        socket.on('SubmitAnswer', () => {
+            console.log('Answer submitted!');
+        });
+
+        socket.on('NextQuestion', () => {
+            console.log('Moving to the next question!');
+        });
+    </script>
+</head>
+<body>
+    <h1>Quiz Control</h1>
+    <button onclick="quiz()">Start Quiz</button>
+    <button onclick="submitAnswer()">Submit Answer</button>
+    <button onclick="nextQuestion()">Next Question</button>
+</body>
+</html>
