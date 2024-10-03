@@ -32,6 +32,13 @@
                                                 value="{{ old('description', $data->description) }}" class="form-control">
                                             </div>
                                         </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="event_id">Code *</label>
+                                                <input readonly type="text" id="code" name="code"
+                                                value="{{ old('code', $data->code) }}" class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
                                 </fieldset>
                                 <div class="col-md-12">

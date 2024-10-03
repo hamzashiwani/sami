@@ -98,11 +98,36 @@ class EventController extends BaseController
     public function getQuestions(Request $request)
     {
         try {
-            $event = MainQuiz::where('id', 1)->first();
+            $event = MainQuiz::where('code', $request->code)->first();
             if($event) {
                 $getUserData = Quiz::orderBy('id','desc')->where('quiz_id',$event->id)->where('status',0)->first();
                 if(!$getUserData) {
                     return $this->respond([], [], true, 'Quiz Finish');
+                }
+                $user = $request->user();
+            } else {
+                $getUserData = [];
+            }
+            return $this->respond($getUserData, [], true, 'Success');
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
+    public function updateStatus(Request $request)
+    {
+        try {
+            $event = Quiz::where('id', $request->quiz_id)->first();
+            if($event) {
+                $getUserData = Quiz::where('id',$request->quiz_id)->update(['status'=>1]);                
+                if(!$getUserData) {
+                    $event2 = Quiz::where('id', $request->quiz_id)->where('status',0)->first();
+                    if($event2) {
+                        $getUserData = MainQuiz::where('id',$event->quiz_id)->update(['status'=>2]);
+                    } else {
+                        $getUserData = MainQuiz::where('id',$event->quiz_id)->update(['status'=>1]);
+                    }
+                    return $this->respond([], [], true, 'Answer Submited');
                 }
                 $user = $request->user();
             } else {
