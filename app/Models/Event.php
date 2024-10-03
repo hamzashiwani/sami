@@ -16,10 +16,14 @@ class Event extends Model
 
     protected $guarded = [];
 
-     protected $appends = ['cordinator'];
+     protected $appends = ['cordinator','marketing_group];
 
     function getCordinatorAttribute() {
         return 'Test User';
+    }
+
+    function getMarketingGroupAttribute() {
+        return '5435455454';
     }
 
     public function eventListings()
