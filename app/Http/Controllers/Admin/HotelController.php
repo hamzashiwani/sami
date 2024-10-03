@@ -31,7 +31,8 @@ class HotelController extends Controller
     {
         try{
             $data = EventHotel::where('event_id',$id)->get();
-            return view('admin.hotel.index', compact('data','id'));
+            $users = User::get();
+            return view('admin.hotel.index', compact('data','id','users'));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
             return redirect()->back();

@@ -28,8 +28,27 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="event_id">Date *</label>
-                                                <input type="text" id="date" name="date"
+                                                <input type="date" id="date" name="date"
                                                 value="{{ old('date', $data->date) }}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="room_no">Room No *</label>
+                                                <input type="number" id="room_no" name="room_no"
+                                                value="{{ old('room_no', $data->room_no) }}" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="user_id">Users *</label>
+                                                <select id="user_id" name="user_id" class="form-control" required>
+                                                    <option value="">Select Users</option>
+                                                    @foreach($users as $user)
+                                                     <option value="{{$user->id}}" {!! $data->user_id == $user->id ? 'selected' : '' !!}>{{$user->name}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
