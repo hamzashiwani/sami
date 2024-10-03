@@ -166,12 +166,12 @@ class EventTimelineController extends Controller
      * @param  int  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
         try {
             DB::beginTransaction();
 
-            $blog = EventListing::findOrFail($request->id);
+            $blog = EventListing::findOrFail($id);
 
             $data = $request->except(
                 [

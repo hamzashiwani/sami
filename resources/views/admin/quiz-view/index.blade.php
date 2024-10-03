@@ -19,6 +19,7 @@
             margin: 20px 0;
         }
         .answers li {
+            position: relative;
             margin: 10px 0;
             cursor: pointer;
             background: #e7f3fe;
@@ -30,6 +31,19 @@
         .answers li:hover {
             background: #d1e8ff;
             transform: scale(1.02);
+        }
+        .correct {
+            background-color: #28a745 !important; /* Green background for the correct answer */
+            color: white;
+        }
+        .wrong {
+            background-color: #dc3545; /* Red background for wrong answers */
+            color: white;
+        }
+        .answer-total {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #666;
         }
         .button-container {
             margin: 30px 0;
@@ -71,13 +85,13 @@
                         <div id="timer">30</div>
                         <div class="question">What is the capital of France?</div>
                         <ul class="answers">
-                            <li onclick="selectAnswer('A')">A. Berlin</li>
-                            <li onclick="selectAnswer('B')">B. Madrid</li>
-                            <li onclick="selectAnswer('C')">C. Paris</li>
-                            <li onclick="selectAnswer('D')">D. Rome</li>
+                            <li onclick="selectAnswer('A', false)">A. Berlin</li>
+                            <li onclick="selectAnswer('B', false)">B. Madrid</li>
+                            <li onclick="selectAnswer('C', true)">C. Paris</li>
+                            <li onclick="selectAnswer('D', false)">D. Rome</li>
                         </ul>
                         <div class="button-container">
-                            <button id="nextButton" onclick="nextQuestion()">Next</button>
+                            <button id="nextButton" onclick="nextQuestion()" disabled>Next</button>
                             <button id="finishButton" onclick="finishQuiz()">Finish</button>
                         </div>
                         <canvas id="chart"></canvas>
@@ -93,6 +107,7 @@
         const timerElement = document.getElementById('timer');
         const chartElement = document.getElementById('chart');
         let countdown;
+        const correctAnswer = 'C'; // The correct answer
 
         function startTimer() {
             countdown = setInterval(() => {
@@ -101,66 +116,52 @@
 
                 if (timeLeft <= 0) {
                     clearInterval(countdown);
-                    alert('Time is up!');
-                    showChart();
+                    showResults(); // Call the results function when time is up
                 }
             }, 1000);
         }
 
-        function selectAnswer(answer) {
-            alert(`You selected: ${answer}`);
+        function selectAnswer(answer, isCorrect) {
             // Disable further selections
             const answers = document.querySelectorAll('.answers li');
-            answers.forEach(item => item.style.pointerEvents = 'none');
-            document.getElementById('nextButton').disabled = false;
+            answers.forEach(item => {
+                item.style.pointerEvents = 'none'; // Disable further selections
+            });
+            document.getElementById('nextButton').disabled = false; // Enable the next button
         }
 
         function nextQuestion() {
-            // Logic to go to the next question (for now just resetting the timer)
             timeLeft = 30;
             timerElement.innerText = timeLeft;
             startTimer();
-            // Hide the chart if it was shown
-            chartElement.style.display = 'none';
+            // Reset answers display
+            const answers = document.querySelectorAll('.answers li');
+            answers.forEach(item => {
+                item.classList.remove('correct', 'wrong');
+                item.querySelector('.answer-total')?.remove(); // Remove totals
+            });
+            chartElement.style.display = 'none'; // Hide the chart
         }
 
         function finishQuiz() {
             clearInterval(countdown);
-            showChart();
+            showResults();
         }
 
-        function showChart() {
-            const ctx = chartElement.getContext('2d');
-            chartElement.style.display = 'block'; // Show the chart
-            const chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['A', 'B', 'C', 'D'],
-                    datasets: [{
-                        label: 'Answers',
-                        data: [1, 0, 1, 0], // Example data
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
+        function showResults() {
+            const answers = document.querySelectorAll('.answers li');
+
+            // Highlight the correct answer
+            answers.forEach(item => {
+                if (item.textContent.includes('C. Paris')) {
+                    item.classList.add('correct'); // Highlight correct answer
+                } else {
+                    item.classList.add('wrong'); // Highlight wrong answers
                 }
+                const total = document.createElement('div');
+                total.classList.add('answer-total');
+                total.innerText = 'Total Answers: ' + (Array.from(answers).indexOf(item) + 1); // Example logic for total answers
+                item.appendChild(total);
             });
         }
 

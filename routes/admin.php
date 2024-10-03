@@ -97,6 +97,14 @@ Route::name('admin.')->group(
         Route::put('main-quiz/update/{id}', [MainQuizController::class, 'update'])->name('main-quiz.update');
         Route::get('main-quiz/destroy/{id}', [MainQuizController::class, 'destroy'])->name('main-quiz.destroy');
 
+    Route::get('event-hotel/{id}', [EventHotelController::class, 'index'])->name('event-hotel.index');
+        Route::get('event-hotel/create/{id}', [EventHotelController::class, 'create'])->name('event-hotel.create');
+        Route::post('event-hotel/store/{id}', [EventHotelController::class, 'store'])->name('event-hotel.store');
+        Route::get('event-hotel/edit/{id}', [EventHotelController::class, 'edit'])->name('event-hotel.edit');
+        Route::post('event-hotel/update/{id}', [EventHotelController::class, 'update'])->name('event-hotel.update');
+        Route::put('event-hotel/update/{id}', [EventHotelController::class, 'update'])->name('event-hotel.update');
+        Route::get('event-hotel/destroy/{id}', [EventHotelController::class, 'destroy'])->name('event-hotel.destroy');
+
 
         Route::post('upload-image', [
             'uses'  => 'IndexController@uploadImage',
