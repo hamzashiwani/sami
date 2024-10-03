@@ -122,7 +122,7 @@ class EventController extends BaseController
                 $getUserData = Quiz::where('id',$request->quiz_id)->update(['status'=>1]);                
                 // if($getUserData) {
                     $event2 = Quiz::where('id', $request->quiz_id)->where('status',0)->first();
-                    if($event2) {
+                    if(!$event2) {
                         $getUserData = MainQuiz::where('id',$event->quiz_id)->update(['status'=>2]);
                     } else {
                         $getUserData = MainQuiz::where('id',$event->quiz_id)->update(['status'=>1]);
