@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Event;
+use App\Models\MainQuiz;
+use App\Models\Quiz;
 use App\Models\EventListing;
 use App\Models\EventAttendance;
 use App\Models\Notification;
@@ -83,6 +85,25 @@ class EventController extends BaseController
             $event = Event::where('end_date', '>=', Carbon::now())->first();
             if($event) {
                 $getUserData = EventListing::where('date',date('Y-m-d'))->get();
+                $user = $request->user();
+            } else {
+                $getUserData = [];
+            }
+            return $this->respond($getUserData, [], true, 'Success');
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
+    public function getQuestions(Request $request)
+    {
+        try {
+            $event = MainQuiz::where('id', 2)->first();
+            if($event) {
+                $getUserData = Quiz::orderBy('id','desc')->where('status',0)->first();
+                if(!$getUserData) {
+                    return $this->respond([], [], true, 'Quiz Finish');
+                }
                 $user = $request->user();
             } else {
                 $getUserData = [];

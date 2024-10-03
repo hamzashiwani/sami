@@ -27,6 +27,9 @@
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
                                                 <!-- <td><small><span class="badge badge-{!! $result->status == 'published' ? 'success' : 'danger' !!}">{!! strtoupper($result->status) !!}</span></small></td> -->
                                                 <td>
+                                                <a href="{!! route('admin.event-hotel.index', $result->id) !!}"
+                                                        class="btn btn-info btn-sm waves-effect waves-light"><i
+                                                            class="feather icon-eye"></i></a>
                                                 <a href="{!! route('admin.main-quiz.index', $result->id) !!}"
                                                         class="btn btn-info btn-sm waves-effect waves-light"><i
                                                             class="feather icon-eye"></i></a>

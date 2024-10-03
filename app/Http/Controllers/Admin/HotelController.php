@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\StoreFaqRequest;
 use App\Http\Requests\Admin\UpdateFaqRequest;
 use App\Models\EventHotel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -46,15 +47,16 @@ class HotelController extends Controller
      */
     public function create($id)
     {
-        $data = new Faq();
+        $data = new EventHotel();
         $form = [
             'type' => 'create',
             'heading' => 'Add EventHotel',
             'method' => 'POST',
             'action' => route('admin.event-hotel.store',$id),
-            'cancel_url' => route('admin.event-hotel.index',)
+            'cancel_url' => route('admin.event-hotel.index',$id)
         ];
-        return view('admin.hotel.form', compact('data', 'form','id'));
+        $users = User::get();
+        return view('admin.hotel.form', compact('data', 'form','id','users'));
     }
 
     /**
@@ -63,7 +65,7 @@ class HotelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreFaqRequest $request,$id)
+    public function store(Request $request,$id)
     {
         try{
             DB::beginTransaction();
@@ -116,7 +118,8 @@ class HotelController extends Controller
             'action' => route('admin.event-hotel.update', $ids),
             'cancel_url' => route('admin.event-hotel.index',$id)
         ];
-        return view('admin.hotel.form', compact('data', 'form','id'));
+        $users = User::get();
+        return view('admin.hotel.form', compact('data', 'form','id','users'));
     }
 
     /**
@@ -126,7 +129,7 @@ class HotelController extends Controller
      * @param  int  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateFaqRequest $request,$id)
+    public function update(Request $request,$id)
     {
         try {
             DB::beginTransaction();
