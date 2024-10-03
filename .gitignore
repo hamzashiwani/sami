@@ -19,3 +19,4 @@ yarn-error.log
 error_log
 .DS_Store
 sitemap.xml
+/quiz-websocket-server/node_modules
