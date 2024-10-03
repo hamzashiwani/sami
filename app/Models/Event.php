@@ -16,7 +16,7 @@ class Event extends Model
 
     protected $guarded = [];
 
-     protected $appends = ['cordinator','marketing_group];
+     protected $appends = ['cordinator','marketing_group'];
 
     function getCordinatorAttribute() {
         return 'Test User';
