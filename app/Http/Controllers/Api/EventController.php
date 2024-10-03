@@ -100,7 +100,7 @@ class EventController extends BaseController
         try {
             $event = MainQuiz::where('id', 2)->first();
             if($event) {
-                $getUserData = Quiz::orderBy('id','desc')->where('status',0)->first();
+                $getUserData = Quiz::orderBy('id','desc')->where('quiz_id',$event->id)->where('status',0)->first();
                 if(!$getUserData) {
                     return $this->respond([], [], true, 'Quiz Finish');
                 }
