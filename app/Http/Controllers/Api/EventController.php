@@ -98,7 +98,7 @@ class EventController extends BaseController
     public function getQuestions(Request $request)
     {
         try {
-            $event = MainQuiz::where('id', 2)->first();
+            $event = MainQuiz::where('id', 1)->first();
             if($event) {
                 $getUserData = Quiz::orderBy('id','desc')->where('quiz_id',$event->id)->where('status',0)->first();
                 if(!$getUserData) {
