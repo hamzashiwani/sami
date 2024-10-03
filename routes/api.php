@@ -19,6 +19,10 @@ Route::post('forget-password', 'ApiController@forgetPassword');
 Route::post('reset-password', 'ApiController@resetPassword');
 Route::post('login', 'ApiController@login');
 
+
+Route::group(['prefix' => 'events'], function () {
+	Route::get('get-questions', 'EventController@getQuestions');
+});
 // Authenticated routes
 Route::group(['middleware' => ['jwt.verify']], function() {
 	Route::post('background-login', 'ApiController@backgroundLogin');
