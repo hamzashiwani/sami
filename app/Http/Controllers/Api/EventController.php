@@ -82,7 +82,7 @@ class EventController extends BaseController
         try {
             $event = Event::where('end_date', '>=', Carbon::now())->first();
             if($event) {
-                $getUserData = EventListing::where('date','2024-10-03')->get();
+                $getUserData = EventListing::where('date',date('Y-m-d'))->get();
                 $user = $request->user();
             } else {
                 $getUserData = [];
