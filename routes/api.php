@@ -23,6 +23,7 @@ Route::post('login', 'ApiController@login');
 Route::group(['prefix' => 'events'], function () {
 	Route::get('get-questions', 'EventController@getQuestions');
 	Route::get('update-status', 'EventController@updateStatus');
+	Route::get('get-quiz', 'EventController@getQuiz');
 });
 // Authenticated routes
 Route::group(['middleware' => ['jwt.verify']], function() {

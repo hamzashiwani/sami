@@ -114,6 +114,24 @@ class EventController extends BaseController
         }
     }
 
+    public function getQuiz(Request $request)
+    {
+        try {
+            $data = [];
+            $event = MainQuiz::where('code', $request->code)->first();
+            if($event) {
+                $data['quiz'] = $event;
+                $data['total'] = Quiz::orderBy('id','desc')->where('quiz_id',$event->id)->get();
+                $data['pending'] = Quiz::orderBy('id','desc')->where('quiz_id',$event->id)->where('status',0)->get();
+            } else {
+                $data = [];
+            }
+            return $this->respond($data, [], true, 'Success');
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
     public function updateStatus(Request $request)
     {
         try {
