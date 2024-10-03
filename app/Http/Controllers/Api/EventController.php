@@ -109,7 +109,8 @@ class EventController extends BaseController
 
                     EventAttendance::create($create);
                 } else {
-                    return $this->respondBadRequest([], false, 'Already Check In');    
+                    // return $this->respondBadRequest([], false, 'Already Check In');    
+                    return $this->respond([], [], true, 'Already Check In');
                 }
             } else {
                 return $this->respondBadRequest([], false, 'Code Not Found');        
