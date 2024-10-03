@@ -16,6 +16,12 @@ class Event extends Model
 
     protected $guarded = [];
 
+     protected $appends = ['cordinator'];
+
+    function getCordinatorAttribute() {
+        return 'Test User';
+    }
+
     public function eventListings()
     {
         return $this->hasMany(EventListing::class);
