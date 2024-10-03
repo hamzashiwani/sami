@@ -114,6 +114,26 @@ class EventController extends BaseController
         }
     }
 
+
+    public function getQuestionsApi(Request $request)
+    {
+        try {
+            $event = MainQuiz::where('code', $request->code)->first();
+            if($event) {
+                $getUserData = Quiz::orderBy('id','desc')->where('quiz_id',$event->id)->where('status',0)->first();
+                if(!$getUserData) {
+                    return $this->respond([], [], true, 'Success');
+                }
+                $user = $request->user();
+            } else {
+                $getUserData = [];
+            }
+            return $this->respond($getUserData, [], true, 'Success');
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
     public function getQuiz(Request $request)
     {
         try {
@@ -140,7 +160,7 @@ class EventController extends BaseController
                 $getUserData = Quiz::where('id',$request->quiz_id)->update(['status'=>1]);                
                 // if($getUserData) {
                     $event2 = Quiz::where('id', $request->quiz_id)->where('status',0)->get();
-                    if(count(event2) > 0) {
+                    if(count($event2) > 0) {
                         $getUserData = MainQuiz::where('id',$event->quiz_id)->update(['status'=>1]);
                     } else {
                         $getUserData = MainQuiz::where('id',$event->quiz_id)->update(['status'=>2]);
