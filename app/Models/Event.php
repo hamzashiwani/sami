@@ -26,10 +26,6 @@ class Event extends Model
         ]);
     }
 
-    function getMarketingGroupAttribute() {
-        return '5435455454';
-    }
-
     public function eventListings()
     {
         return $this->hasMany(EventListing::class);
