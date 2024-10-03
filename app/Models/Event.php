@@ -19,11 +19,11 @@ class Event extends Model
      protected $appends = ['cordinator'];
 
     function getCordinatorAttribute() {
-        return json_encode([
+        return [
             "name" => "Test User",
             "group" => "Marketing Group",
             "contact" => "00000000000"
-        ]);
+        ];
     }
 
     public function eventListings()
