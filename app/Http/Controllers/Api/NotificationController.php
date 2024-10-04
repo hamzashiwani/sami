@@ -14,7 +14,9 @@ class NotificationController extends BaseController
             $user = $request->user();
 
     // Retrieve all notifications
-            $allNotifications = Notification::orderBy('created_at', 'desc')->get();
+            $skip = 0;
+            $skip = $request->skip;
+            $allNotifications = Notification::orderBy('created_at', 'desc')->skip($skip)->take(10)->get();
 
             // Map through notifications and check if the user has read them
             $notifications = $allNotifications->map(function ($notification) use ($user) {
