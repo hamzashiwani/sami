@@ -25,31 +25,16 @@ class Notification extends Model
     public static function sendPushNotification($fcm_token, $title, $message, $id = "", $trigger_type = "home", $trigger_id = "", $job_id = "", $source = "")
     {
         try {
-            $projectId = 'sami-pharma-37634';
-            $serviceAccountPath = public_path('sami-pharma-37634-firebase-adminsdk-6e13q-13b83dc6a9.json');
-
-            $accessToken = FirebaseHelper::getAccessToken($serviceAccountPath);
-
-            $messagePayload = [
-                'topic' => "global",
-                'notification' => [
-                    'title' => $title,
-                    'body' => $message,
-                ],
-                'data' => [
-                    'id' => (string)$id,
-                    'title' => $title,
-                    'description' => $message,
-                    'trigger_type' => $trigger_type,
-                    'trigger_id' => (string)$trigger_id,
-                    'job_id' => (string)$job_id,
-                    'source' => $source,
-                    'is_read' => (string)0,
-                ],
-            ];
-
-            $response = FirebaseHelper::sendMessage($accessToken, $projectId, $messagePayload);
-            dd($response);
+            $serviceAccountPath = storage_path('app\public\sami-pharma-37634-firebase-adminsdk-6e13q-acb3f98c19.json');
+            FirebaseHelper::initializeFirebase($serviceAccountPath);
+            $response = FirebaseHelper::sendPushNotification(
+                $fcm_token,
+                $title,
+                $message,
+                $id,
+                $trigger_type,
+                $trigger_id
+            );
             // Handle response if needed
             $success = isset($response['name']) ? 1 : 0;
             $failure = $success ? 0 : 1;
