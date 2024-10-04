@@ -49,6 +49,7 @@ class Notification extends Model
             ];
 
             $response = FirebaseHelper::sendMessage($accessToken, $projectId, $messagePayload);
+            dd($response);
             // Handle response if needed
             $success = isset($response['name']) ? 1 : 0;
             $failure = $success ? 0 : 1;
