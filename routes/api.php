@@ -31,6 +31,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 	Route::post('update-profile', 'ApiController@updateProfile');
 	Route::post('change-password', 'ApiController@changePassword');
 	Route::post('view-profile', 'ApiController@viewProfile');
+	Route::post('save-device-token', 'ApiController@saveDeviceToken');
 	Route::post('logout', 'ApiController@logout');
 });
 
