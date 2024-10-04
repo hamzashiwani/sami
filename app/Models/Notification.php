@@ -25,7 +25,7 @@ class Notification extends Model
     public static function sendPushNotification($fcm_token, $title, $message, $id = "", $trigger_type = "home", $trigger_id = "", $job_id = "", $source = "")
     {
         try {
-            $serviceAccountPath = storage_path('app\public\sami-pharma-37634-firebase-adminsdk-6e13q-acb3f98c19.json');
+            $serviceAccountPath = storage_path('app/public/sami-pharma-37634-firebase-adminsdk-6e13q-acb3f98c19.json');
             FirebaseHelper::initializeFirebase($serviceAccountPath);
             $response = FirebaseHelper::sendPushNotification(
                 $fcm_token,
