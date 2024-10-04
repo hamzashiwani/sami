@@ -431,9 +431,9 @@ class ApiController extends Controller
             $request->validate([
                 'device_token' => 'required|string',
             ]);
-    
+            $checkUser = JWTAuth::authenticate();
             $deviceToken = DeviceToken::updateOrCreate(
-                ['user_id' => auth()->id()],
+                ['user_id' => $checkUser->id()],
                 ['device_token' => $request->device_token]
             );
     
