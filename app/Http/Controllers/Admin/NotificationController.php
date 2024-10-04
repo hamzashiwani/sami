@@ -95,8 +95,9 @@ class NotificationController extends Controller
                 }
             }
 
-            Notification::create($data);
+            $notification = Notification::create($data);
             DB::commit();
+            Notification::sendPushNotification("", $notification->title, $notification->message, $notification->id, "notification", $notification->id);
         }catch (\Exception $exception) {
             dd($exception->getMessage());
             DB::rollBack();
