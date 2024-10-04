@@ -9,6 +9,7 @@ use App\Models\Quiz;
 use App\Models\EventListing;
 use App\Models\EventAttendance;
 use App\Models\Notification;
+use App\Models\SubmitAnswer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -168,6 +169,37 @@ class EventController extends BaseController
                     return $this->respond([], [], true, 'Answer Submited');
                 // }
                 $user = $request->user();
+            } else {
+                $getUserData = [];
+            }
+            return $this->respond($getUserData, [], true, 'Success');
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
+
+    public function submitAnswer(Request $request)
+    {
+        try {
+            $event = Quiz::where('id', $request->question_id)->first();
+            if($event) {
+                $main = MainQuiz::where('id',$event->quiz_id)->first();
+                $check = SubmitAnswer::where('user_id',auth()->user()->id)->where('question_id',$request->question_id)
+                ->first();
+                if(!$check) {
+                    $getUserData = [
+                        'user_id' => auth()->user()->id,
+                        'event_id' => $main->event_id,
+                        'quiz_id' => $main->id,
+                        'question_id' => $request->question_id,
+                        'answer' => $request->answer,
+                    ];              
+                    SubmitAnswer::create($getUserData);
+                    $user = $request->user();
+                } else {
+                    return $this->respond([], [], true, 'Already Submit');
+                }
             } else {
                 $getUserData = [];
             }

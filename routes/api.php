@@ -58,7 +58,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 		Route::get('get-attendance', 'EventController@getAttendance');
 		Route::get('detail', 'EventController@detail');
 		Route::post('check-in', 'EventController@attendance');
-		Route::post('get-quiz', 'EventController@getQuestionsApi');
+		Route::get('get-quiz', 'EventController@getQuestionsApi');
+		Route::post('submit-answer', 'EventController@submitAnswer');
 	});
 
 	Route::group(['prefix' => 'dashboard'], function () {

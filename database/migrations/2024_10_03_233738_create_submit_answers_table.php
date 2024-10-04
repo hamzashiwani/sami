@@ -17,7 +17,9 @@ class CreateSubmitAnswersTable extends Migration
             $table->id();
             $table->string('user_id')->nullable();
             $table->string('event_id')->nullable();
-            $table->string('event_id')->nullable();
+            $table->string('quiz_id')->nullable();
+            $table->string('question_id')->nullable();
+            $table->string('answer')->nullable();
             $table->timestamps();
         });
     }

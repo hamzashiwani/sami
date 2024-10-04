@@ -9,5 +9,5 @@ class SubmitAnswer extends Model
 {
     use HasFactory;
 
-    protected $guareded = [];
+    protected $guarded = [];
 }
