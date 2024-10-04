@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Models\DeviceToken;
 
 class PassportAuthController extends BaseController
 {
@@ -127,6 +128,29 @@ class PassportAuthController extends BaseController
             } else {
                 return $this->respondNotFound('User not found'); // You can customize this response accordingly
             }
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
+    public function saveDeviceToken(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            
+            $deviceToken = DeviceToken::updateOrCreate(
+                ['user_id' => auth()->id()],
+                ['device_token' => $request->device_token, 'user_id' => auth()->id()]
+            );
+            DB::commit();
+            return $this->respond(
+                [],
+                [],
+                true,
+                'Device token saved successfully!'
+            );
+
         } catch (Exception $e) {
             DB::rollBack();
             return $this->respondInternalError($e->getMessage());

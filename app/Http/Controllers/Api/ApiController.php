@@ -424,34 +424,6 @@ class ApiController extends Controller
         }
     }
 
-    public function saveDeviceToken(Request $request)
-    {
-        try {
-
-            $request->validate([
-                'device_token' => 'required|string',
-            ]);
-            $checkUser = JWTAuth::authenticate();
-            $deviceToken = DeviceToken::updateOrCreate(
-                ['user_id' => $checkUser->id()],
-                ['device_token' => $request->device_token]
-            );
-    
-            return response()->json([
-                'statusCode' => 200,
-                'message'    => 'Device token saved successfully!',
-                'data'       => json_decode('{}')
-            ]);
-
-        } catch (Exception $e) {
-            return response()->json([
-                'statusCode' => 500,
-                'message'    => $e->getMessage(),
-                'data'       => json_decode('{}')
-            ]);
-        }
-    }
-
     public function logout(Request $request)
     {
         try {
