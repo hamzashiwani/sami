@@ -31,7 +31,7 @@ class QuizController extends Controller
     public function index($id)
     {
         try{
-            $data = Quiz::where('event_id',$id)->get();
+            $data = Quiz::where('quiz_id',$id)->get();
             return view('admin.quiz.index', compact('data','id'));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
@@ -114,7 +114,7 @@ class QuizController extends Controller
     public function edit($ids)
     {
         $data = Quiz::find($ids);
-        $id = $data->event_id;
+        $id = $data->quiz_id;
         $form = [
             'type' => 'create',
             'heading' => 'Edit Quiz',
@@ -152,7 +152,7 @@ class QuizController extends Controller
 
             DB::commit();
             return redirect()
-                ->route('admin.quiz.index',$quiz->event_id)
+                ->route('admin.quiz.index',$quiz->quiz_id)
                 ->with('success', 'Quiz has been updated successfully.');
         } catch (\Exception $exception) {
             DB::rollBack();
