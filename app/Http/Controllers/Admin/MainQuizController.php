@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\StoreBlogRequest;
+use App\Http\Requests\Admin\StoreMainQuizRequest;
 use App\Http\Requests\Admin\UpdateBlogRequest;
 use App\Models\Quiz;
 use App\Models\MainQuiz;
@@ -68,7 +68,7 @@ class MainQuizController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(StoreMainQuizRequest $request,$id)
     {
         try{
             DB::beginTransaction();

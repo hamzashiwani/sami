@@ -2,39 +2,27 @@
 
 @section('content')
 <style>
-    body {
-    font-family: Arial, sans-serif;
-}
-
-.tags-input {
-    border: 1px solid #ccc;
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.tags-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 5px;
-}
-
-.tag {
-    background-color: #007bff;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 3px;
-    margin: 5px;
-}
-
-.tag .remove-tag {
-    margin-left: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-</style>
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #ccc;
+            padding: 5px;
+            min-height: 40px;
+        }
+        .tag {
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .remove-tag {
+            margin-left: 5px;
+            cursor: pointer;
+            color: red;
+        }
+    </style>
     <section id="number-tabs">
         <div class="row">
             <div class="col-12">
@@ -44,7 +32,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form method="POST" action="{!! $form['action'] !!}"
+                            <form id="tag-form" method="POST" action="{!! $form['action'] !!}"
                                   class="number-tab-steps wizard-circle" enctype="multipart/form-data">
                                 <input type="hidden" name="id" value="{{ $data->id }}">
                                 @csrf
@@ -62,8 +50,9 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="tags">Tags *</label>
-                                                <input type="text" id="tag-input" name="tags"
+                                                <input type="text" id="tag-input" name="tags[]"
                                                        value="{!! old('tags', $data->tags) !!}" class="form-control">
+                                                       <div id="tags-list" class="tags-list"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -194,38 +183,51 @@
             }
         }
 
+    </script>
+
+        <script>
         const tagInput = document.getElementById('tag-input');
         const tagsList = document.getElementById('tags-list');
+        const tagForm = document.getElementById('tag-form');
 
-tagInput.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter' && tagInput.value) {
-        event.preventDefault();
-        addTag(tagInput.value.trim());
-        tagInput.value = '';
-    }
-});
+        tagInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && tagInput.value) {
+                event.preventDefault();
+                addTag(tagInput.value.trim());
+                tagInput.value = '';
+            }
+        });
 
-function addTag(tag) {
-    // Check for duplicate tags
-    if ([...tagsList.children].some(tagEl => tagEl.textContent.includes(tag))) {
-        alert('Tag already exists!');
-        return;
-    }
+        function addTag(tag) {
+            // Check for duplicate tags
+            if ([...tagsList.children].some(tagEl => tagEl.textContent.includes(tag))) {
+                alert('Tag already exists!');
+                return;
+            }
 
-    const tagElement = document.createElement('div');
-    tagElement.className = 'tag';
-    tagElement.textContent = tag;
+            const tagElement = document.createElement('div');
+            tagElement.className = 'tag';
+            tagElement.textContent = tag;
 
-    const removeTagBtn = document.createElement('span');
-    removeTagBtn.textContent = '×';
-    removeTagBtn.className = 'remove-tag';
-    removeTagBtn.onclick = function() {
-        tagsList.removeChild(tagElement);
-    };
+            const removeTagBtn = document.createElement('span');
+            removeTagBtn.textContent = '×';
+            removeTagBtn.className = 'remove-tag';
+            removeTagBtn.onclick = function() {
+                tagsList.removeChild(tagElement);
+            };
 
-    tagElement.appendChild(removeTagBtn);
-    tagsList.appendChild(tagElement);
-}
+            tagElement.appendChild(removeTagBtn);
+            tagsList.appendChild(tagElement);
 
+            // Create a hidden input for the tag
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'tags[]'; // Using array notation
+            hiddenInput.value = tag;
+            tagForm.appendChild(hiddenInput);
+        }
+    </script>
+
+        }
     </script>
 @endsection

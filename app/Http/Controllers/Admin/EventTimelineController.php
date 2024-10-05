@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\StoreBlogRequest;
+use App\Http\Requests\Admin\StoreEventTimelineRequest;
 use App\Http\Requests\Admin\UpdateBlogRequest;
 use App\Models\EventListing;
 use App\Models\Event;
@@ -71,7 +71,7 @@ class EventTimelineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(StoreEventTimelineRequest $request,$id)
     {
         try{
             DB::beginTransaction();
@@ -79,9 +79,12 @@ class EventTimelineController extends Controller
                 [
                     '_method',
                     '_token',
-                    'previous_image'
+                    'previous_image',
+                    'tags'
                 ]
             );
+
+            $data['tags'] = implode(',',$request->tags);
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');

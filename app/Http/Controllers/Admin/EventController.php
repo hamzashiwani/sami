@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\StoreBlogRequest;
+use App\Http\Requests\Admin\StoreEventRequest;
 use App\Http\Requests\Admin\UpdateBlogRequest;
 use App\Models\Event;
 use Illuminate\Http\Request;
@@ -64,7 +64,7 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEventRequest $request)
     {
         try{
             DB::beginTransaction();
