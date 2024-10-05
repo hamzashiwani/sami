@@ -76,8 +76,6 @@ class HotelController extends Controller
                     'id'
                 ]
             );
-
-            $hotel = EventHotel::where('event_id',$id)->where('user_id',$request->id)->first();
             EventHotel::create($data);
             DB::commit();
         }catch (\Exception $exception) {

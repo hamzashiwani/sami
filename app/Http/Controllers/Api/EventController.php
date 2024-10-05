@@ -83,7 +83,7 @@ class EventController extends BaseController
     public function getAttendance(Request $request)
     {
         try {
-            $event = Event::where('end_date', '>=', Carbon::now())->first();
+            $event = Event::where('end_date', '>=', date('Y-m-d'))->first();
             if($event) {
                 $getUserData = EventListing::where('date',date('Y-m-d'))->get();
                 $user = $request->user();
@@ -188,12 +188,18 @@ class EventController extends BaseController
                 $check = SubmitAnswer::where('user_id',auth()->user()->id)->where('question_id',$request->question_id)
                 ->first();
                 if(!$check) {
+                    if($event->correct_answer == $request->answer) {
+                        $points = $request->seconds + 5;
+                    } else {
+                        $points = 0;
+                    }
                     $getUserData = [
                         'user_id' => auth()->user()->id,
                         'event_id' => $main->event_id,
                         'quiz_id' => $main->id,
                         'question_id' => $request->question_id,
                         'answer' => $request->answer,
+                        'seconds' => $points,
                     ];              
                     SubmitAnswer::create($getUserData);
                     $user = $request->user();
