@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\EventTimelineController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\MainQuizController;
 use App\Http\Controllers\Admin\HotelController;
+use App\Http\Controllers\Admin\FlightController;
+use App\Http\Controllers\Admin\TransportController;
 
 
 /*
@@ -98,13 +100,31 @@ Route::name('admin.')->group(
         Route::put('main-quiz/update/{id}', [MainQuizController::class, 'update'])->name('main-quiz.update');
         Route::get('main-quiz/destroy/{id}', [MainQuizController::class, 'destroy'])->name('main-quiz.destroy');
 
-    Route::get('event-hotel/{id}', [HotelController::class, 'index'])->name('event-hotel.index');
+        Route::get('event-hotel/{id}', [HotelController::class, 'index'])->name('event-hotel.index');
         Route::get('event-hotel/create/{id}', [HotelController::class, 'create'])->name('event-hotel.create');
         Route::post('event-hotel/store/{id}', [HotelController::class, 'store'])->name('event-hotel.store');
         Route::get('event-hotel/edit/{id}', [HotelController::class, 'edit'])->name('event-hotel.edit');
         Route::post('event-hotel/update/{id}', [HotelController::class, 'update'])->name('event-hotel.update');
         Route::put('event-hotel/update/{id}', [HotelController::class, 'update'])->name('event-hotel.update');
         Route::get('event-hotel/destroy/{id}', [HotelController::class, 'destroy'])->name('event-hotel.destroy');
+
+
+        Route::get('event-flight/{id}', [FlightController::class, 'index'])->name('event-flight.index');
+        Route::get('event-flight/create/{id}', [FlightController::class, 'create'])->name('event-flight.create');
+        Route::post('event-flight/store/{id}', [FlightController::class, 'store'])->name('event-flight.store');
+        Route::get('event-flight/edit/{id}', [FlightController::class, 'edit'])->name('event-flight.edit');
+        Route::post('event-flight/update/{id}', [FlightController::class, 'update'])->name('event-flight.update');
+        Route::put('event-flight/update/{id}', [FlightController::class, 'update'])->name('event-flight.update');
+        Route::get('event-flight/destroy/{id}', [FlightController::class, 'destroy'])->name('event-flight.destroy');
+
+
+        Route::get('event-transport/{id}', [TransportController::class, 'index'])->name('event-transport.index');
+        Route::get('event-transport/create/{id}', [TransportController::class, 'create'])->name('event-transport.create');
+        Route::post('event-transport/store/{id}', [TransportController::class, 'store'])->name('event-transport.store');
+        Route::get('event-transport/edit/{id}', [TransportController::class, 'edit'])->name('event-transport.edit');
+        Route::post('event-transport/update/{id}', [TransportController::class, 'update'])->name('event-transport.update');
+        Route::put('event-transport/update/{id}', [TransportController::class, 'update'])->name('event-transport.update');
+        Route::get('event-transport/destroy/{id}', [TransportController::class, 'destroy'])->name('event-transport.destroy');
 
 
         Route::post('upload-image', [

@@ -25,7 +25,7 @@
                                         @foreach ($data as $key => $result)
                                             <tr>
                                                 <td>{!! Str::limit($result->name, 20, '...') !!}</td>
-                                                <td>{!! $result->user !!}</td>
+                                                <td>{!! $result->user->name !!}</td>
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
                                                 <td>
                                                     <!-- <a href="{!! route('admin.quiz.index', $result->id) !!}"
@@ -36,7 +36,7 @@
                                                         class="btn btn-primary btn-sm waves-effect waves-light"><i
                                                             class="feather icon-edit"></i></a>
 
-                                                    <button type="button"
+                                                    <!-- <button type="button"
                                                         class="btn btn-danger btn-sm waves-effect waves-light"
                                                         onclick="deleteConfirmation({!! $result->id !!})"><i
                                                             class="feather icon-trash"></i></button>
@@ -45,7 +45,7 @@
                                                         id="deleteForm{!! $result->id !!}">
                                                         @csrf
                                                         @method('DELETE')
-                                                    </form>
+                                                    </form> -->
 
                                                 </td>
                                             </tr>

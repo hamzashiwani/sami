@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\StoreFaqRequest;
 use App\Http\Requests\Admin\UpdateFaqRequest;
-use App\Models\EventHotel;
+use App\Models\EventFlight;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class HotelController extends Controller
+class FlightController extends Controller
 {
     private $faq;
     /**
@@ -17,7 +17,7 @@ class HotelController extends Controller
      *
      * @return void
      */
-    public function __construct(EventHotel $faq)
+    public function __construct(EventFlight $faq)
     {
         $this->middleware('auth:admin');
         $this->faq = $faq;
@@ -31,9 +31,9 @@ class HotelController extends Controller
     public function index($id)
     {
         try{
-            $data = EventHotel::where('event_id',$id)->get();
+            $data = EventFlight::where('event_id',$id)->get();
             $users = User::get();
-            return view('admin.hotel.index', compact('data','id','users'));
+            return view('admin.flight.index', compact('data','id','users'));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
             return redirect()->back();
@@ -47,16 +47,16 @@ class HotelController extends Controller
      */
     public function create($id)
     {
-        $data = new EventHotel();
+        $data = new EventFlight();
         $form = [
             'type' => 'create',
-            'heading' => 'Add EventHotel',
+            'heading' => 'Add EventFlight',
             'method' => 'POST',
-            'action' => route('admin.event-hotel.store',$id),
-            'cancel_url' => route('admin.event-hotel.index',$id)
+            'action' => route('admin.event-flight.store',$id),
+            'cancel_url' => route('admin.event-flight.index',$id)
         ];
         $users = User::get();
-        return view('admin.hotel.form', compact('data', 'form','id','users'));
+        return view('admin.flight.form', compact('data', 'form','id','users'));
     }
 
     /**
@@ -76,7 +76,15 @@ class HotelController extends Controller
                     'id'
                 ]
             );
-            EventHotel::create($data);
+
+            $hotel = EventFlight::where('event_id',$id)->where('user_id',auth()->user()->id)->get();
+            if(count($hotel) > 1) {
+                DB::rollBack();
+                return redirect()
+                    ->back()
+                    ->with('error', 'Reacord Already Available On Selected User');
+            }
+            EventFlight::create($data);
             DB::commit();
         }catch (\Exception $exception) {
             DB::rollBack();
@@ -85,8 +93,8 @@ class HotelController extends Controller
                 ->with('error', $exception->getMessage());
         }
         return redirect()
-            ->route('admin.event-hotel.index',$id)
-            ->with('success', 'EventHotel has been added successfully.');
+            ->route('admin.event-flight.index',$id)
+            ->with('success', 'EventFlight has been added successfully.');
     }
 
     /**
@@ -97,8 +105,8 @@ class HotelController extends Controller
      */
     public function show($id)
     {
-        $data = EventHotel::find($id);
-        return view('admin.hotel.show', compact('data'));
+        $data = EventFlight::find($id);
+        return view('admin.flight.show', compact('data'));
     }
 
     /**
@@ -109,17 +117,17 @@ class HotelController extends Controller
      */
     public function edit($ids)
     {
-        $data = EventHotel::find($ids);
+        $data = EventFlight::find($ids);
         $id = $data->event_id;
         $form = [
             'type' => 'create',
-            'heading' => 'Edit EventHotel',
+            'heading' => 'Edit EventFlight',
             'method' => 'PUT',
-            'action' => route('admin.event-hotel.update', $ids),
-            'cancel_url' => route('admin.event-hotel.index',$id)
+            'action' => route('admin.event-flight.update', $ids),
+            'cancel_url' => route('admin.event-flight.index',$id)
         ];
         $users = User::get();
-        return view('admin.hotel.form', compact('data', 'form','id','users'));
+        return view('admin.flight.form', compact('data', 'form','id','users'));
     }
 
     /**
@@ -133,18 +141,18 @@ class HotelController extends Controller
     {
         try {
             DB::beginTransaction();
-            $hotel = EventHotel::where('id',$id)->first();
+            $flight = EventFlight::where('id',$id)->first();
             $data = $request->except(
                 [
                     '_method',
                     '_token',
                 ]
             );
-            EventHotel::update(['id' => $request->id], $data);
+            EventFlight::where(['id' => $request->id])->update($data);
             DB::commit();
             return redirect()
-                ->route('admin.event-hotel.index',$hotel->event_id)
-                ->with('success', 'EventHotel has been updated successfully.');
+                ->route('admin.event-flight.index',$flight->event_id)
+                ->with('success', 'EventFlight has been updated successfully.');
         } catch (\Exception $exception) {
             DB::rollBack();
 
@@ -164,10 +172,10 @@ class HotelController extends Controller
     public function destroy($id)
     {
         try {
-            $faq = EventHotel::find($id);
+            $faq = EventFlight::find($id);
             return redirect()
-                ->route('admin.event-hotel.index')
-                ->with('success', 'EventHotel has been deleted successfully.');
+                ->route('admin.event-flight.index')
+                ->with('success', 'EventFlight has been deleted successfully.');
         }catch (\Exception $exception) {
             return redirect()
                 ->back()

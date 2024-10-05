@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\StoreFaqRequest;
 use App\Http\Requests\Admin\UpdateFaqRequest;
-use App\Models\EventHotel;
+use App\Models\EventTransport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class HotelController extends Controller
+class TransportController extends Controller
 {
     private $faq;
     /**
@@ -17,7 +17,7 @@ class HotelController extends Controller
      *
      * @return void
      */
-    public function __construct(EventHotel $faq)
+    public function __construct(EventTransport $faq)
     {
         $this->middleware('auth:admin');
         $this->faq = $faq;
@@ -31,9 +31,9 @@ class HotelController extends Controller
     public function index($id)
     {
         try{
-            $data = EventHotel::where('event_id',$id)->get();
+            $data = EventTransport::where('event_id',$id)->get();
             $users = User::get();
-            return view('admin.hotel.index', compact('data','id','users'));
+            return view('admin.transport.index', compact('data','id','users'));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
             return redirect()->back();
@@ -47,16 +47,16 @@ class HotelController extends Controller
      */
     public function create($id)
     {
-        $data = new EventHotel();
+        $data = new EventTransport();
         $form = [
             'type' => 'create',
-            'heading' => 'Add EventHotel',
+            'heading' => 'Add EventTransport',
             'method' => 'POST',
-            'action' => route('admin.event-hotel.store',$id),
-            'cancel_url' => route('admin.event-hotel.index',$id)
+            'action' => route('admin.event-transport.store',$id),
+            'cancel_url' => route('admin.event-transport.index',$id)
         ];
         $users = User::get();
-        return view('admin.hotel.form', compact('data', 'form','id','users'));
+        return view('admin.transport.form', compact('data', 'form','id','users'));
     }
 
     /**
@@ -77,14 +77,14 @@ class HotelController extends Controller
                 ]
             );
 
-            $hotel = EventHotel::where('event_id',$id)->where('user_id',auth()->user()->id)->first();
-            if($hotel) {
+            $transport = EventTransport::where('event_id',$id)->where('user_id',auth()->user()->id)->first();
+            if($transport) {
                 DB::rollBack();
                 return redirect()
                     ->back()
                     ->with('error', 'Reacord Already Available On Selected User');
             }
-            EventHotel::create($data);
+            EventTransport::create($data);
             DB::commit();
         }catch (\Exception $exception) {
             DB::rollBack();
@@ -93,8 +93,8 @@ class HotelController extends Controller
                 ->with('error', $exception->getMessage());
         }
         return redirect()
-            ->route('admin.event-hotel.index',$id)
-            ->with('success', 'EventHotel has been added successfully.');
+            ->route('admin.event-transport.index',$id)
+            ->with('success', 'EventTransport has been added successfully.');
     }
 
     /**
@@ -105,8 +105,8 @@ class HotelController extends Controller
      */
     public function show($id)
     {
-        $data = EventHotel::find($id);
-        return view('admin.hotel.show', compact('data'));
+        $data = EventTransport::find($id);
+        return view('admin.transport.show', compact('data'));
     }
 
     /**
@@ -117,17 +117,17 @@ class HotelController extends Controller
      */
     public function edit($ids)
     {
-        $data = EventHotel::find($ids);
+        $data = EventTransport::find($ids);
         $id = $data->event_id;
         $form = [
             'type' => 'create',
-            'heading' => 'Edit EventHotel',
+            'heading' => 'Edit EventTransport',
             'method' => 'PUT',
-            'action' => route('admin.event-hotel.update', $ids),
-            'cancel_url' => route('admin.event-hotel.index',$id)
+            'action' => route('admin.event-transport.update', $ids),
+            'cancel_url' => route('admin.event-transport.index',$id)
         ];
         $users = User::get();
-        return view('admin.hotel.form', compact('data', 'form','id','users'));
+        return view('admin.transport.form', compact('data', 'form','id','users'));
     }
 
     /**
@@ -141,18 +141,18 @@ class HotelController extends Controller
     {
         try {
             DB::beginTransaction();
-            $hotel = EventHotel::where('id',$id)->first();
+            $transport = EventTransport::where('id',$id)->first();
             $data = $request->except(
                 [
                     '_method',
                     '_token',
                 ]
             );
-            EventHotel::where(['id' => $request->id])->update($data);
+            EventTransport::where(['id' => $request->id])->update($data);
             DB::commit();
             return redirect()
-                ->route('admin.event-hotel.index',$hotel->event_id)
-                ->with('success', 'EventHotel has been updated successfully.');
+                ->route('admin.event-transport.index',$transport->event_id)
+                ->with('success', 'EventTransport has been updated successfully.');
         } catch (\Exception $exception) {
             DB::rollBack();
 
@@ -172,10 +172,10 @@ class HotelController extends Controller
     public function destroy($id)
     {
         try {
-            $faq = EventHotel::find($id);
+            $faq = EventTransport::find($id);
             return redirect()
-                ->route('admin.event-hotel.index')
-                ->with('success', 'EventHotel has been deleted successfully.');
+                ->route('admin.event-transport.index')
+                ->with('success', 'EventTransport has been deleted successfully.');
         }catch (\Exception $exception) {
             return redirect()
                 ->back()

@@ -27,6 +27,12 @@
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
                                                 <!-- <td><small><span class="badge badge-{!! $result->status == 'published' ? 'success' : 'danger' !!}">{!! strtoupper($result->status) !!}</span></small></td> -->
                                                 <td>
+                                                <a href="{!! route('admin.event-transport.index', $result->id) !!}"
+                                                        class="btn btn-info btn-sm waves-effect waves-light"><i
+                                                            class="feather icon-eye"></i></a>
+                                                <a href="{!! route('admin.event-flight.index', $result->id) !!}"
+                                                        class="btn btn-info btn-sm waves-effect waves-light"><i
+                                                            class="feather icon-eye"></i></a>
                                                 <a href="{!! route('admin.event-hotel.index', $result->id) !!}"
                                                         class="btn btn-info btn-sm waves-effect waves-light"><i
                                                             class="feather icon-eye"></i></a>
@@ -41,7 +47,7 @@
                                                         class="btn btn-primary btn-sm waves-effect waves-light"><i
                                                             class="feather icon-edit"></i></a>
 
-                                                    <button type="button"
+                                                    <!-- <button type="button"
                                                         class="btn btn-danger btn-sm waves-effect waves-light"
                                                         onclick="deleteConfirmation({!! $result->id !!})"><i
                                                             class="feather icon-trash"></i></button>
@@ -50,7 +56,7 @@
                                                         id="deleteForm{!! $result->id !!}">
                                                         @csrf
                                                         @method('DELETE')
-                                                    </form>
+                                                    </form> -->
 
                                                 </td>
                                             </tr>
