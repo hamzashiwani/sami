@@ -85,7 +85,7 @@ class EventController extends BaseController
         try {
             $event = Event::where('end_date', '>=', date('Y-m-d'))->first();
             if($event) {
-                $getUserData = EventListing::where('date',date('Y-m-d'))->get();
+                $getUserData = EventListing::where('date',date('Y-m-d'))->where('time', '>=',date('H:i:s'))->get();
                 $user = $request->user();
             } else {
                 $getUserData = [];
