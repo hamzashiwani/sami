@@ -24,7 +24,7 @@ class StoreQuizRequest extends FormRequest
     public function rules()
     {
         return [
-            'question' => 'required|max:32',
+            'question' => 'required',
             // 'tags' => 'required',
             'correct_answer'  => 'required',
             // 'image'      => 'required|file|mimes:jpeg,jpg,png|max:5000',
