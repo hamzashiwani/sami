@@ -13,7 +13,7 @@
 
         async function quiz() {
             let code = $('#code').val();
-            const response = await fetch(`http://localhost/sami/public/api/events/get-questions?code=${code}`, {
+            const response = await fetch(`http://localhost/sami/public/api/socket/events/get-questions?code=${code}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -35,7 +35,7 @@
         }
 
         async function updateStatus() {
-            const response = await fetch('http://localhost/sami/public/api/events/update-status?quiz_id=2', {
+            const response = await fetch('http://localhost/sami/public/api/socket/events/update-status?quiz_id=2', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -47,7 +47,7 @@
 
         async function submitCode() {
             let code = $('#code').val();
-            const response = await fetch(`http://localhost/sami/public/api/events/get-quiz?code=${code}`, {
+            const response = await fetch(`http://localhost/sami/public/api/socket/events/get-quiz?code=${code}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'

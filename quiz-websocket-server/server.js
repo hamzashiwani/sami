@@ -17,7 +17,7 @@ io.on('connection', (socket) => {
     socket.on('quiz', (data) => {
         console.log('quiz event received');
         console.log(data);
-        io.emit('quiz'); // Broadcast the quiz event
+        io.emit('quiz', data); // Broadcast the quiz event
     });
 
     socket.on('disconnect', () => {
