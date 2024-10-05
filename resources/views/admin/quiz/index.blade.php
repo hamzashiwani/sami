@@ -16,7 +16,6 @@
                                     <thead>
                                         <tr>
                                             <th>Question</th>
-                                            <th>Event</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -25,7 +24,6 @@
                                         @foreach ($data as $key => $result)
                                             <tr>
                                                 <td>{!! Str::limit($result->question, 20, '...') !!}</td>
-                                                <td>{!! $result->event->title !!}</td>
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
                                                 <td>
 {{--                                                    <a href="{!! route('admin.quiz.show', $result->id) !!}"--}}
