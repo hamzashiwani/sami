@@ -178,6 +178,24 @@ class EventController extends BaseController
         }
     }
 
+    public function getQuizStats(Request $request)
+    {
+        try {
+            $event = Quiz::where('id', $request->quiz_id)->first();
+            if($event) {
+                return SubmitAnswer::where('question_id', $request->quiz_id)
+                ->select('answer', \DB::raw('count(*) as total'))
+                ->groupBy('answer')
+                ->get();
+            } else {
+                $getUserData = [];
+            }
+            return $this->respond($getUserData, [], true, 'Success');
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
 
     public function submitAnswer(Request $request)
     {

@@ -24,6 +24,7 @@ Route::group(['prefix' => 'socket/events'], function () {
 	Route::get('get-questions', 'EventController@getQuestions');
 	Route::get('update-status', 'EventController@updateStatus');
 	Route::get('get-quiz', 'EventController@getQuiz');
+	Route::get('get-quiz-stats', 'EventController@getQuizStats');
 });
 // Authenticated routes
 Route::group(['middleware' => ['jwt.verify']], function() {
