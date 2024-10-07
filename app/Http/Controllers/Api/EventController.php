@@ -96,6 +96,27 @@ class EventController extends BaseController
         }
     }
 
+    public function getLeadorboard(Request $request)
+    {
+        try {
+            $event = MainQuiz::where('id', $request->quiz_id)->first();
+            if($event) {
+                $leaderboard = SubmitAnswer::select('user_id','quiz_id')
+                ->where('quiz_id',$event->id)
+                ->selectRaw('SUM(seconds) as total_points')
+                ->groupBy('user_id')
+                ->orderBy('total_points', 'desc')
+                ->with('user') // Assuming you want user details as well
+                ->get();
+            } else {
+                return $this->respond([], [], true, 'Quiz Not Found');    
+            }
+            return $this->respond($leaderboard, [], true, 'Success');
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
     public function getQuestions(Request $request)
     {
         try {
