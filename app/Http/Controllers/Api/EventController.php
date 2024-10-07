@@ -101,11 +101,15 @@ class EventController extends BaseController
         try {
             $event = MainQuiz::where('id', $request->quiz_id)->first();
             if($event) {
-                $leaderboard = SubmitAnswer::select('user_id','quiz_id')
-                ->where('quiz_id',$event->id)
-                ->selectRaw('SUM(seconds) as total_points')
+                // Get total participants
+            $leaderboard['totalParticipants'] = SubmitAnswer::where('quiz_id', $event->id)->distinct('user_id')->count('user_id');
+
+            // Get leaderboard data
+            $leaderboard['leadorboard'] = SubmitAnswer::select('user_id', 'quiz_id')
+                ->where('quiz_id', $event->id)
+                ->selectRaw('SUM(time_remain) as total_time, COUNT(CASE WHEN is_correct THEN 1 END) as total_correct_answers')
                 ->groupBy('user_id')
-                ->orderBy('total_points', 'desc')
+                ->orderBy('total_time', 'asc') // Assuming you want to order by time ascending (faster is better)
                 ->with('user') // Assuming you want user details as well
                 ->get();
             } else {
@@ -229,8 +233,12 @@ class EventController extends BaseController
                 if(!$check) {
                     if($event->correct_answer == $request->answer) {
                         $points = $request->seconds + 5;
+                        $correct = 1;
+                        $time_remain = $request->seconds;
                     } else {
                         $points = 0;
+                        $correct = 0;
+                        $time_remain = $request->seconds;
                     }
                     $getUserData = [
                         'user_id' => auth()->user()->id,
@@ -239,6 +247,8 @@ class EventController extends BaseController
                         'question_id' => $request->question_id,
                         'answer' => $request->answer,
                         'seconds' => $points,
+                        'is_correct' => $correct,
+                        'time_remain' => $time_remain,
                     ];              
                     SubmitAnswer::create($getUserData);
                     $user = $request->user();
