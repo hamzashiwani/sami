@@ -24,7 +24,7 @@ class FirebaseHelper
         try {
             // Construct message payload using Kreait's CloudMessage
             $messagePayload = CloudMessage::fromArray([
-                'topic' => "global",
+                'topic' => "Global",
                 'notification' => [
                     'title' => $title,
                     'body' => $message,
