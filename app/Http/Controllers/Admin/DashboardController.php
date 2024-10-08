@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Page;
 use App\Models\Testimonial;
 use App\Models\User;
+use App\Models\Event;
 
 class DashboardController extends Controller
 {
@@ -28,6 +29,8 @@ class DashboardController extends Controller
     {
         $usersCount = User::count();
         $blogsCount = Blog::count();
+        $eventsCount = Event::count();
+        $upcomingCount = Event::where('date','>',date('Y-m-d'))->count();
         $testimonialsCount = Testimonial::count();
         $pageCount = Page::count();
         $users = User::orderBy('id', 'DESC')->take(5)->get();
@@ -36,7 +39,9 @@ class DashboardController extends Controller
             'blogsCount',
             'testimonialsCount',
             'pageCount',
-            'users'
+            'users',
+            'eventsCount',
+            'upcomingCount'
         ));
     }
 }

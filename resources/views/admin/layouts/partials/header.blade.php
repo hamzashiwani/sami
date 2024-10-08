@@ -85,14 +85,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item {{ request()->segment(2) == 'quiz-view' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Quiz Start</span></a>
-                <ul class="menu-content">
-                    <!-- <li class="{{ (request()->segment(2) == 'quiz-view' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.event.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
-                    </li> -->
-                    <li class="{{ (request()->segment(2) == 'eventquiz-view' && request()->segment(3) != 'create') ? 'active' : '' }}"><a href="{{ route('admin.quiz-view.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">View</span></a>
-                    </li>
-                </ul>
-            </li>
+            
             
 
             <li class="navigation-header"><span>Settings</span>

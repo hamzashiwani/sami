@@ -8,6 +8,7 @@ use App\Models\MainQuiz;
 use App\Models\Quiz;
 use App\Models\EventListing;
 use App\Models\EventAttendance;
+use App\Models\User;
 use App\Models\Notification;
 use App\Models\SubmitAnswer;
 use Illuminate\Http\Request;
@@ -91,6 +92,31 @@ class EventController extends BaseController
                 $getUserData = [];
             }
             return $this->respond($getUserData, [], true, 'Success');
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
+    public function getLeadorboard(Request $request)
+    {
+        try {
+            $event = MainQuiz::where('id', $request->quiz_id)->first();
+            if($event) {
+                // Get total participants
+            $leaderboard['totalParticipants'] = SubmitAnswer::where('quiz_id', $event->id)->distinct('user_id')->count('user_id');
+
+            // Get leaderboard data
+            $leaderboard['leadorboard'] = SubmitAnswer::select('user_id', 'quiz_id')
+                ->where('quiz_id', $event->id)
+                ->selectRaw('SUM(time_remain) as total_time, COUNT(CASE WHEN is_correct THEN 1 END) as total_correct_answers')
+                ->groupBy('user_id')
+                ->orderBy('total_time', 'asc') // Assuming you want to order by time ascending (faster is better)
+                ->with('user') // Assuming you want user details as well
+                ->get();
+            } else {
+                return $this->respond([], [], true, 'Quiz Not Found');    
+            }
+            return $this->respond($leaderboard, [], true, 'Success');
         } catch (\Exception $e) {
             return $this->respondInternalError($e->getMessage());
         }
@@ -208,8 +234,12 @@ class EventController extends BaseController
                 if(!$check) {
                     if($event->correct_answer == $request->answer) {
                         $points = $request->seconds + 5;
+                        $correct = 1;
+                        $time_remain = $request->seconds;
                     } else {
                         $points = 0;
+                        $correct = 0;
+                        $time_remain = $request->seconds;
                     }
                     $getUserData = [
                         'user_id' => auth()->user()->id,
@@ -218,6 +248,8 @@ class EventController extends BaseController
                         'question_id' => $request->question_id,
                         'answer' => $request->answer,
                         'seconds' => $points,
+                        'is_correct' => $correct,
+                        'time_remain' => $time_remain,
                     ];              
                     SubmitAnswer::create($getUserData);
                     $user = $request->user();
@@ -256,6 +288,51 @@ class EventController extends BaseController
                 return $this->respondBadRequest([], false, 'Code Not Found');        
             }
             return $this->respond([], [], true, 'Success');
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
+
+    public function profileImage(Request $request)
+    {
+        try {
+            if(!$request->hasFile('image')) {
+                return $this->respondBadRequest([], false, 'Upload File Not Found');
+            }
+
+            $allowedfileExtension=['jpeg','JPEG','jpg','JPG','png','PNG', 'webp'];
+            $file = $request->file('image');
+            $errors = [];
+
+            $extension = $file->getClientOriginalExtension();
+
+            $check = in_array($extension,$allowedfileExtension);
+            if ($check) {
+
+            $path = $file->store('user','public');
+            $type = $file->getClientOriginalExtension();
+
+            $user = User::where('id', $request->user()->id)->update(['image' => $path]);
+
+            $user = User::find($request->user()->id);
+            return $this->respond($user, [], true, 'Success');
+
+            } else {
+                return $this->respondBadRequest([], false, 'Invalid File Format');
+            }
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
+    public function getProfile(Request $request)
+    {
+        try {
+            $user = User::where('id', $request->user()->id)->first();
+            if($user) {
+                 return $this->respond($user, [], true, 'Success');  
+            }
         } catch (\Exception $e) {
             return $this->respondInternalError($e->getMessage());
         }

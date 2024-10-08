@@ -35,7 +35,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="room_no">Seat No *</label>
-                                                <input type="number" id="seat_no" name="seat_no"
+                                                <input type="text" id="seat_no" name="seat_no"
                                                 value="{{ old('seat_no', $data->seat_no) }}" class="form-control">
                                             </div>
                                         </div>

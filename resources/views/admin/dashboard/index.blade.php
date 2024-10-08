@@ -34,8 +34,8 @@
                                 <i class="feather icon-users text-success font-medium-5"></i>
                             </div>
                         </div>
-                        <h2 class="text-bold-700 mt-1 mb-25">{{ $blogCount ?? 0 }}</h2>
-                        <p class="mb-0"><a href="{!! route('admin.blog.index') !!}?type=dealer" style="color: black">Total Blogs</a></p>
+                        <h2 class="text-bold-700 mt-1 mb-25">{{ $eventsCount ?? 0 }}</h2>
+                        <p class="mb-0"><a href="{!! route('admin.event.index') !!}?type=dealer" style="color: black">Total Events</a></p>
                     </div>
                     <div class="card-content">
                         {{--                    <div id="orders-received-chart"></div>--}}
@@ -50,8 +50,8 @@
                                 <i class="feather icon-users text-success font-medium-5"></i>
                             </div>
                         </div>
-                        <h2 class="text-bold-700 mt-1 mb-25">{{ $testimonialCount ?? 0 }}</h2>
-                        <p class="mb-0"><a href="{!! route('admin.testimonial.index') !!}?type=agent" style="color: black">Total Testimonials</a></p>
+                        <h2 class="text-bold-700 mt-1 mb-25">{{ $upcomingCount ?? 0 }}</h2>
+                        <p class="mb-0"><a href="{!! route('admin.event.index') !!}?type=agent" style="color: black">Total Upcoming Events</a></p>
                     </div>
                     <div class="card-content">
                         {{--                    <div id="orders-received-chart"></div>--}}
