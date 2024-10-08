@@ -68,6 +68,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 		Route::get('/', 'EventController@dashboard');
 	});
 
+	Route::group(['prefix' => 'user'], function () {
+		Route::post('upload-profile', 'EventController@profileImage');
+	});
+
 	Route::group(['prefix' => 'auth'], function () {
 		Route::post('save-device-token', 'Auth\PassportAuthController@saveDeviceToken');
 	});

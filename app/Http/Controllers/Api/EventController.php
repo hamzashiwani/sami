@@ -8,6 +8,7 @@ use App\Models\MainQuiz;
 use App\Models\Quiz;
 use App\Models\EventListing;
 use App\Models\EventAttendance;
+use App\Models\User;
 use App\Models\Notification;
 use App\Models\SubmitAnswer;
 use Illuminate\Http\Request;
@@ -287,6 +288,39 @@ class EventController extends BaseController
                 return $this->respondBadRequest([], false, 'Code Not Found');        
             }
             return $this->respond([], [], true, 'Success');
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
+
+
+    public function profileImage(Request $request)
+    {
+        try {
+            if(!$request->hasFile('image')) {
+                return $this->respondBadRequest([], false, 'Upload File Not Found');
+            }
+
+            $allowedfileExtension=['jpeg','JPEG','jpg','JPG','png','PNG', 'webp'];
+            $file = $request->file('image');
+            $errors = [];
+
+            $extension = $file->getClientOriginalExtension();
+
+            $check = in_array($extension,$allowedfileExtension);
+            if ($check) {
+
+            $path = $file->store('user','public');
+            $type = $file->getClientOriginalExtension();
+
+            $user = User::where('id', $request->user()->id)->update(['image' => $path]);
+
+            $user = User::find($request->user()->id);
+            return $this->respond($user, [], true, 'Success');
+
+            } else {
+                return $this->respondBadRequest([], false, 'Invalid File Format');
+            }
         } catch (\Exception $e) {
             return $this->respondInternalError($e->getMessage());
         }
