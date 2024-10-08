@@ -69,6 +69,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 	});
 
 	Route::group(['prefix' => 'user'], function () {
+		Route::get('get-profile', 'EventController@getProfile');
 		Route::post('upload-profile', 'EventController@profileImage');
 	});
 
