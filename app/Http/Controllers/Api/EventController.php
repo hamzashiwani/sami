@@ -325,4 +325,16 @@ class EventController extends BaseController
             return $this->respondInternalError($e->getMessage());
         }
     }
+
+    public function getProfile(Request $request)
+    {
+        try {
+            $user = User::where('id', $request->user()->id)->first();
+            if($user) {
+                 return $this->respond($user, [], true, 'Success');  
+            }
+        } catch (\Exception $e) {
+            return $this->respondInternalError($e->getMessage());
+        }
+    }
 }
