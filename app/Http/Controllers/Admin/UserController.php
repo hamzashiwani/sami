@@ -89,4 +89,24 @@ class UserController extends Controller
             ]);
         }
     }
+
+
+    public function importLead(Request $request)
+    {
+
+        foreach ($request->name as $key => $value) {
+        $data = [
+            'name' => ($request->name[$key]) ? $request->name[$key] : '',
+            'email' => ($request->email[$key]) ? $request->email[$key] : '',
+            'phone' => ($request->phone[$key])   ? $request->phone[$key] : '',
+        ];
+
+         $user = User::create($data);
+        }
+
+            return response()->json([
+                'status' => true,
+                'message' => 'successfully Created',
+            ]);
+    }
 }
