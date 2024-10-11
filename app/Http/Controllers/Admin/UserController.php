@@ -128,11 +128,23 @@ class UserController extends Controller
             $request['file'] = $fileName;
             $saveFile = $this->save_csv($request['file']);
             if (count($saveFile) > 0){
-                return $this->respond($saveFile, [], true, 'success');
+                return response()->json([
+                'status' => true,
+                'message' => 'successfully Created',
+            ]);
+                // return $this->respond($saveFile, [], true, 'success');
             }
-            return $this->respondInternalError([], false, 'error');
+            return response()->json([
+                'status' => false,
+                'message' => 'error',
+            ]);
+            // return $this->respondInternalError([], false, 'error');
         }
-        return $this->respondInternalError([], false, 'error');
+        return response()->json([
+                'status' => false,
+                'message' => 'error',
+            ]);
+        // return $this->respondInternalError([], false, 'error');
 
     }
 
