@@ -109,4 +109,82 @@ class UserController extends Controller
                 'message' => 'successfully Created',
             ]);
     }
+
+     public function import_csv()
+    {
+        $request = request()->all();
+        $rules = [
+                'file' => 'required|max:5000|mimes:csv,txt,xlsx',
+        ];
+        $validator = Validator::make($request, $rules);
+        if($validator->fails()){
+            return $this->respondWithError($validator->errors(),false,trans('messages.validation_bad_request'));
+        }
+        if (!empty($request['file']))
+        {
+            $file = $request['file'];
+            $fileName = md5($file->getClientOriginalName()) . time() . "." . $file->getclientOriginalExtension();
+            $file->move(public_path('csv/'), $fileName);
+            $request['file'] = $fileName;
+            $saveFile = $this->save_csv($request['file']);
+            if (count($saveFile) > 0){
+                return $this->respond($saveFile, [], true, 'success');
+            }
+            return $this->respondInternalError([], false, 'error');
+        }
+        return $this->respondInternalError([], false, 'error');
+
+    }
+
+    public function save_csv($fileNameOn)
+    {
+        $fileName = public_path('csv').'/'.$fileNameOn;
+        $file = fopen($fileName,"r");
+        $arrayData = [];
+        while(! feof($file)){
+            array_push($arrayData, fgetcsv($file));
+        }
+        $col = [];
+        $totalRecord=[];
+        foreach ($arrayData as $key => $val) {
+            if ($key > 0) {
+                $data = [];
+                $other = [];
+                if (!empty($val)) {
+                    foreach ($val as $dataKey => $dataVal) {
+                        // dd($dataVal);
+                        if (is_array($col[$dataKey])) {
+                            array_push($other,$col[$dataKey][0]);
+                            array_push($other,isset($val[$dataKey]) ? $val[$dataKey] : null);
+                        } else {
+                            $data[$col[$dataKey]] = isset($val[$dataKey]) ? $val[$dataKey] : null;
+                        }
+                    }
+                }
+                if (!empty($data['name'])) {
+                 $responseStatus = $this->save_user_import($data);
+                    // if ($responseStatus) {
+                        $totalRecord[] = $data;
+                    // }
+                }
+            } else {
+                foreach ($val as $colKey => $colVal){
+                    // $colVal = $this->manage_col($colVal,$colKey);
+                    array_push($col,$colVal);
+                }
+            }
+        }
+        fclose($file);
+        // dd($totalRecord);
+        return $totalRecord;
+
+    }
+
+    public function save_user_import($data)
+    {
+        if (is_array($data)){
+            User::create($data);
+            return true;
+        }
+    }
 }
