@@ -90,3 +90,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 		Route::post('save-device-token', 'Auth\PassportAuthController@saveDeviceToken');
 	});
 });
+
+
+    Route::group(['prefix' => 'notification'], function () {
+		Route::get('show', 'NotificationController@index');
+		Route::get('detail', 'NotificationController@detail');
+	});
