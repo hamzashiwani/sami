@@ -29,6 +29,8 @@ class EventController extends BaseController
                           ->where('end_date', '>=', $specificDate);
                 })
                 ->first();
+            } else {
+                $getUserData = [];
             }
             return $this->respond($getUserData, [], true, 'Success');
         } catch (\Exception $e) {
