@@ -19,6 +19,14 @@ Route::post('forget-password', 'ApiController@forgetPassword');
 Route::post('reset-password', 'ApiController@resetPassword');
 Route::post('login', 'ApiController@login');
 
+    Route::group(['prefix' => 'events'], function () {
+		Route::get('show', 'EventController@index');
+	});
+
+	Route::group(['prefix' => 'dashboard'], function () {
+		Route::get('/', 'EventController@dashboard');
+	});
+
 
 Route::group(['prefix' => 'socket/events'], function () {
 	Route::get('get-questions', 'EventController@getQuestions');
