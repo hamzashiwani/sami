@@ -69,7 +69,7 @@ class NotificationController extends BaseController
     {
         try {
             $user = $request->user();
-            if(!$user {
+            if(!$user) {
                $allNotifications = Notification::where('id', $request->id)->first();
             ) else {
                 $allNotifications = Notification::where('id', $request->id)->first();
