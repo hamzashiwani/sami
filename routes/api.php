@@ -23,6 +23,11 @@ Route::post('login', 'ApiController@login');
 		Route::get('show-guest', 'EventController@index');
 	});
 
+    Route::group(['prefix' => 'notification'], function () {
+		Route::get('show', 'NotificationController@index');
+		Route::get('detail', 'NotificationController@detail');
+	});
+
 	Route::group(['prefix' => 'dashboard'], function () {
 		Route::get('show-guest', 'EventController@dashboardGuest');
 	});
