@@ -68,15 +68,17 @@ class NotificationController extends BaseController
     public function detail(Request $request)
     {
         try {
-            $user = $request->user();
-            if(!$user) {
-               $allNotifications = Notification::where('id', $request->id)->first();
-            ) else {
-                $allNotifications = Notification::where('id', $request->id)->first();
-                $user->notifications()->syncWithoutDetaching([$request->id]);
-            }
-            $allNotifications = Notification::where('id', $request->id)->first();
-            $user->notifications()->syncWithoutDetaching([$request->id]);
+             $user = $request->user();
+        $notification = Notification::where('id', $request->id)->first();
+
+        if (!$notification) {
+            return $this->respondInternalError('Notification not found.');
+        }
+
+        // Sync notification with user if authenticated
+        if ($user) {
+            $user->notifications()->syncWithoutDetaching([$notification->id]);
+        }
             return $this->respond($allNotifications, [], true, 'Success');
         } catch (\Exception $e) {
             return $this->respondInternalError($e->getMessage());
