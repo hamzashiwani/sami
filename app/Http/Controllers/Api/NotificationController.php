@@ -13,24 +13,48 @@ class NotificationController extends BaseController
         try {
             $user = $request->user();
 
-    // Retrieve all notifications
-            $skip = 0;
-            $skip = $request->skip;
-            $allNotifications = Notification::orderBy('created_at', 'desc')->skip($skip)->take(10)->get();
+            if (!$user) {
+                $skip = $request->input('skip', 0); // Default to 0 if not provided
+                $allNotifications = Notification::orderBy('created_at', 'desc')
+                    ->skip($skip)
+                    ->take(10)
+                    ->get();
+        
+                // Map through notifications
+                $notifications = $allNotifications->map(function ($notification) {
+                    return [
+                        'id' => $notification->id,
+                        'title' => $notification->title,
+                        'description' => $notification->description,
+                        'file' => $notification->file,
+                        'file_screenshot' => $notification->file_screenshot,
+                        'file_type' => $notification->file_type,
+                        'created_at' => $notification->created_at,
+                        // Remove user read check if no authentication
+                        'is_read' => 0, // Or set to a default value if desired
+                    ];
+                });
+            } else {
+                $skip = 0;
+                $skip = $request->skip;
+                $allNotifications = Notification::orderBy('created_at', 'desc')->skip($skip)->take(10)->get();
+    
+                // Map through notifications and check if the user has read them
+                $notifications = $allNotifications->map(function ($notification) use ($user) {
+                    return [
+                        'id' => $notification->id,
+                        'title' => $notification->title,
+                        'description' => $notification->description,
+                        'file' => $notification->file,
+                        'file_screenshot' => $notification->file_screenshot,
+                        'file_type' => $notification->file_type,
+                        'created_at' => $notification->created_at,
+                        'is_read' => $user->notifications()->where('notification_id', $notification->id)->exists(), // Check if read
+                    ];
+                });
+            }
 
-            // Map through notifications and check if the user has read them
-            $notifications = $allNotifications->map(function ($notification) use ($user) {
-                return [
-                    'id' => $notification->id,
-                    'title' => $notification->title,
-                    'description' => $notification->description,
-                    'file' => $notification->file,
-                    'file_screenshot' => $notification->file_screenshot,
-                    'file_type' => $notification->file_type,
-                    'created_at' => $notification->created_at,
-                    'is_read' => $user->notifications()->where('notification_id', $notification->id)->exists(), // Check if read
-                ];
-            });
+    // Retrieve all notifications
             // $skip = 0;
             // $skip = $request->skip;
             // $getUserData = Notification::orderBy('created_at', 'desc')
@@ -45,6 +69,12 @@ class NotificationController extends BaseController
     {
         try {
             $user = $request->user();
+            if(!$user {
+               $allNotifications = Notification::where('id', $request->id)->first();
+            ) else {
+                $allNotifications = Notification::where('id', $request->id)->first();
+                $user->notifications()->syncWithoutDetaching([$request->id]);
+            }
             $allNotifications = Notification::where('id', $request->id)->first();
             $user->notifications()->syncWithoutDetaching([$request->id]);
             return $this->respond($allNotifications, [], true, 'Success');
