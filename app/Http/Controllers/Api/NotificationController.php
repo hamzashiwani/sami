@@ -79,7 +79,7 @@ class NotificationController extends BaseController
         if ($user) {
             $user->notifications()->syncWithoutDetaching([$notification->id]);
         }
-            return $this->respond($allNotifications, [], true, 'Success');
+            return $this->respond($notification, [], true, 'Success');
         } catch (\Exception $e) {
             return $this->respondInternalError($e->getMessage());
         }
