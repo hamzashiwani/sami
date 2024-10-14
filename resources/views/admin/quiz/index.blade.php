@@ -6,7 +6,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Quiz</h4>
+                        <h4 class="card-title">Question</h4>
                         <span><a href="{{ route('admin.quiz.create',$id) }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a></span>
                     </div>
                     <div class="card-content">

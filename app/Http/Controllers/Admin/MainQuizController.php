@@ -51,7 +51,7 @@ class MainQuizController extends Controller
 
         $form = [
             'type' => 'create',
-            'heading' => 'Create MainQuiz',
+            'heading' => 'Create Quiz',
             'method' => 'POST',
             'action' => route('admin.main-quiz.store',$id),
             'cancel_url' => route('admin.main-quiz.index',$id)
@@ -90,7 +90,7 @@ class MainQuizController extends Controller
         }
         return redirect()
             ->route('admin.main-quiz.index',$id)
-            ->with('success', 'MainQuiz has been added successfully.');
+            ->with('success', 'Quiz has been added successfully.');
     }
     
 
@@ -118,7 +118,7 @@ class MainQuizController extends Controller
         $id = $data->event_id;
         $form = [
             'type' => 'create',
-            'heading' => 'Edit MainQuiz',
+            'heading' => 'Edit Quiz',
             'method' => 'PUT',
             'action' => route('admin.main-quiz.update', $ids),
             'cancel_url' => route('admin.main-quiz.index',$id)
@@ -154,7 +154,7 @@ class MainQuizController extends Controller
             DB::commit();
             return redirect()
                 ->route('admin.main-quiz.index',$quiz->event_id)
-                ->with('success', 'MainQuiz has been updated successfully.');
+                ->with('success', 'Quiz has been updated successfully.');
         } catch (\Exception $exception) {
             DB::rollBack();
             return redirect()
@@ -176,7 +176,7 @@ class MainQuizController extends Controller
             $quiz = MainQuiz::find($id);
             return redirect()
                 ->route('admin.main-quiz.index')
-                ->with('success', 'MainQuiz has been deleted successfully.');
+                ->with('success', 'Quiz has been deleted successfully.');
         }catch (\Exception $exception) {
             return redirect()
                 ->back()

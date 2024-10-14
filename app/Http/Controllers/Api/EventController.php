@@ -85,12 +85,10 @@ class EventController extends BaseController
     public function dashboardGuest(Request $request)
     {
         try {
-            $getUserData['event'] = Event::with(['hotel', 'flights', 'transports'])
-            ->where('end_date', '>=', Carbon::now())
-            ->first();
+            $getUserData['event'] = json_encode([]);
 
             // Retrieve all notifications
-            $allNotifications = Notification::orderBy('created_at', 'desc')->limit(10)->get();
+            $allNotifications = Notification::orderBy('created_at', 'desc')->where('topic', 'Global')->limit(10)->get();
 
             // Map through notifications and check if the user has read them
             $notifications = $allNotifications->map(function ($notification) {

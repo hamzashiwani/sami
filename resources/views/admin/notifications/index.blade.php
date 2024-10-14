@@ -16,8 +16,8 @@
                                     <thead>
                                         <tr>
                                             <th>Title</th>
+                                            <th>Topic</th>
                                             <th>Created At</th>
-                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -25,8 +25,8 @@
                                         @foreach ($data as $key => $result)
                                             <tr>
                                                 <td>{!! Str::limit($result->title, 20, '...') !!}</td>
+                                                <td>{!! $result->topic == 'Global' ? 'All' : 'Registered Users' !!}</td>
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
-                                                <td><small><span class="badge badge-{!! $result->status == 'published' ? 'success' : 'danger' !!}">{!! strtoupper($result->status) !!}</span></small></td>
                                                 <td>
 {{--                                                    <a href="{!! route('admin.notification.show', $result->id) !!}"--}}
 {{--                                                        class="btn btn-info btn-sm waves-effect waves-light"><i--}}

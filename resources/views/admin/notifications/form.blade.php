@@ -35,7 +35,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="short_description">Description</label>
                                                 <textarea type="text" name="description" maxlength="190" class="form-control">{{ old('description', $data->description) }}</textarea>
@@ -47,6 +47,20 @@
                                                 <textarea name="content" maxlength="65000" rows="5" id="content" class="form-control editor-tinymce">{{ old('content', $data->content ?? '') }}</textarea>
                                             </div>
                                         </div> -->
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="topic">Topic *</label>
+                                                <select id="topic" name="topic" class="form-control" required>
+                                                    <option value="">Select Topic</option>
+                                                    <option value="Global">All</option>
+                                                    <option value="Internal">Registered Users</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </fieldset>
                                 <fieldset>

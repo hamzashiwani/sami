@@ -49,7 +49,7 @@ class NotificationController extends Controller
 
         $form = [
             'type' => 'create',
-            'heading' => 'Create Notication',
+            'heading' => 'Create Notification',
             'method' => 'POST',
             'action' => route('admin.notification.store'),
             'cancel_url' => route('admin.notification.index')
@@ -97,7 +97,7 @@ class NotificationController extends Controller
 
             $notification = Notification::create($data);
             DB::commit();
-            Notification::sendPushNotification("", $notification->title, $notification->message, $notification->id, "notification", $notification->id);
+            Notification::sendPushNotification($notification->topic, $notification->title, $notification->message, $notification->id, "notification", $notification->id);
         }catch (\Exception $exception) {
             dd($exception->getMessage());
             DB::rollBack();
@@ -152,7 +152,7 @@ class NotificationController extends Controller
         $data = Notification::find($id);
         $form = [
             'type' => 'create',
-            'heading' => 'Edit Notication',
+            'heading' => 'Edit Notification',
             'method' => 'PUT',
             'action' => route('admin.notification.update', $id),
             'cancel_url' => route('admin.notification.index')
@@ -172,7 +172,7 @@ class NotificationController extends Controller
         try {
             DB::beginTransaction();
 
-            $blog = Notication::findOrFail($request->id);
+            $blog = Notification::findOrFail($request->id);
 
             $data = $request->except(
                 [
@@ -198,7 +198,7 @@ class NotificationController extends Controller
             DB::commit();
             return redirect()
                 ->route('admin.notification.index')
-                ->with('success', 'Notication has been updated successfully.');
+                ->with('success', 'Notification has been updated successfully.');
         } catch (\Exception $exception) {
             DB::rollBack();
             return redirect()
@@ -217,10 +217,10 @@ class NotificationController extends Controller
     public function destroy($id)
     {
         try {
-            $blog = Notication::find($id);
+            $blog = Notification::find($id);
             return redirect()
                 ->route('admin.notification.index')
-                ->with('success', 'Notication has been deleted successfully.');
+                ->with('success', 'Notification has been deleted successfully.');
         }catch (\Exception $exception) {
             return redirect()
                 ->back()

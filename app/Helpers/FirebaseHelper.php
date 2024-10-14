@@ -19,12 +19,12 @@ class FirebaseHelper
             ->createMessaging();
     }
 
-    public static function sendPushNotification($fcm_token, $title, $message, $id = "", $trigger_type = "home", $trigger_id = "", $job_id = "", $source = "")
+    public static function sendPushNotification($topic, $title, $message, $id = "", $trigger_type = "home", $trigger_id = "", $job_id = "", $source = "")
     {
         try {
             // Construct message payload using Kreait's CloudMessage
             $messagePayload = CloudMessage::fromArray([
-                'topic' => "Global",
+                'topic' => $topic,
                 'notification' => [
                     'title' => $title,
                     'body' => $message,

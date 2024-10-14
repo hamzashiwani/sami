@@ -32,6 +32,9 @@
                                             <p><h5>Description: </h5>{!! $data->description ?? '' !!}</p>
                                         </div>
                                         <div class="col-6">
+                                            <p><h5>Topic: </h5>{!! $data->topic ?? '' !!}</p>
+                                        </div>
+                                        <div class="col-6">
                                             <p><h5>Content: </h5>{!! $data->content ?? '' !!}</p>
                                         </div>
                                         <div class="col-6">

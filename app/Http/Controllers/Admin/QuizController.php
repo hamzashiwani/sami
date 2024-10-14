@@ -50,7 +50,7 @@ class QuizController extends Controller
 
         $form = [
             'type' => 'create',
-            'heading' => 'Create Quiz',
+            'heading' => 'Create Question',
             'method' => 'POST',
             'action' => route('admin.quiz.store',$id),
             'cancel_url' => route('admin.quiz.index',$id)
@@ -89,7 +89,7 @@ class QuizController extends Controller
         }
         return redirect()
             ->route('admin.quiz.index',$id)
-            ->with('success', 'Quiz has been added successfully.');
+            ->with('success', 'Question has been added successfully.');
     }
     
 
@@ -117,7 +117,7 @@ class QuizController extends Controller
         $id = $data->quiz_id;
         $form = [
             'type' => 'create',
-            'heading' => 'Edit Quiz',
+            'heading' => 'Edit Question',
             'method' => 'PUT',
             'action' => route('admin.quiz.update', $ids),
             'cancel_url' => route('admin.quiz.index',$id)
@@ -175,7 +175,7 @@ class QuizController extends Controller
             $quiz = Quiz::find($id);
             return redirect()
                 ->route('admin.quiz.index')
-                ->with('success', 'Quiz has been deleted successfully.');
+                ->with('success', 'Question has been deleted successfully.');
         }catch (\Exception $exception) {
             return redirect()
                 ->back()

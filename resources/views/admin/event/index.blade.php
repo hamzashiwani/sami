@@ -27,27 +27,27 @@
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
                                                 <!-- <td><small><span class="badge badge-{!! $result->status == 'published' ? 'success' : 'danger' !!}">{!! strtoupper($result->status) !!}</span></small></td> -->
                                                 <td>
-                                                    <a href="{!! route('admin.event-transport.index', $result->id) !!}" 
+                                                    <a title="Transports" href="{!! route('admin.event-transport.index', $result->id) !!}" 
                                                     class="btn btn-info btn-sm waves-effect waves-light">
                                                         <i class="feather icon-truck"></i> <!-- Icon for transport -->
                                                     </a>
-                                                    <a href="{!! route('admin.event-flight.index', $result->id) !!}" 
+                                                    <a title="Flights" href="{!! route('admin.event-flight.index', $result->id) !!}" 
                                                     class="btn btn-info btn-sm waves-effect waves-light">
                                                         <i class="feather icon-send"></i> <!-- Icon for flight -->
                                                     </a>
-                                                    <a href="{!! route('admin.event-hotel.index', $result->id) !!}" 
+                                                    <a title="Hotels" href="{!! route('admin.event-hotel.index', $result->id) !!}" 
                                                     class="btn btn-info btn-sm waves-effect waves-light">
                                                         <i class="feather icon-home"></i> <!-- Icon for hotel -->
                                                     </a>
-                                                    <a href="{!! route('admin.main-quiz.index', $result->id) !!}" 
+                                                    <a title="Quiz" href="{!! route('admin.main-quiz.index', $result->id) !!}" 
                                                     class="btn btn-info btn-sm waves-effect waves-light">
                                                         <i class="feather icon-book-open"></i> <!-- Icon for quiz -->
                                                     </a>
-                                                    <a href="{!! route('admin.event-timeline.index', $result->id) !!}" 
+                                                    <a title="Event Timeline" href="{!! route('admin.event-timeline.index', $result->id) !!}" 
                                                     class="btn btn-info btn-sm waves-effect waves-light">
                                                         <i class="feather icon-clock"></i> <!-- Icon for timeline -->
                                                     </a>
-                                                    <a href="{!! route('admin.event.edit', $result->id) !!}" 
+                                                    <a title="Edit" href="{!! route('admin.event.edit', $result->id) !!}" 
                                                     class="btn btn-primary btn-sm waves-effect waves-light">
                                                         <i class="feather icon-edit"></i> <!-- Icon for edit -->
                                                     </a>

@@ -28,11 +28,11 @@
                                                 <td>{!! $result->description !!}</td>
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
                                                 <td>
-                                                    <a href="{!! route('admin.quiz.index', $result->id) !!}"
+                                                    <a title="Questions" href="{!! route('admin.quiz.index', $result->id) !!}"
                                                         class="btn btn-info btn-sm waves-effect waves-light"><i
-                                                            class="feather icon-search"></i></a>
+                                                            class="feather icon-message-circle"></i></a>
 
-                                                    <a href="{!! route('admin.main-quiz.edit', $result->id) !!}"
+                                                    <a title="Edit" href="{!! route('admin.main-quiz.edit', $result->id) !!}"
                                                         class="btn btn-primary btn-sm waves-effect waves-light"><i
                                                             class="feather icon-edit"></i></a>
 
