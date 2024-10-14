@@ -24,7 +24,7 @@ Route::post('login', 'ApiController@login');
 	});
 
 	Route::group(['prefix' => 'dashboard'], function () {
-		Route::get('show-guest', 'EventController@dashboard');
+		Route::get('show-guest', 'EventController@dashboardGuest');
 	});
 
 
