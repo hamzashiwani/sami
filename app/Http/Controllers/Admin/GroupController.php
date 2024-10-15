@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\StoreGroupRequest;
 use App\Http\Requests\Admin\UpdateBlogRequest;
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -72,12 +73,14 @@ class GroupController extends Controller
                 [
                     '_method',
                     '_token',
+                    'users',
                     'previous_image',
                     'previous_document'
                 ]
             );
 
-            Group::create($data);
+            $group = Group::create($data);
+            $group->members()->attach($request->input('users', []));
             DB::commit();
         }catch (\Exception $exception) {
             dd($exception->getMessage());
@@ -120,7 +123,8 @@ class GroupController extends Controller
             'action' => route('admin.group.update', $id),
             'cancel_url' => route('admin.group.index')
         ];
-        return view('admin.group.form', compact('data', 'form'));
+        $users = User::all(); 
+        return view('admin.group.form', compact('data', 'form','users'));
     }
 
     /**
@@ -179,5 +183,11 @@ class GroupController extends Controller
                 ->back()
                 ->with('error', $exception->getMessage());
         }
+    }
+
+    public function getUsers()
+    {
+        $users = User::all(); // Fetch all users
+        return response()->json($users); // Return as JSON
     }
 }

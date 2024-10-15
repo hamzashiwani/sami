@@ -10,4 +10,9 @@ class Group extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function members()
+    {
+        return $this->belongsToMany(User::class,'group_members');
+    }
 }

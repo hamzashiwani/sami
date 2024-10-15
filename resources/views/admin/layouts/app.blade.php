@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('assets/admin/app-assets/vendors/css/extensions/tether-theme-arrows.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('assets/admin/app-assets/vendors/css/extensions/tether.min.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('assets/admin/app-assets/vendors/css/extensions/shepherd-theme-default.css') !!}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
     <!-- END: Vendor CSS-->
 
@@ -109,6 +110,8 @@
     <script src="{!! asset('assets/admin/app-assets/js/core/app-menu.js') !!}"></script>
     <script src="{!! asset('assets/admin/app-assets/js/core/app.js') !!}"></script>
     <script src="{!! asset('assets/admin/app-assets/js/scripts/components.js') !!}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->

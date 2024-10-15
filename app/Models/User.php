@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Notification::class, 'user_notifications')->withTimestamps();
     }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
 }

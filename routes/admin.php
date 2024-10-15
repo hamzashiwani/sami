@@ -67,6 +67,8 @@ Route::name('admin.')->group(
         Route::resource('blog', 'BlogController');
         Route::resource('faq', 'FaqController');
         Route::resource('notification', 'NotificationController');
+        Route::resource('group', 'GroupController');
+        Route::get('get-users', 'GroupController@getUsers')->name('get-users');
         // Route::resource('quiz', 'QuizController');
         Route::resource('event', 'EventController');
         Route::resource('testimonial', 'TestimonialController');
