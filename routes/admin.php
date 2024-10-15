@@ -73,7 +73,7 @@ Route::name('admin.')->group(
         Route::resource('contact-us', 'ContactUsController');
         Route::resource('newsletters', 'NewsLettersController');
         Route::resource('users', 'UserController');
-        Route::post('users/import-csv', [UserController::class, 'import_csv'])->name('import-csv');
+        Route::post('users/import-csv', [UserController::class, 'import_csv'])->name('users.import-csv');
         Route::resource('quiz-view', 'QuizViewController');
 
         Route::get('event-timeline/{id}', [EventTimelineController::class, 'index'])->name('event-timeline.index');
@@ -109,7 +109,7 @@ Route::name('admin.')->group(
         Route::post('event-hotel/update/{id}', [HotelController::class, 'update'])->name('event-hotel.update');
         Route::put('event-hotel/update/{id}', [HotelController::class, 'update'])->name('event-hotel.update');
         Route::get('event-hotel/destroy/{id}', [HotelController::class, 'destroy'])->name('event-hotel.destroy');
-        Route::post('event-hotel/import-csv/{id}', [HotelController::class, 'import_csv'])->name('import-csv');
+        Route::post('event-hotel/import-csv/{id}', [HotelController::class, 'import_csv'])->name('event-hotel.import-csv');
 
 
         Route::get('event-flight/{id}', [FlightController::class, 'index'])->name('event-flight.index');
@@ -119,7 +119,7 @@ Route::name('admin.')->group(
         Route::post('event-flight/update/{id}', [FlightController::class, 'update'])->name('event-flight.update');
         Route::put('event-flight/update/{id}', [FlightController::class, 'update'])->name('event-flight.update');
         Route::get('event-flight/destroy/{id}', [FlightController::class, 'destroy'])->name('event-flight.destroy');
-         Route::post('event-flight/import-csv/{id}', [FlightController::class, 'import_csv'])->name('import-csv');
+         Route::post('event-flight/import-csv/{id}', [FlightController::class, 'import_csv'])->name('event-flight.import-csv');
 
 
         Route::get('event-transport/{id}', [TransportController::class, 'index'])->name('event-transport.index');
