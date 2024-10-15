@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
@@ -35,11 +37,106 @@ class UserController extends Controller
         }
     }
 
+    public function create()
+    {
+        return view('admin.users.create');
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->except([
+            '_token',
+            '_method',
+            'image'
+        ]);
+
+        //move | upload file on server
+         if ($request->hasFile('image')) {
+            $file          = $request->file('image');
+            $extension     = $file->getClientOriginalExtension();
+            $filename      = 'admin-profile-'.time() . '.' . $extension;
+            $file->move(uploadsDir('admin'), $filename);
+            $data['image'] = $filename;
+        }
+
+        $password         = generateRandomString(8);
+        $data['password'] = bcrypt($password);
+
+            if ($data['email'] != '') {
+                Mail::send(
+                    'emails.admin.created',
+                    [
+                        'data'     => $data,
+                        'password' => $password,
+                    ],
+                    function ($message) use ($data) {
+                        $email   = $data['email'];
+                        $message->to($email, $email);
+                        $message->replyTo(config('mail.from.address'), config('mail.from.name'));
+                        $subject = "Account created.";
+                        $message->subject($subject);
+                    }
+                );
+            }
+
+        // generate-random-8digits-password (send in mail & store in DB).
+
+        User::create($data);
+
+        return redirect()
+            ->route('admin.users.edit')
+            ->with('success', 'User has been added successfully.');
+    }
+
     public function show($id)
     {
         $data = User::findOrFail($id);
         return view('admin.users.show', compact('data'));
     }
+
+    public function edit($id)
+    {
+      $data = User::find($id);
+      return view('admin.users.edit', compact('data'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->except([
+            '_token',
+            '_method',
+            'email',
+            'previous_image',
+            'image',
+            'password',
+            'password_confirmation'
+        ]);
+
+        //move | upload file on server
+         if ($request->hasFile('image')) {
+            $file      = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename  = 'admin-profile-'.time() . '.' . $extension;
+            $file->move(uploadsDir('admin'), $filename);
+
+            if ($request->previous_image != '' && file_exists(uploadsDir('admin') . $request->previous_image)) {
+                unlink(uploadsDir('admin') . $request->previous_image);
+            }
+
+            $data['image'] = $filename;
+        }
+
+        if (isset($request->password) && $request->password !='') {
+            $data['password'] = bcrypt($request->password);
+        }
+
+        User::where('id', $id)->update($data);
+
+        return redirect()
+            ->back()
+            ->with('success', 'User has been updated successfully.');
+    }
+
 
 
     public function destroy($id)
