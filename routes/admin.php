@@ -59,7 +59,6 @@ Route::name('admin.')->group(
         ]);
         Route::get('update-profile', 'AdministratorsController@editProfile')->name('update-profile');
         Route::post('update-status', 'UserController@updateStatus')->name('update-status');
-        Route::post('users/import-csv', [UserController::class, 'import_csv'])->name('import-csv');
 
         Route::resource('administrators', 'AdministratorsController');
         Route::resource('site-settings', 'SiteSettingsController');
@@ -74,6 +73,7 @@ Route::name('admin.')->group(
         Route::resource('contact-us', 'ContactUsController');
         Route::resource('newsletters', 'NewsLettersController');
         Route::resource('users', 'UserController');
+        Route::post('users/import-csv', [UserController::class, 'import_csv'])->name('import-csv');
         Route::resource('quiz-view', 'QuizViewController');
 
         Route::get('event-timeline/{id}', [EventTimelineController::class, 'index'])->name('event-timeline.index');
