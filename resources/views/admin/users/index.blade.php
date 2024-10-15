@@ -121,7 +121,7 @@
                 $(this).attr('disabled',true);
                 // document.getElementById("overlay").style.display = "block";
                 $.ajax({
-                    url: "{{route('admin.import-csv')}}",
+                    url: "{{route('admin.users.import-csv')}}",
                     method:"POST",
                     data:new FormData(this),
                     contentType:false,
