@@ -8,6 +8,7 @@
                     <div class="card-header">
                         <h4 class="card-title">Flights</h4>
                         <span><a href="{{ route('admin.event-flight.create',$id) }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a></span>
+                          <button onclick="openModal();" type="button" class="btn btn-primary">
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard">
@@ -61,10 +62,77 @@
             </div>
         </div>
     </section>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Import Flights</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="formAdd" method="post" name="formAdd" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="file" id="file" name="file" class="form-control csv--file">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('footer-js')
     <script>
+         function openModal() {
+            $('#exampleModal').modal({backdrop: 'static',keyboard: false});
+        }
+
+         $(function() {
+            $('#exampleModal #formAdd').on('submit', function(e) {
+                e.preventDefault();
+                $(':input').removeClass('has-error');
+                $('.text-danger').remove();
+                $(this).attr('disabled',true);
+                // document.getElementById("overlay").style.display = "block";
+                $.ajax({
+                    url: "{{route('admin.import-csv-flight')}}",
+                    method:"POST",
+                    data:new FormData(this),
+                    contentType:false,
+                    processData:false,
+                    success:function(response) {
+                        if(response.status == 'error'){
+                            $.each(response.errors, function (k, v) {
+                                $('input[name="' + k + '"]').addClass("has-error");
+                                $('input[name="' + k + '"]').after("<span class='text-danger'>" + v[0] + "</span>");
+                            });
+                        }else if(response.status == 'fileError'){
+                            $('.csv--file').addClass("has-error");
+                            $('.csv--file').after("<span class='text-danger'>" + response.error + "</span>");
+                        } else{
+                            // document.getElementById("overlay").style.display = "none";
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Your work has been saved',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            $('#exampleModal').modal('hide');
+                            setTimeout(function () {
+                                window.location.reload();
+                            },1000);
+                        }
+                    }
+                });
+            });
+        });
+
         $('#datatable').DataTable({
             "order": [[2, "desc"]] // Sort by the fourth column (created_at) in descending order
         });
