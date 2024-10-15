@@ -61,22 +61,6 @@ class UserController extends Controller
         $password         = generateRandomString(8);
         $data['password'] = bcrypt($password);
 
-            if ($data['email'] != '') {
-                Mail::send(
-                    'emails.admin.created',
-                    [
-                        'data'     => $data,
-                        'password' => $password,
-                    ],
-                    function ($message) use ($data) {
-                        $email   = $data['email'];
-                        $message->to($email, $email);
-                        $message->replyTo(config('mail.from.address'), config('mail.from.name'));
-                        $subject = "Account created.";
-                        $message->subject($subject);
-                    }
-                );
-            }
 
         // generate-random-8digits-password (send in mail & store in DB).
 
