@@ -28,6 +28,7 @@ class DashboardController extends Controller
     public function index()
     {
         $usersCount = User::count();
+        $usersActiveCount = User::where('is_avtive',1)->count();
         $blogsCount = Blog::count();
         $eventsCount = Event::count();
         $upcomingCount = Event::where('date','>',date('Y-m-d'))->count();
@@ -41,6 +42,7 @@ class DashboardController extends Controller
             'pageCount',
             'users',
             'eventsCount',
+            'usersActiveCount',
             'upcomingCount'
         ));
     }
