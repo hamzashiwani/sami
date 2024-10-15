@@ -34,6 +34,13 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
+                                                <label for="question_time">Time for each Question (In Seconds) *</label>
+                                                <input type="number" id="question_time" name="question_time" required
+                                                       value="{{ old('question_time', $data->question_time) }}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
                                                 <label for="event_id">Code *</label>
                                                 <input readonly type="text" id="code" name="code"
                                                 value="{{ old('code', $data->code) }}" class="form-control">
