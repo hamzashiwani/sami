@@ -66,8 +66,8 @@
                                 <i class="feather icon-users text-primary font-medium-5"></i>
                             </div>
                         </div>
-                        <h2 class="text-bold-700 mt-1 mb-25">{{ $pagesCount ?? 0 }}</h2>
-                        <p class="mb-0"><a href="{!! route('admin.pages.index') !!}" style="color: black">Total Pages</a></p>
+                        <h2 class="text-bold-700 mt-1 mb-25">{{ $usersActiveCount ?? 0 }}</h2>
+                        <p class="mb-0"><a href="{!! route('admin.users.index') !!}" style="color: black">Total Active Users</a></p>
                     </div>
                     <div class="card-content">
                         {{--                    <div id="subscribe-gain-chart"></div>--}}
