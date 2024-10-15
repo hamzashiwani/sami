@@ -8,6 +8,7 @@
                     <div class="card-header">
                         <h4 class="card-title">Hotels</h4>
                         <span><a href="{{ route('admin.event-hotel.create',$id) }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a></span>
+                          <button onclick="openModal();" type="button" class="btn btn-primary">
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard">
@@ -63,6 +64,50 @@
 
 @section('footer-js')
     <script>
+         function openModal() {
+            $('#exampleModal').modal({backdrop: 'static',keyboard: false});
+        }
+
+         $(function() {
+            $('#exampleModal #formAdd').on('submit', function(e) {
+                e.preventDefault();
+                $(':input').removeClass('has-error');
+                $('.text-danger').remove();
+                $(this).attr('disabled',true);
+                // document.getElementById("overlay").style.display = "block";
+                $.ajax({
+                    url: "{{route('admin.event-hotel.import-csv',$id)}}",
+                    method:"POST",
+                    data:new FormData(this),
+                    contentType:false,
+                    processData:false,
+                    success:function(response) {
+                        if(response.status == 'error'){
+                            $.each(response.errors, function (k, v) {
+                                $('input[name="' + k + '"]').addClass("has-error");
+                                $('input[name="' + k + '"]').after("<span class='text-danger'>" + v[0] + "</span>");
+                            });
+                        }else if(response.status == 'fileError'){
+                            $('.csv--file').addClass("has-error");
+                            $('.csv--file').after("<span class='text-danger'>" + response.error + "</span>");
+                        } else{
+                            // document.getElementById("overlay").style.display = "none";
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Your work has been saved',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            $('#exampleModal').modal('hide');
+                            setTimeout(function () {
+                                window.location.reload();
+                            },1000);
+                        }
+                    }
+                });
+            });
+        });
         $('#datatable').DataTable({
             "order": [[2, "desc"]] // Sort by the fourth column (created_at) in descending order
         });
