@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -164,7 +165,6 @@ class UserController extends Controller
                 $other = [];
                 if (!empty($val)) {
                     foreach ($val as $dataKey => $dataVal) {
-                        // dd($dataVal);
                         if (is_array($col[$dataKey])) {
                             array_push($other,$col[$dataKey][0]);
                             array_push($other,isset($val[$dataKey]) ? $val[$dataKey] : null);
@@ -173,7 +173,7 @@ class UserController extends Controller
                         }
                     }
                 }
-                if (!empty($data['name'])) {
+                if (!empty($data['email'])) {
                  $responseStatus = $this->save_user_import($data);
                     // if ($responseStatus) {
                         $totalRecord[] = $data;
@@ -195,7 +195,10 @@ class UserController extends Controller
     public function save_user_import($data)
     {
         if (is_array($data)){
-            User::create($data);
+            $user = User::where('email',$data['email'])->first();
+            if(!$user) {
+                User::create($data);
+            }
             return true;
         }
     }
