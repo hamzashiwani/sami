@@ -59,7 +59,7 @@ Route::name('admin.')->group(
         ]);
         Route::get('update-profile', 'AdministratorsController@editProfile')->name('update-profile');
         Route::post('update-status', 'UserController@updateStatus')->name('update-status');
-        Route::post('/import-csv', [UserController::class, 'import_csv'])->name('import-csv');
+        Route::post('users/import-csv', [UserController::class, 'import_csv'])->name('import-csv');
 
         Route::resource('administrators', 'AdministratorsController');
         Route::resource('site-settings', 'SiteSettingsController');
