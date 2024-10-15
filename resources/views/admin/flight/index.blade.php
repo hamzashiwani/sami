@@ -100,7 +100,7 @@
                 $(this).attr('disabled',true);
                 // document.getElementById("overlay").style.display = "block";
                 $.ajax({
-                    url: "{{route('admin.import-csv-flight')}}",
+                    url: "{{route('admin.import-csv-flight',$id)}}",
                     method:"POST",
                     data:new FormData(this),
                     contentType:false,
