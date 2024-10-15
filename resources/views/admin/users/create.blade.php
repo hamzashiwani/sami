@@ -50,13 +50,13 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="phone">Division *</label>
-                                            <input type="number" name="division" value="{{ old('division') }}" class="form-control">
+                                            <input type="text" name="division" value="{{ old('division') }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="email">Base Town *</label>
-                                            <input type="email" name="base_town" value="{{ old('base_town') }}" class="form-control">
+                                            <input type="text" name="base_town" value="{{ old('base_town') }}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
