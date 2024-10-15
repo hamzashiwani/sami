@@ -182,4 +182,103 @@ class FlightController extends Controller
                 ->with('error', $exception->getMessage());
         }
     }
+
+    public function import_csv($id)
+    {
+        $request = request()->all();
+        $rules = [
+                'file' => 'required|max:5000|mimes:csv,txt,xlsx',
+        ];
+        $validator = Validator::make($request, $rules);
+        if($validator->fails()){
+            return $this->respondWithError($validator->errors(),false,trans('messages.validation_bad_request'));
+        }
+        if (!empty($request['file']))
+        {
+            $file = $request['file'];
+            $fileName = md5($file->getClientOriginalName()) . time() . "." . $file->getclientOriginalExtension();
+            $file->move(public_path('csv/'), $fileName);
+            $request['file'] = $fileName;
+            $saveFile = $this->save_csv($request['file'],$id);
+            if (count($saveFile) > 0){
+                return response()->json([
+                'status' => true,
+                'message' => 'successfully Created',
+            ]);
+                // return $this->respond($saveFile, [], true, 'success');
+            }
+            return response()->json([
+                'status' => false,
+                'message' => 'error',
+            ]);
+            // return $this->respondInternalError([], false, 'error');
+        }
+        return response()->json([
+                'status' => false,
+                'message' => 'error',
+            ]);
+        // return $this->respondInternalError([], false, 'error');
+
+    }
+
+    public function save_csv($fileNameOn, $id)
+    {
+        $fileName = public_path('csv').'/'.$fileNameOn;
+        $file = fopen($fileName,"r");
+        $arrayData = [];
+        while(! feof($file)){
+            array_push($arrayData, fgetcsv($file));
+        }
+        $col = [];
+        $totalRecord=[];
+        foreach ($arrayData as $key => $val) {
+            if ($key > 0) {
+                $data = [];
+                $other = [];
+                if (!empty($val)) {
+                    foreach ($val as $dataKey => $dataVal) {
+                        if (is_array($col[$dataKey])) {
+                            array_push($other,$col[$dataKey][0]);
+                            array_push($other,isset($val[$dataKey]) ? $val[$dataKey] : null);
+                        } else {
+                            $data[$col[$dataKey]] = isset($val[$dataKey]) ? $val[$dataKey] : null;
+                        }
+                    }
+                }
+                if (!empty($data['email'])) {
+                 $responseStatus = $this->save_user_import($data, $id);
+                    // if ($responseStatus) {
+                        $totalRecord[] = $data;
+                    // }
+                }
+            } else {
+                foreach ($val as $colKey => $colVal){
+                    // $colVal = $this->manage_col($colVal,$colKey);
+                    array_push($col,$colVal);
+                }
+            }
+        }
+        fclose($file);
+        // dd($totalRecord);
+        return $totalRecord;
+
+    }
+
+    public function save_user_import($data,$id)
+    {
+        if (is_array($data)){
+            $user = User::where('email',$data['email'])->first();
+            if($user) {
+                $hotel = EventFlight::where('event_id',$id)->where('user_id',$user->id)->get();
+                if(count($hotel) > 1) {
+                    
+                } else {
+                    $data['user_id'] = $user->id;
+                    $data['event_id'] = $id;
+                    EventFlight::create($data);
+                }
+            }
+            return true;
+        }
+    }
 }
