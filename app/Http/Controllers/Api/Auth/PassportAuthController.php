@@ -88,7 +88,7 @@ class PassportAuthController extends BaseController
                 return $this->respondNotFound([], false, 'Invalid code');
             }
 
-            $user->update(['otp' => null]);
+            $user->update(['otp' => null,'is_active'=>1]);
 
             $token = $this->createUserToken($user, 'login');
             $response = ['token' => $token, 'user' => $user];
