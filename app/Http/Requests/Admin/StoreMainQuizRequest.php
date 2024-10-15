@@ -27,6 +27,7 @@ class StoreMainQuizRequest extends FormRequest
             'title' => 'required|max:32',
             // 'tags' => 'required',
             'description'  => 'required',
+            'question_time'  => 'required|int|min:1',
             // 'image'      => 'required|file|mimes:jpeg,jpg,png|max:5000',
             // 'date'  => 'required',
             // 'time'  => 'required',

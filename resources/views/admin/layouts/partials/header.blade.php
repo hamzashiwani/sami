@@ -84,18 +84,6 @@
                     </li>
                 </ul>
             </li>
-
-            
-            
-
-            <li class="navigation-header"><span>Settings</span>
-            </li>
-            <li class="nav-item {{ request()->segment(2) == 'site-settings' ? 'active' : '' }}">
-                <a href="{{ route('admin.site-settings.index') }}">
-                    <i class="feather icon-settings"></i>
-                    <span class="menu-title" data-i18n="Email">Site Settings</span>
-                </a>
-            </li>
         </ul>
     </div>
 </div>

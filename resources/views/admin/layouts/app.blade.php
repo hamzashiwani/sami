@@ -4,10 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="{!! $siteSettings->site_title !!} - Admin">
+    <meta name="description" content="Sami Pharma - Admin">
     <meta name="keywords" content="">
     <meta name="author" content="">
-    <title>{!! $siteSettings->site_title !!} - Admin</title>
+    <title>Sami Pharma - Admin</title>
     <link rel="apple-touch-icon" href="{!! asset('assets/admin/app-assets/images/ico/apple-icon-120.png') !!}">
     <link rel="shortcut icon" type="image/x-icon" href="{!! $siteSettings->favicon_path !!}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
