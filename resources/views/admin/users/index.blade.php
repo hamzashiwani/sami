@@ -31,7 +31,7 @@
                                         <tr>
                                             <td>{!! $user->name !!}</td>
                                             <td>{!! $user->email !!}</td>
-                                            <td>{!! $user->email !!}</td>
+                                            <td>{!! $user->phone !!}</td>
                                             <td><span style="display: none">{!! strtotime($user->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($user->created_at)) !!}</td>
                                             <td class="text-center">
                                                 <div class="form-check form-switch mb-2">
