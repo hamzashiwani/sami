@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\UpdateFaqRequest;
 use App\Models\EventFlight;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
 class FlightController extends Controller
