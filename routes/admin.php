@@ -118,6 +118,7 @@ Route::name('admin.')->group(
         Route::post('event-flight/update/{id}', [FlightController::class, 'update'])->name('event-flight.update');
         Route::put('event-flight/update/{id}', [FlightController::class, 'update'])->name('event-flight.update');
         Route::get('event-flight/destroy/{id}', [FlightController::class, 'destroy'])->name('event-flight.destroy');
+         Route::post('event-flight/import-csv/{id}', [UserController::class, 'import_csv'])->name('import-csv');
 
 
         Route::get('event-transport/{id}', [TransportController::class, 'index'])->name('event-transport.index');
