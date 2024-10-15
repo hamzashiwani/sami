@@ -7,6 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Users <i class="feather icon-user"></i></h4>
+                          <span><a href="{{ route('admin.users.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add User</a></span>
                         <button onclick="openModal();" type="button" class="btn btn-primary">
                 Import
             </button>
@@ -40,7 +41,7 @@
                                             </td>
                                             <td>
                                                 <a href="{!! route('admin.users.show', $user->id) !!}" class="btn btn-info btn-sm waves-effect waves-light"><i class="feather icon-search"></i></a>
-
+                                                    <a href="{!! route('admin.users.edit', $user->id) !!}" class="btn btn-primary btn-sm waves-effect waves-light"><i class="feather icon-edit"></i></a>
                                                 <button type="button"
                                                         class="btn btn-danger btn-sm waves-effect waves-light"
                                                         onclick="deleteConfirmation({!! $user->id !!})"><i
