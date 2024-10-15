@@ -21,6 +21,12 @@
                                             <input type="text" name="name" value="{{ old('name', $data->name) }}" class="form-control">
                                         </div>
                                     </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="first_name"> Designation *</label>
+                                            <input type="text" name="designation" value="{{ old('designation', $data->designation) }}" class="form-control">
+                                        </div>
+                                    </div>
                                 </div>
                             </fieldset>
                             <fieldset>
@@ -35,6 +41,23 @@
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="email" name="email" value="{{  $data->email }}" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="phone">Division *</label>
+                                            <input type="number" name="division" value="{{ old('division',$data->division) }}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="email">Base Town *</label>
+                                            <input type="email" name="base_town" value="{{ old('base_town',$data->base_town) }}" class="form-control">
                                         </div>
                                     </div>
                                 </div>

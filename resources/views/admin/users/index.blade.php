@@ -7,10 +7,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Users <i class="feather icon-user"></i></h4>
-                          <span><a href="{{ route('admin.users.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add User</a></span>
-                        <button onclick="openModal();" type="button" class="btn btn-primary">
+                        <button style="
+    margin-right: -848px;" onclick="openModal();" type="button" class="btn btn-primary">
                 Import
             </button>
+            <a href="{{ route('admin.users.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add User</a>
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard">
@@ -22,7 +23,7 @@
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Created At</th>
-                                        <th>Status</th>
+                                        <!-- <th>Status</th> -->
                                         <th class="text-center">Actions</th>
                                     </tr>
                                     </thead>
@@ -33,12 +34,12 @@
                                             <td>{!! $user->email !!}</td>
                                             <td>{!! $user->phone !!}</td>
                                             <td><span style="display: none">{!! strtotime($user->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($user->created_at)) !!}</td>
-                                            <td class="text-center">
+                                            <!-- <td class="text-center">
                                                 <div class="form-check form-switch mb-2">
                                                     <input class="form-check-input switch-button" type="checkbox" id="isActive" data-id="{!! $user->id !!}" data-column="is_active" {!! matchChecked($user->is_active,1) !!} >
                                                     <label class="form-check-label" for="isActive"></label>
                                                 </div>
-                                            </td>
+                                            </td> -->
                                             <td>
                                                 <a href="{!! route('admin.users.show', $user->id) !!}" class="btn btn-info btn-sm waves-effect waves-light"><i class="feather icon-search"></i></a>
                                                     <a href="{!! route('admin.users.edit', $user->id) !!}" class="btn btn-primary btn-sm waves-effect waves-light"><i class="feather icon-edit"></i></a>
