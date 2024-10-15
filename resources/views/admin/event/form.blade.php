@@ -64,11 +64,6 @@
                                             </div>
                                             <div class="form-group">
                                                 <input type="hidden" name="previous_image" value="{{ $data->image }}" />
-                                                @if ($data->image)
-                                                    <div class="avatar mr-1 avatar-xl">
-                                                        <img src="{!! asset('storage/'. $data->image) !!}" alt="Page Image" title="Page Image" class="img-responsive" />
-                                                    </div>
-                                                @endif
                                             </div>
                                         </div>
 
@@ -86,11 +81,7 @@
                                             </div> -->
                                             <div class="form-group">
                                                 <input type="hidden" name="previous_document" value="{{ $data->document }}" />
-                                                @if ($data->image)
-                                                    <div class="avatar mr-1 avatar-xl">
-                                                        <img  src="https://ibb.co/K2Y7TJG" alt="Page Image" title="Page Image" class="img-responsive" />
-                                                    </div>
-                                                @endif
+                                                
                                             </div>
                                         </div>
 

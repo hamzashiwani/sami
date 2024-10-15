@@ -15,7 +15,7 @@ class Notification extends Model
     protected $guarded;
 
     protected $table = 'notifications';
-    protected $fillable = ['sender_id', 'receiver_id', 'title', 'message','trigger_id','trigger_type','device_type','success','failure' ,'image','is_read','job_id','source','topic'];
+    protected $fillable = ['title', 'description', 'file', 'file_screenshot','file_type','topic'];
 
     public function users()
     {

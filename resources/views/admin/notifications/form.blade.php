@@ -56,8 +56,8 @@
                                                 <label for="topic">Topic *</label>
                                                 <select id="topic" name="topic" class="form-control" required>
                                                     <option value="">Select Topic</option>
-                                                    <option value="Global">All</option>
-                                                    <option value="Internal">Registered Users</option>
+                                                    <option value="Global" {{ ($data->topic == 'Global') ? 'selected': '' }}>All</option>
+                                                    <option value="Internal" {{ ($data->topic == 'Internal') ? 'selected': '' }}>Registered Users</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -77,7 +77,8 @@
                                                 </div>
                                             </div> -->
                                             <div class="form-group">
-                                                <input type="hidden" name="previous_image" value="{{ $data->image }}" />
+                                                <input type="hidden" name="previous_image" value="{{ $data->file }}" />
+                                                <input type="hidden" name="file_type" value="{{ $data->file_type }}" />
                                                 @if ($data->image != '' && file_exists(uploadsDir('front'). $data->image))
                                                     <div class="avatar mr-1 avatar-xl">
                                                         <img src="{!! asset(uploadsDir('front'). $data->image) !!}" alt="Page Image" title="Page Image" class="img-responsive" />

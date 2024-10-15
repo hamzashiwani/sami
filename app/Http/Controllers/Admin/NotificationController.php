@@ -99,7 +99,7 @@ class NotificationController extends Controller
             DB::commit();
             Notification::sendPushNotification($notification->topic, $notification->title, $notification->message, $notification->id, "notification", $notification->id);
         }catch (\Exception $exception) {
-            dd($exception->getMessage());
+            // dd($exception->getMessage());
             DB::rollBack();
             return redirect()
                 ->back()
@@ -171,8 +171,8 @@ class NotificationController extends Controller
     {
         try {
             DB::beginTransaction();
-
-            $blog = Notification::findOrFail($request->id);
+            
+            $notification = Notification::findOrFail($request->id);
 
             $data = $request->except(
                 [
@@ -182,18 +182,31 @@ class NotificationController extends Controller
                 ]
             );
 
-            $data['slug'] = generateBlogUniqueSlug($request->title, $blog->slug);
-
             $previousimage = $request->previous_image;
 
-            if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $data['image'] = $this->updateFile($file, $previousimage, 'name');
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                // $path = $this->uploadFile($file, 'page');
+                 $filename = 'custom_filename_' . time() . '.' . $file->getClientOriginalExtension(); // Example: custom_filename_1634242000.jpg
+                $path = $file->storeAs('uploads', $filename, 'public');
+
+                $data['file'] = $path;
+                if (strpos($request->file('file')->getMimeType(), 'video/') === 0) {
+                     $videoFullPath = storage_path('app/public/' . $path);
+                    // dd($videoFullPath);
+                    $data['file_type'] = 'video';
+                    $screenshotPath = $this->generateScreenshot($videoFullPath);
+                    $data['file_screenshot'] = $screenshotPath;
+                    // Save screenshot logic here
+                } elseif (strpos($request->file('file')->getMimeType(), 'image/') === 0) {
+                    $data['file_type'] = 'image';
+                }
             } else {
-                $data['image'] = $previousimage;
+                $data['file'] = $previousimage;
+                $data['file_type'] = 'image';
             }
 
-            $blog->update($data);
+            $notification->update($data);
 
             DB::commit();
             return redirect()
