@@ -114,7 +114,6 @@
             url: "{{route('admin.get-users')}}",
             method: 'GET',
             success: function(data) {
-                // Populate the user dropdowns
                 data.forEach(function(user) {
                     let option1 = new Option(user.name, user.id, false, false);
                     $('#user-dropdown').append(option1);
@@ -122,8 +121,8 @@
                     let option2 = new Option(user.name, user.id, false, false);
                     $('#user-dropdown1').append(option2);
                 });
-                $('#user-dropdown').trigger('change'); // Notify Select2 to refresh
-                $('#user-dropdown1').trigger('change'); // Notify Select2 to refresh
+                $('#user-dropdown').trigger('change');
+                $('#user-dropdown1').trigger('change');
             },
             error: function(err) {
                 console.log(err);
@@ -134,20 +133,22 @@
     fetchUsers(); // Call the function to fetch users
 
     // Listen for changes in the coordinator dropdown
-   $('#user-dropdown').on('change', function() {
+    $('#user-dropdown').on('change', function() {
         let selectedCordinatorId = $(this).val();
-        $('#user-dropdown1 option').show(); // Show all options
+
+        // Show all options first
+        $('#user-dropdown1 option').show(); // Ensure all options are visible initially
 
         if (selectedCordinatorId) {
             $('#user-dropdown1 option').each(function() {
                 if ($(this).val() == selectedCordinatorId) {
-                    console.log($(this).hide());
                     $(this).hide(); // Hide the selected coordinator
                 }
             });
         }
 
-        $('#user-dropdown1').select2().trigger('change'); // Refresh Select2
+        // Refresh Select2 to reflect the changes
+        $('#user-dropdown1').select2().trigger('change'); // Update Select2 instance
     });
 });
 
