@@ -35,16 +35,16 @@
                                                     <button Name="button"
                                                         class="btn btn-danger btn-sm waves-effect waves-light"
                                                         onclick="deleteConfirmation({!! $result->id !!})"><i
-                                                            class="feather icon-trash"></button>
+                                                            class="feather icon-trash"></i></button>
 
                                                     <form action="{!! URL::route('admin.group.destroy', $result->id) !!}" method="POST"
                                                         id="deleteForm{!! $result->id !!}">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
-
                                                 </td>
-</tr>                                 @endforeach
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

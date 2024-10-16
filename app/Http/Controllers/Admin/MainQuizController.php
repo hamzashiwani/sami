@@ -174,8 +174,11 @@ class MainQuizController extends Controller
     {
         try {
             $quiz = MainQuiz::find($id);
+            $event_id = $quiz->event_id;
+            MainQuiz::where('id', $id)->delete();
+            Quiz::where('quiz_id', $id)->delete();
             return redirect()
-                ->route('admin.main-quiz.index')
+                ->route('admin.main-quiz.index', $event_id)
                 ->with('success', 'Quiz has been deleted successfully.');
         }catch (\Exception $exception) {
             return redirect()

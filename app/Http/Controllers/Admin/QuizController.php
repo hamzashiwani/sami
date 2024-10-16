@@ -173,8 +173,10 @@ class QuizController extends Controller
     {
         try {
             $quiz = Quiz::find($id);
+            $quiz_id = $quiz->quiz_id;
+            Quiz::where('id', $id)->delete();
             return redirect()
-                ->route('admin.quiz.index')
+                ->route('admin.quiz.index', $quiz_id)
                 ->with('success', 'Question has been deleted successfully.');
         }catch (\Exception $exception) {
             return redirect()

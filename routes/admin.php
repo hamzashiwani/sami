@@ -93,7 +93,7 @@ Route::name('admin.')->group(
         Route::get('quiz/edit/{id}', [QuizController::class, 'edit'])->name('quiz.edit');
         Route::post('quiz/update/{id}', [QuizController::class, 'update'])->name('quiz.update');
         Route::put('quiz/update/{id}', [QuizController::class, 'update'])->name('quiz.update');
-        Route::get('quiz/destroy/{id}', [QuizController::class, 'destroy'])->name('quiz.destroy');
+        Route::delete('quiz/destroy/{id}', [QuizController::class, 'destroy'])->name('quiz.destroy');
 
 
         Route::get('main-quiz/{id}', [MainQuizController::class, 'index'])->name('main-quiz.index');
@@ -102,7 +102,7 @@ Route::name('admin.')->group(
         Route::get('main-quiz/edit/{id}', [MainQuizController::class, 'edit'])->name('main-quiz.edit');
         Route::post('main-quiz/update/{id}', [MainQuizController::class, 'update'])->name('main-quiz.update');
         Route::put('main-quiz/update/{id}', [MainQuizController::class, 'update'])->name('main-quiz.update');
-        Route::get('main-quiz/destroy/{id}', [MainQuizController::class, 'destroy'])->name('main-quiz.destroy');
+        Route::delete('main-quiz/destroy/{id}', [MainQuizController::class, 'destroy'])->name('main-quiz.destroy');
 
         Route::get('event-hotel/{id}', [HotelController::class, 'index'])->name('event-hotel.index');
         Route::get('event-hotel/create/{id}', [HotelController::class, 'create'])->name('event-hotel.create');

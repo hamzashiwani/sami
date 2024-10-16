@@ -35,8 +35,8 @@
                                                     <a title="Edit" href="{!! route('admin.main-quiz.edit', $result->id) !!}"
                                                         class="btn btn-primary btn-sm waves-effect waves-light"><i
                                                             class="feather icon-edit"></i></a>
-
-                                                    <!-- <button type="button"
+                                                    @if($result->status == 0)
+                                                    <button type="button"
                                                         class="btn btn-danger btn-sm waves-effect waves-light"
                                                         onclick="deleteConfirmation({!! $result->id !!})"><i
                                                             class="feather icon-trash"></i></button>
@@ -45,7 +45,8 @@
                                                         id="deleteForm{!! $result->id !!}">
                                                         @csrf
                                                         @method('DELETE')
-                                                    </form> -->
+                                                    </form>
+                                                    @endif
 
                                                 </td>
                                             </tr>

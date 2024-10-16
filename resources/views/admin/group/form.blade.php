@@ -64,9 +64,13 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="topic">Users *</label>
+                                                <label for="topic">Members *</label>
                                                 <select id="user-dropdown1" name="users[]" multiple  class="form-control" required>
                                                    
                                                     <!-- Options will be populated by AJAX -->
