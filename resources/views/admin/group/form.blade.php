@@ -136,13 +136,13 @@
     $('#user-dropdown').on('change', function() {
         let selectedCordinatorId = $(this).val();
 
-        // Show all options first
-        $('#user-dropdown1 option').show(); // Ensure all options are visible initially
+        // Enable all options first
+        $('#user-dropdown1 option').prop('disabled', false); // Enable all options initially
 
         if (selectedCordinatorId) {
             $('#user-dropdown1 option').each(function() {
                 if ($(this).val() == selectedCordinatorId) {
-                    $(this).hide(); // Hide the selected coordinator
+                    $(this).prop('disabled', true); // Disable the selected coordinator
                 }
             });
         }
@@ -151,6 +151,7 @@
         $('#user-dropdown1').select2().trigger('change'); // Update Select2 instance
     });
 });
+
 
 </script>   
     <script>
