@@ -134,23 +134,19 @@
     fetchUsers(); // Call the function to fetch users
 
     // Listen for changes in the coordinator dropdown
-    $('#user-dropdown').on('change', function() {
+   $('#user-dropdown').on('change', function() {
         let selectedCordinatorId = $(this).val();
-        
-        // Show all users first
-        $('#user-dropdown1 option').show();
+        $('#user-dropdown1 option').show(); // Show all options
 
-        // Hide the selected coordinator in the users dropdown
         if (selectedCordinatorId) {
             $('#user-dropdown1 option').each(function() {
                 if ($(this).val() == selectedCordinatorId) {
-                    $(this).hide();
+                    $(this).hide(); // Hide the selected coordinator
                 }
             });
         }
-        
-        // Refresh the user dropdown to reflect the changes
-        $('#user-dropdown1').trigger('change');
+
+        $('#user-dropdown1').select2().trigger('change'); // Refresh Select2
     });
 });
 
