@@ -66,33 +66,53 @@ class GroupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        try{
-            DB::beginTransaction();
-            $data = $request->except(
-                [
-                    '_method',
-                    '_token',
-                    'users',
-                    'previous_image',
-                    'previous_document'
-                ]
-            );
+{
+    try {
+        DB::beginTransaction();
 
-            $group = Group::create($data);
-            $group->members()->attach($request->input('users', []));
-            DB::commit();
-        }catch (\Exception $exception) {
-            dd($exception->getMessage());
-            DB::rollBack();
-            return redirect()
-                ->back()
-                ->with('error', $exception->getMessage());
+        // Validate users
+        $users = $request->input('users', []);
+        if ($users) {
+            foreach ($users as $userId) {
+                // Check if user is already in another group
+                $existingGroups = Group::where('cordinator_id',$userId)->orwhereHas('members', function ($query) use ($userId) {
+                    $query->where('id', $userId);
+                })->get();
+
+                if ($existingGroups->count() > 0) {
+                    return redirect()
+                        ->back()
+                        ->with('error', "User with ID $userId is already in another group.");
+                }
+            }
         }
+
+        $data = $request->except(
+            [
+                '_method',
+                '_token',
+                'users',
+                'previous_image',
+                'previous_document'
+            ]
+        );
+
+        $group = Group::create($data);
+        $group->members()->attach($users);
+
+        DB::commit();
+    } catch (\Exception $exception) {
+        DB::rollBack();
         return redirect()
-            ->route('admin.group.index')
-            ->with('success', 'Group has been added successfully.');
+            ->back()
+            ->with('error', $exception->getMessage());
     }
+
+    return redirect()
+        ->route('admin.group.index')
+        ->with('success', 'Group has been added successfully.');
+}
+
     
 
     /**
