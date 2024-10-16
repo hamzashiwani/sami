@@ -97,49 +97,63 @@
 @section('footer-js')
 <script>
     $(document).ready(function() {
-        // Initialize Select2
-        $('#user-dropdown').select2({
-            placeholder: "Select Users",
-            allowClear: true
-        });
+    // Initialize Select2 for coordinator and users
+    $('#user-dropdown').select2({
+        placeholder: "Select Coordinator",
+        allowClear: true
+    });
 
-        // Fetch users using AJAX
+    $('#user-dropdown1').select2({
+        placeholder: "Select Users",
+        allowClear: true
+    });
+
+    // Fetch users using AJAX for both dropdowns
+    function fetchUsers() {
         $.ajax({
             url: "{{route('admin.get-users')}}",
             method: 'GET',
             success: function(data) {
+                // Populate the user dropdowns
                 data.forEach(function(user) {
-                    let option = new Option(user.name, user.id, false, false);
-                    $('#user-dropdown').append(option);
+                    let option1 = new Option(user.name, user.id, false, false);
+                    $('#user-dropdown').append(option1);
+
+                    let option2 = new Option(user.name, user.id, false, false);
+                    $('#user-dropdown1').append(option2);
                 });
                 $('#user-dropdown').trigger('change'); // Notify Select2 to refresh
-            },
-            error: function(err) {
-                console.log(err);
-            }
-        });
-
-        $('#user-dropdown1').select2({
-            placeholder: "Select Users",
-            allowClear: true
-        });
-
-        // Fetch users using AJAX
-        $.ajax({
-            url: "{{route('admin.get-users')}}",
-            method: 'GET',
-            success: function(data) {
-                data.forEach(function(user) {
-                    let option = new Option(user.name, user.id, false, false);
-                    $('#user-dropdown1').append(option);
-                });
                 $('#user-dropdown1').trigger('change'); // Notify Select2 to refresh
             },
             error: function(err) {
                 console.log(err);
             }
         });
+    }
+
+    fetchUsers(); // Call the function to fetch users
+
+    // Listen for changes in the coordinator dropdown
+    $('#user-dropdown').on('change', function() {
+        let selectedCordinatorId = $(this).val();
+        
+        // Show all users first
+        $('#user-dropdown1 option').show();
+
+        // Hide the selected coordinator in the users dropdown
+        if (selectedCordinatorId) {
+            $('#user-dropdown1 option').each(function() {
+                if ($(this).val() == selectedCordinatorId) {
+                    $(this).hide();
+                }
+            });
+        }
+        
+        // Refresh the user dropdown to reflect the changes
+        $('#user-dropdown1').trigger('change');
     });
+});
+
 </script>   
     <script>
         $("#title").on('blur', function (){
