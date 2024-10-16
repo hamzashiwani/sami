@@ -76,7 +76,7 @@ class GroupController extends Controller
             foreach ($users as $userId) {
                 // Check if user is already in another group
                 $existingGroups = Group::where('cordinator_id',$userId)->orwhereHas('members', function ($query) use ($userId) {
-                    $query->where('id', $userId);
+                    $query->where('user_id', $userId);
                 })->get();
 
                 if ($existingGroups->count() > 0) {
