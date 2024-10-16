@@ -13,7 +13,7 @@ class SiteSetting extends Model
         if (!empty($this->favicon) && file_exists(uploadsDir('front').$this->favicon)) {
             return asset('uploads/front/' . $this->favicon);
         }
-        return asset('assets/admin/app-assets/images/ico/favicon.ico');
+        return asset('assets/admin/app-assets/images/ico/favicon.png');
     }
 
     public function getLogoPathAttribute()
