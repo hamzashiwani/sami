@@ -21,6 +21,6 @@ class SiteSetting extends Model
         if (!empty($this->logo) && file_exists(uploadsDir('front').$this->logo)) {
             return asset('uploads/front/' . $this->logo);
         }
-        return asset('assets/admin/app-assets/images/ico/favicon.ico');
+        return asset('assets/admin/app-assets/images/logo/sami-icon.png');
     }
 }
