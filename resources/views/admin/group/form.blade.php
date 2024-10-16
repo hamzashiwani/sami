@@ -68,13 +68,7 @@
                                             <div class="form-group">
                                                 <label for="topic">Users *</label>
                                                 <select id="user-dropdown1" name="users[]" multiple  class="form-control" required>
-                                                    @if(isset($data->id))
-                                                    @foreach ($users as $user)
-                                                        <option value="{{ $user->id }}" {{ $data->members->contains($user->id) ? 'selected' : '' }}>
-                                                            {{ $user->name }}
-                                                        </option>
-                                                    @endforeach
-                                                    @endif
+                                                   
                                                     <!-- Options will be populated by AJAX -->
                                                 </select>
                                             </div>
@@ -120,6 +114,12 @@
 
                     let option2 = new Option(user.name, user.id, false, false);
                     $('#user-dropdown1').append(option2);
+
+                     @if(isset($data->members))
+                        if ({{ json_encode($data->members->pluck('id')->toArray()) }}.includes(user.id)) {
+                            option2.selected = true; // Mark as selected if exists in $data->members
+                        }
+                    @endif
                 });
                 $('#user-dropdown').trigger('change');
                 $('#user-dropdown1').trigger('change');
