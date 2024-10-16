@@ -175,6 +175,7 @@ class GroupController extends Controller
     {
         try {
             $blog = Group::find($id);
+            Group::where('id',$id)->delete();
             return redirect()
                 ->route('admin.group.index')
                 ->with('success', 'Group has been deleted successfully.');
