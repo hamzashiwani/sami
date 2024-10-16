@@ -141,7 +141,7 @@
         if (selectedCordinatorId) {
             $('#user-dropdown1 option').each(function() {
                 if ($(this).val() == selectedCordinatorId) {
-                    alert($(this).hide());
+                    console.log($(this).hide());
                     $(this).hide(); // Hide the selected coordinator
                 }
             });
