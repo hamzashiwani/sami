@@ -162,6 +162,7 @@ class EventController extends BaseController
                     return $this->respond([], [], true, 'Quiz Finish');
                 }
                 $user = $request->user();
+                $getUserData->question_time = $event->question_time;
             } else {
                 $getUserData = [];
             }
