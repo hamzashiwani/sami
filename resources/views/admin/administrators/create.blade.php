@@ -55,10 +55,11 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="is_active">Is Active</label>
-                                            <select class="form-control" name="is_active">
-                                                <option value="1">Yes</option>
-                                                <option value="0">No</option>
+                                            <label for="is_active">Type</label>
+                                            <select class="form-control" name="type">
+                                                <option value="0">Admin</option>
+                                                <option value="1">Notification</option>
+                                                <option value="2">Quiz</option>
                                             </select>
                                         </div>
                                     </div>
