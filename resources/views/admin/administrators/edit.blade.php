@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="is_active">Is Active</label>
+                                            <label for="is_active">Type</label>
                                             <select class="form-control" name="type" {!! auth()->id() == $data->id ? 'disabled' : '' !!}>
                                                 <option value="0" {!! ($data->type = 0) ? 'selected' : '' !!}>Admin</option>
                                                 <option value="1" {!! ($data->type = 1) ? 'selected' : '' !!}>Notification</option>

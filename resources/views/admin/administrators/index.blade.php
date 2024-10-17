@@ -17,7 +17,7 @@
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>Email</th>
-                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Type</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -27,7 +27,13 @@
                                             <td>{!! $admin->first_name !!} {!! $admin->last_name !!}</td>
                                             <td>{!! $admin->phone !!}</td>
                                             <td>{!! $admin->email !!}</td>
-                                            <td>{!! ($admin->is_active > 0) ? 'Yes' : 'No' !!}</td>
+                                            @if($admin->type == 0)
+                                            <td>Admin</td>
+                                            @elseif($admin->type == 1)
+                                            <td>Notification</td>
+                                            @elseif($admin->type == 2)
+                                            <td>Quiz</td>
+                                            @endif
                                             <td>
                                                 <a href="{!! route('admin.administrators.show', $admin->id) !!}" class="btn btn-info btn-sm waves-effect waves-light"><i class="feather icon-search"></i></a>
 

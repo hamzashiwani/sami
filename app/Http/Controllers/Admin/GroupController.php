@@ -172,6 +172,7 @@ class GroupController extends Controller
             );
 
             $blog->update($data);
+            $group->members()->attach($users);
 
             DB::commit();
             return redirect()
