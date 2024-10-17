@@ -34,9 +34,9 @@ class Event extends Model
                 ];
             } else {
                 return [
-                    "name" => "Test User",
-                    "group" => "Marketing Group",
-                    "contact" => "00000000000"
+                    "name" => "",
+                    "group" => "",
+                    "contact" => ""
                 ];
             }
     }
