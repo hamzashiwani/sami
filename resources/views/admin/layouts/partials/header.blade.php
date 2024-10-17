@@ -60,6 +60,14 @@
 
             <li class=" navigation-header"><span>Modules</span>
             </li>
+            <li class="nav-item {{ request()->segment(2) == 'administrators' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Administrators</span></a>
+                <ul class="menu-content">
+                    <li class="{{ (request()->segment(2) == 'administrators' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.administrators.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
+                    </li>
+                    <li class="{{ (request()->segment(2) == 'administrators' && request()->segment(3) != 'create') ? 'active' : '' }}"><a href="{{ route('admin.administrators.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">List</span></a>
+                    </li>
+                </ul>
+            </li>
             <li class="nav-item {{ request()->segment(2) == 'users' ? 'active' : '' }}"> <a href="#"><i class="feather icon-user"></i><span class="menu-title" data-i18n="User">Users</span></a>
                 <ul class="menu-content">
                     <li class="{{ (request()->segment(2) == 'users' && request()->segment(3) != 'create') ? 'active' : '' }}"><a href="{{ route('admin.users.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">List</span></a>
