@@ -28,11 +28,11 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         try{
-            $data = Group::get();
-            return view('admin.group.index', compact('data'));
+            $data = Group::where('event_id',$id)->get();
+            return view('admin.group.index', compact('data','id'));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
             return redirect()->back();
@@ -44,7 +44,7 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $data = new Group();
 
@@ -52,11 +52,11 @@ class GroupController extends Controller
             'type' => 'create',
             'heading' => 'Create Group',
             'method' => 'POST',
-            'action' => route('admin.group.store'),
-            'cancel_url' => route('admin.group.index')
+            'action' => route('admin.group.store',$id),
+            'cancel_url' => route('admin.group.index',$id)
         ];
 
-        return view('admin.group.form', compact('data', 'form'));
+        return view('admin.group.form', compact('data', 'form','id'));
     }
 
     /**
@@ -65,7 +65,7 @@ class GroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
 {
     try {
         DB::beginTransaction();
@@ -109,7 +109,7 @@ class GroupController extends Controller
     }
 
     return redirect()
-        ->route('admin.group.index')
+        ->route('admin.group.index',$id)
         ->with('success', 'Group has been added successfully.');
 }
 
@@ -124,7 +124,7 @@ class GroupController extends Controller
     public function show($id)
     {
         $data = Group::find($id);
-        return view('admin.group.show', compact('data'));
+        return view('admin.group.show', compact('data',));
     }
 
     /**
@@ -133,18 +133,19 @@ class GroupController extends Controller
      * @param  int  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($ids)
     {
-        $data = Group::find($id);
+        $data = Group::find($ids);
+        $id = $data->event_id;
         $form = [
             'type' => 'create',
             'heading' => 'Edit Group',
             'method' => 'PUT',
-            'action' => route('admin.group.update', $id),
-            'cancel_url' => route('admin.group.index')
+            'action' => route('admin.group.update', $ids),
+            'cancel_url' => route('admin.group.index',$id)
         ];
         $users = User::all(); 
-        return view('admin.group.form', compact('data', 'form','users'));
+        return view('admin.group.form', compact('data', 'form','users','id'));
     }
 
     /**
@@ -154,7 +155,7 @@ class GroupController extends Controller
      * @param  int  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
         try {
             DB::beginTransaction();
@@ -174,7 +175,7 @@ class GroupController extends Controller
 
             DB::commit();
             return redirect()
-                ->route('admin.group.index')
+                ->route('admin.group.index',$id)
                 ->with('success', 'Group has been updated successfully.');
         } catch (\Exception $exception) {
             DB::rollBack();

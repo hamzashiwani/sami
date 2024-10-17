@@ -27,6 +27,10 @@
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
                                                 <!-- <td><small><span class="badge badge-{!! $result->status == 'published' ? 'success' : 'danger' !!}">{!! strtoupper($result->status) !!}</span></small></td> -->
                                                 <td>
+                                                <a title="Group" href="{!! route('admin.group.index', $result->id) !!}" 
+                                                    class="btn btn-info btn-sm waves-effect waves-light">
+                                                        <i class="feather icon-grid"></i> <!-- Icon for transport -->
+                                                    </a>
                                                     <a title="Transports" href="{!! route('admin.event-transport.index', $result->id) !!}" 
                                                     class="btn btn-info btn-sm waves-effect waves-light">
                                                         <i class="feather icon-truck"></i> <!-- Icon for transport -->

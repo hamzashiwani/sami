@@ -42,8 +42,19 @@
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
+                                                <label for="user_id">Type *</label>
+                                                <select id="type" name="type" class="form-control" required>
+                                                    <option value="">Select Type</option>
+                                                    <option value="0" {!! $data->type == "0" ? 'selected' : '' !!}>User</option>
+                                                    <option value="1" {!! $data->type == "1" ? 'selected' : '' !!}>Group</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @if($data->type == 0)
+                                        <div class="col-sm-6 user" >
+                                            <div class="form-group">
                                                 <label for="user_id">Users *</label>
-                                                <select id="user_id" name="user_id" class="form-control" required>
+                                                <select id="user_id" name="user_id" class="form-control" >
                                                     <option value="">Select Users</option>
                                                     @foreach($users as $user)
                                                      <option value="{{$user->id}}" {!! $data->user_id == $user->id ? 'selected' : '' !!}>{{$user->name}}</option>
@@ -51,6 +62,43 @@
                                                 </select>
                                             </div>
                                         </div>
+
+                                        <div class="col-sm-6 group" style="display:none">
+                                            <div class="form-group">
+                                                <label for="user_id">Group *</label>
+                                                <select id="group_id" name="group_id" class="form-control" >
+                                                    <option value="">Select Group</option>
+                                                    @foreach($groups as $group)
+                                                     <option value="{{$group->id}}" {!! $data->group_id == $group->id ? 'selected' : '' !!}>{{$group->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @else
+                                        <div class="col-sm-6 user" style="display:none">
+                                            <div class="form-group">
+                                                <label for="user_id">Users *</label>
+                                                <select id="user_id" name="user_id" class="form-control" >
+                                                    <option value="">Select Users</option>
+                                                    @foreach($users as $user)
+                                                     <option value="{{$user->id}}" {!! $data->user_id == $user->id ? 'selected' : '' !!}>{{$user->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 group" >
+                                            <div class="form-group">
+                                                <label for="user_id">Group *</label>
+                                                <select id="group_id" name="group_id" class="form-control" >
+                                                    <option value="">Select Group</option>
+                                                    @foreach($groups as $group)
+                                                     <option value="{{$group->id}}" {!! $data->group_id == $group->id ? 'selected' : '' !!}>{{$group->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @endif
                                     </div>
                                 </fieldset>
                                 <div class="col-md-12">
@@ -86,6 +134,17 @@
         $("#title").on('blur', function (){
             var value = $( this ).val();
             $('#slug').val(slugify(value));
+        });
+
+        $('#type').change(function() {
+            var selectedValue = $(this).val();
+            if(selectedValue == "0") {
+                $('.user').show();
+                $('.group').hide();
+            } else {
+                $('.user').hide();
+                $('.group').show();
+            }
         });
     </script>
 @endsection

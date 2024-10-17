@@ -6,6 +6,7 @@ use App\Http\Requests\Admin\StoreFaqRequest;
 use App\Http\Requests\Admin\UpdateFaqRequest;
 use App\Models\EventTransport;
 use App\Models\User;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -56,7 +57,8 @@ class TransportController extends Controller
             'cancel_url' => route('admin.event-transport.index',$id)
         ];
         $users = User::get();
-        return view('admin.transport.form', compact('data', 'form','id','users'));
+        $groups = Group::get();
+        return view('admin.transport.form', compact('data', 'form','id','users','groups'));
     }
 
     /**
@@ -77,12 +79,22 @@ class TransportController extends Controller
                 ]
             );
 
-            $transport = EventTransport::where('event_id',$id)->where('user_id',auth()->user()->id)->first();
-            if($transport) {
-                DB::rollBack();
-                return redirect()
-                    ->back()
-                    ->with('error', 'Reacord Already Available On Selected User');
+            if($request->type == '0') {
+                $transport = EventTransport::where('event_id',$id)->where('user_id',$request->user_id)->first();
+                if($transport) {
+                    DB::rollBack();
+                    return redirect()
+                        ->back()
+                        ->with('error', 'Reacord Already Available On Selected User');
+                }
+            } else {
+                $transport = EventTransport::where('event_id',$id)->where('group_id',$request->group_id)->first();
+                if($transport) {
+                    DB::rollBack();
+                    return redirect()
+                        ->back()
+                        ->with('error', 'Reacord Already Available On Selected Group');
+                }
             }
             EventTransport::create($data);
             DB::commit();
@@ -127,7 +139,8 @@ class TransportController extends Controller
             'cancel_url' => route('admin.event-transport.index',$id)
         ];
         $users = User::get();
-        return view('admin.transport.form', compact('data', 'form','id','users'));
+        $groups = Group::get();
+        return view('admin.transport.form', compact('data', 'form','id','users','groups'));
     }
 
     /**

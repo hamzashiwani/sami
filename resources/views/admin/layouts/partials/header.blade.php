@@ -104,14 +104,6 @@
                 </ul>
             </li>
 
-            <li class="nav-item {{ request()->segment(2) == 'group' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Group</span></a>
-                <ul class="menu-content">
-                    <li class="{{ (request()->segment(2) == 'group' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.group.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
-                    </li>
-                    <li class="{{ (request()->segment(2) == 'group' && request()->segment(3) != 'create') ? 'active' : '' }}"><a href="{{ route('admin.group.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">List</span></a>
-                    </li>
-                </ul>
-            </li>
             @endif
         </ul>
     </div>

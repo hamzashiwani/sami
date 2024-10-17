@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Groups</h4>
-                        <span><a href="{{ route('admin.group.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a></span>
+                        <span><a href="{{ route('admin.group.create',$id) }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a></span>
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard">
@@ -31,11 +31,11 @@
                                                     <a href="{!! route('admin.group.edit', $result->id) !!}"
                                                         class="btn btn-primary btn-sm waves-effect waves-light"><i
                                                             class="feather icon-edit"></i></a>
-
+<!-- 
                                                     <button Name="button"
                                                         class="btn btn-danger btn-sm waves-effect waves-light"
                                                         onclick="deleteConfirmation({!! $result->id !!})"><i
-                                                            class="feather icon-trash"></i></button>
+                                                            class="feather icon-trash"></i></button> -->
 
                                                     <form action="{!! URL::route('admin.group.destroy', $result->id) !!}" method="POST"
                                                         id="deleteForm{!! $result->id !!}">

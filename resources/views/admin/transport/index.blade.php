@@ -25,7 +25,7 @@
                                         @foreach ($data as $key => $result)
                                             <tr>
                                                 <td>{!! Str::limit($result->name, 20, '...') !!}</td>
-                                                <td>{!! $result->user->name !!}</td>
+                                                <td>{!! ($result->user) ? $result->user->name : '' !!}</td>
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
                                                 <td>
                                                     <!-- <a href="{!! route('admin.quiz.index', $result->id) !!}"

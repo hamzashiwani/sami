@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\MainQuizController;
 use App\Http\Controllers\Admin\HotelController;
+use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\FlightController;
 use App\Http\Controllers\Admin\TransportController;
 
@@ -67,7 +68,7 @@ Route::name('admin.')->group(
         Route::resource('blog', 'BlogController');
         Route::resource('faq', 'FaqController');
         Route::resource('notification', 'NotificationController');
-        Route::resource('group', 'GroupController');
+        // Route::resource('group', 'GroupController');
         Route::get('get-users', 'GroupController@getUsers')->name('get-users');
         // Route::resource('quiz', 'QuizController');
         Route::resource('event', 'EventController');
@@ -85,6 +86,15 @@ Route::name('admin.')->group(
         Route::post('event-timeline/update/{id}', [EventTimelineController::class, 'update'])->name('event-timeline.update');
         Route::put('event-timeline/update/{id}', [EventTimelineController::class, 'update'])->name('event-timeline.update');
         Route::get('event-timeline/destroy/{id}', [EventTimelineController::class, 'destroy'])->name('event-timeline.destroy');
+
+
+         Route::get('group/{id}', [GroupController::class, 'index'])->name('group.index');
+        Route::get('group/create/{id}', [GroupController::class, 'create'])->name('group.create');
+        Route::post('group/store/{id}', [GroupController::class, 'store'])->name('group.store');
+        Route::get('group/edit/{id}', [GroupController::class, 'edit'])->name('group.edit');
+        Route::post('group/update/{id}', [GroupController::class, 'update'])->name('group.update');
+        Route::put('group/update/{id}', [GroupController::class, 'update'])->name('group.update');
+        Route::get('group/destroy/{id}', [GroupController::class, 'destroy'])->name('group.destroy');
 
 
         Route::get('quiz/{id}', [QuizController::class, 'index'])->name('quiz.index');

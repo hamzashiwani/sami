@@ -19,11 +19,26 @@ class Event extends Model
      protected $appends = ['cordinator'];
 
     function getCordinatorAttribute() {
-        return [
-            "name" => "Test User",
-            "group" => "Marketing Group",
-            "contact" => "00000000000"
-        ];
+        $userId = auth()->id();
+        $group = Group::where('event_id', $this->id)
+            ->whereHas('members', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->first();
+            if($group) {
+                $user = User::find($group->cordinator_id);
+                return [
+                    "name" => $user->name,
+                    "group" => $group->name,
+                    "contact" => $user->phone
+                ];
+            } else {
+                return [
+                    "name" => "Test User",
+                    "group" => "Marketing Group",
+                    "contact" => "00000000000"
+                ];
+            }
     }
 
     public function eventListings()

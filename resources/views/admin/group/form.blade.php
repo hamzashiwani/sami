@@ -20,6 +20,7 @@
                                 <input type="hidden" name="id" value="{{ $data->id }}">
                                 @csrf
                                 <input type="hidden" name="_method" value="{!! $form['method'] !!}">
+                                <input type="hidden" name="event_id" value="{!! $id !!}">
                                 <fieldset>
                                     <div class="row">
                                         <div class="col-sm-6">
