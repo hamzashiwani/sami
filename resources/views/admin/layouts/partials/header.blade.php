@@ -60,6 +60,16 @@
 
             <li class=" navigation-header"><span>Modules</span>
             </li>
+            @if(auth()->user()->type == 1)
+            <li class="nav-item {{ request()->segment(2) == 'notification' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Notifications</span></a>
+                <ul class="menu-content">
+                    <li class="{{ (request()->segment(2) == 'notification' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.notification.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
+                    </li>
+                    <li class="{{ (request()->segment(2) == 'notification' && request()->segment(3) != 'create') ? 'active' : '' }}"><a href="{{ route('admin.notification.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">List</span></a>
+                    </li>
+                </ul>
+            </li>
+            @else
             <li class="nav-item {{ request()->segment(2) == 'administrators' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Administrators</span></a>
                 <ul class="menu-content">
                     <li class="{{ (request()->segment(2) == 'administrators' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.administrators.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
@@ -74,6 +84,7 @@
                     </li>
                 </ul>
             </li>
+
             <li class="nav-item {{ request()->segment(2) == 'notification' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Notifications</span></a>
                 <ul class="menu-content">
                     <li class="{{ (request()->segment(2) == 'notification' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.notification.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
@@ -101,6 +112,7 @@
                     </li>
                 </ul>
             </li>
+            @endif
         </ul>
     </div>
 </div>
