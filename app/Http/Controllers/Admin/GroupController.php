@@ -161,6 +161,7 @@ class GroupController extends Controller
             DB::beginTransaction();
 
             $blog = Group::findOrFail($request->id);
+            $users = $request->input('users', []);
 
             $data = $request->except(
                 [
@@ -172,7 +173,7 @@ class GroupController extends Controller
             );
 
             $blog->update($data);
-            $group->members()->attach($users);
+            $blog->members()->sync($users);
 
             DB::commit();
             return redirect()

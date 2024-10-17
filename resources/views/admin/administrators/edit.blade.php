@@ -57,9 +57,9 @@
                                         <div class="form-group">
                                             <label for="is_active">Type</label>
                                             <select class="form-control" name="type" {!! auth()->id() == $data->id ? 'disabled' : '' !!}>
-                                                <option value="0" {!! ($data->type = 0) ? 'selected' : '' !!}>Admin</option>
-                                                <option value="1" {!! ($data->type = 1) ? 'selected' : '' !!}>Notification</option>
-                                                <option value="2" {!! ($data->type = 2) ? 'selected' : '' !!}>Quiz</option>
+                                                <option value="0" {!! ($data->type == "0") ? 'selected' : '' !!}>Admin</option>
+                                                <option value="1" {!! ($data->type == "1") ? 'selected' : '' !!}>Notification</option>
+                                                <option value="2" {!! ($data->type == "2") ? 'selected' : '' !!}>Quiz</option>
                                             </select>
                                         </div>
                                     </div>

@@ -41,9 +41,6 @@
                                     		</p>
                                     	</div>
                                     @endif
-                                    <div class="col-6">
-                                        <p><h5>Is Active: </h5>{!! ($data->is_active > 0) ? 'Yes' : 'No' !!}</p>
-                                    </div>
                                 </div>
                             </div>
                         </div>
