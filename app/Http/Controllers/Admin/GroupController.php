@@ -141,7 +141,7 @@ class GroupController extends Controller
             'type' => 'create',
             'heading' => 'Edit Group',
             'method' => 'PUT',
-            'action' => route('admin.group.update', $ids),
+            'action' => route('admin.group.update', $id),
             'cancel_url' => route('admin.group.index',$id)
         ];
         $users = User::all(); 
@@ -167,14 +167,13 @@ class GroupController extends Controller
                 [
                     '_method',
                     '_token',
+                    'users',
                     'previous_image',
                     'previous_document'
                 ]
             );
-
             $blog->update($data);
             $blog->members()->sync($users);
-
             DB::commit();
             return redirect()
                 ->route('admin.group.index',$id)
