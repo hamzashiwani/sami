@@ -91,7 +91,7 @@ class AdministratorsController extends Controller
         Admin::create($data);
 
         return redirect()
-            ->route('admin.administrators.edit')
+            ->route('admin.administrators.index')
             ->with('success', 'Administrator has been added successfully.');
     }
 
