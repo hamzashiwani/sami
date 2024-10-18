@@ -117,13 +117,6 @@
                     let option1 = new Option(user.name, user.id, false, false);
                     $('#user-dropdown').append(option1);
 
-                  @if(isset($data->cordinator_id))
-                    let coordinatorId = {{ json_encode($data->cordinator_id) }};
-                    if (coordinatorId === user.id) {
-                        option1.selected = true; // Mark as selected if exists in $data->cordinator_id
-                    }
-                @endif
-
                     let option2 = new Option(user.name, user.id, false, false);
                     $('#user-dropdown1').append(option2);
 
