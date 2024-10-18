@@ -117,10 +117,9 @@
                     let option1 = new Option(user.name, user.id, false, false);
                     $('#user-dropdown').append(option1);
 
-                   @if(isset($data->cordinator_id))
-                        let coordinators = Array.isArray({{ json_encode($data->cordinator_id) }}) ? {{ json_encode($data->cordinator_id) }} : [{{ json_encode($data->cordinator_id) }}];
-                        if (coordinators.includes(user.id)) {
-                            option1.selected = true; // Mark as selected if exists in $data->cordinator_id
+                  @if(isset($data->cordinator_id))
+                        if ({{ json_encode($data->cordinator_id) }}.includes(user.id)) {
+                            option1.selected = true; // Mark as selected if exists in $data->members
                         }
                     @endif
 
