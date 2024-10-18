@@ -126,6 +126,10 @@
                         }
                     @endif
                 });
+
+                @if(isset($data->cordinator_id))
+                    $('#user-dropdown').val({{ $data->cordinator_id }}).trigger('change');
+                @endif
                 $('#user-dropdown').trigger('change');
                 $('#user-dropdown1').trigger('change');
             },
