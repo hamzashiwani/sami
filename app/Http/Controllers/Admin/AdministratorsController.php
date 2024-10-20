@@ -66,7 +66,7 @@ class AdministratorsController extends Controller
             $data['image'] = $filename;
         }
 
-        $password         = generateRandomString(8);
+        $password         = $request->password;
         $data['password'] = bcrypt($password);
 
             if ($data['email'] != '') {

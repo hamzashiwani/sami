@@ -89,7 +89,7 @@
                                             <div class="form-group">
                                                 <label for="content">Start Date</label>
                                                 <input type="date" id="date" name="date"
-                                                       value="{{ old('date', $data->date) }}" class="form-control">
+                                                       value="{{ old('date', $data->date) }}" class="form-control" min="{{ \Carbon\Carbon::today()->toDateString() }}">
                                             </div>
                                         </div>
 
@@ -97,7 +97,7 @@
                                             <div class="form-group">
                                                 <label for="content">End Date</label>
                                                 <input type="date" id="end_date" name="end_date"
-                                                       value="{{ old('end_date', $data->end_date) }}" class="form-control">
+                                                       value="{{ old('end_date', $data->end_date) }}" class="form-control" min="{{ \Carbon\Carbon::today()->toDateString() }}">
                                             </div>
                                         </div>
                                     </div>

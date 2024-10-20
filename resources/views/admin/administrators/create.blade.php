@@ -65,6 +65,16 @@
                                     </div>
                                 </div>
                             </fieldset>
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="image">Password</label>
+                                            <input type="text" id="password" name="password" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Add</button>
                             </div>
@@ -76,3 +86,22 @@
     </div>
 </section>
 @endsection
+@section('footer-js')
+    <script>
+        $(document).ready(function(){
+            function generateRandomCode(length) {
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return result;
+            }
+
+            // Set the generated code to the input field
+            const randomCode = generateRandomCode(8); // Adjust length as needed
+            document.getElementById('password').value = randomCode;
+        });
+    </script>
+@endsection
+

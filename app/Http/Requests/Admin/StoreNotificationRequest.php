@@ -26,7 +26,7 @@ class StoreNotificationRequest extends FormRequest
         return [
             'title' => 'required|max:32',
             // 'tags' => 'required',
-            'description'  => 'required',
+            // 'description'  => 'required',
             'topic'  => 'required|in:Global,Internal',
             // 'image'      => 'required|file|mimes:jpeg,jpg,png|max:5000',
             // 'date'  => 'required',

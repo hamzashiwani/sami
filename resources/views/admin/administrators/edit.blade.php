@@ -77,6 +77,16 @@
                                     </div>
                                 </div>
                             </fieldset>
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="image">Password</label>
+                                            <input type="text" id="password" name="password" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Save Changes</button>
                             </div>
