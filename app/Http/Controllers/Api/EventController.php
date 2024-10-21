@@ -30,7 +30,7 @@ class EventController extends BaseController
                 // })
                 // ->first();
 
-                $getUserData = Event::where('date', '<=', $specificDate)
+                $getUserData = Event::orderBy('id','desc')->where('date', '<=', $specificDate)
                 ->where('end_date', '>=', $specificDate)
                 ->with('eventListings')
                 ->first();
