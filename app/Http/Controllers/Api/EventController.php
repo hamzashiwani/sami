@@ -35,11 +35,11 @@ class EventController extends BaseController
                 ->with('eventListings')
                 ->first();
 
-                // if ($getUserData && $getUserData->eventListings) {
-                //     $getUserData->eventListings = $getUserData->eventListings->filter(function ($listing) use ($specificDate) {
-                //         return $listing->date == $specificDate;
-                //     });
-                // }
+                if ($getUserData && $getUserData->eventListings) {
+                    $getUserData->eventListings = $getUserData->eventListings->filter(function ($listing) use ($specificDate) {
+                        return $listing->date == $specificDate;
+                    });
+                }
             } else {
                 $getUserData = [];
             }
