@@ -21,7 +21,7 @@ class EventController extends BaseController
         try {
             if($request->date) {
                 $specificDate = $request->date;
-                $getUserData = Event::with(['eventListings' => function($query) use ($specificDate) {
+                $getUserData = Event::orderBy('id','desc')->with(['eventListings' => function($query) use ($specificDate) {
                     $query->where('date', $specificDate); // Filter event listings by the requested date
                 }])
                 ->where(function ($query) use ($specificDate) {
