@@ -43,7 +43,7 @@ class Event extends Model
 
     public function eventListings()
     {
-        return $this->hasMany(EventListing::class);
+        return $this->hasMany(EventListing::class,'event_id');
     }
 
     public function hotel()
