@@ -24,11 +24,12 @@ class UpdateAdministartorRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name'            => 'required|max:32',
-            'last_name'             => 'max:32',
-            'phone'                 => 'max:24',
-            'image'                 => 'file|mimes:jpeg,jpg,png|max:5000',
-            'password_confirmation' => 'required_if:password,!==,""|same:password',
+            'first_name' => 'required|max:32',
+            'last_name'  => 'required|max:32',
+            'phone'      => 'required|max:24',
+            // 'type'      => 'required|in:0,1,2',
+            // 'email'      => 'required|email:strict,filter|unique:admins|max:128',
+            // 'password_confirmation' => 'required_if:password,!==,""|same:password',
         ];
     }
 }

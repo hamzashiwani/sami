@@ -87,7 +87,7 @@ class AdministratorsController extends Controller
             }
 
         // generate-random-8digits-password (send in mail & store in DB).
-
+        $data['is_active'] = 1;
         Admin::create($data);
 
         return redirect()
@@ -171,7 +171,11 @@ class AdministratorsController extends Controller
         if (isset($request->password) && $request->password !='') {
             $data['password'] = bcrypt($request->password);
         }
-
+        $data['is_active'] = 1;
+        if(!isset($data['type'])) {
+            $admin = Admin::where('id', $id)->first();
+            $data['type'] = $admin->type;
+        }
         Admin::where('id', $id)->update($data);
 
         return redirect()
