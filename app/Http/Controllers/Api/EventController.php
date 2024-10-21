@@ -21,25 +21,25 @@ class EventController extends BaseController
         try {
             if($request->date) {
                 $specificDate = $request->date;
-                // $getUserData = Event::with(['eventListings' => function($query) use ($specificDate) {
-                //     $query->where('date', $specificDate); // Filter event listings by the requested date
-                // }])
-                // ->where(function ($query) use ($specificDate) {
-                //     $query->where('date', '<=', $specificDate)
-                //           ->where('end_date', '>=', $specificDate);
-                // })
-                // ->first();
-
-                $getUserData = Event::orderBy('id','desc')->where('date', '<=', $specificDate)
-                ->where('end_date', '>=', $specificDate)
-                ->with('eventListings')
+                $getUserData = Event::with(['eventListings' => function($query) use ($specificDate) {
+                    $query->where('date', $specificDate); // Filter event listings by the requested date
+                }])
+                ->where(function ($query) use ($specificDate) {
+                    $query->where('date', '<=', $specificDate)
+                          ->where('end_date', '>=', $specificDate);
+                })
                 ->first();
 
-                if ($getUserData && $getUserData->eventListings) {
-                    $getUserData->eventListings = $getUserData->eventListings->filter(function ($listing) use ($specificDate) {
-                        return $listing->date == $specificDate;
-                    });
-                }
+                // $getUserData = Event::orderBy('id','desc')->where('date', '<=', $specificDate)
+                // ->where('end_date', '>=', $specificDate)
+                // ->with('eventListings')
+                // ->first();
+
+                // if ($getUserData && $getUserData->eventListings) {
+                //     $getUserData->eventListings = $getUserData->eventListings->filter(function ($listing) use ($specificDate) {
+                //         return $listing->date == $specificDate;
+                //     });
+                // }
             } else {
                 $getUserData = [];
             }
