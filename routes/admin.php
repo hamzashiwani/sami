@@ -95,6 +95,7 @@ Route::name('admin.')->group(
         Route::post('group/update/{id}', [GroupController::class, 'update'])->name('group.update');
         Route::put('group/update/{id}', [GroupController::class, 'update'])->name('group.update');
         Route::get('group/destroy/{id}', [GroupController::class, 'destroy'])->name('group.destroy');
+        Route::post('group/import-csv/{id}', [GroupController::class, 'import_csv'])->name('group.import-csv');
 
 
         Route::get('quiz/{id}', [QuizController::class, 'index'])->name('quiz.index');

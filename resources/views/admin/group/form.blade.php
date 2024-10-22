@@ -83,7 +83,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="topic">Members *</label>
-                                                <select id="user-dropdown1" name="users[]" multiple  class="form-control" required>
+                                                <select id="user-dropdown1" name="users[]" multiple  class="form-control" >
                                                    
                                                     <!-- Options will be populated by AJAX -->
                                                 </select>
@@ -119,10 +119,16 @@
     });
 
     // Fetch users using AJAX for both dropdowns
+    @if($data->id)
+        const eventId = '';
+    @else
+        const eventId = '{{ $id }}';
+    @endif 
     function fetchUsers() {
         $.ajax({
             url: "{{route('admin.get-users')}}",
             method: 'GET',
+            data: { event_id: eventId },
             success: function(data) {
                 data.forEach(function(user) {
                     let option1 = new Option(user.name, user.id, false, false);

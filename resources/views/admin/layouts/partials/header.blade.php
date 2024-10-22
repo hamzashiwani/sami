@@ -49,14 +49,6 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item {{ request()->segment(2) == 'dashboard' ? 'active' : '' }}">
-                <a href="{{ url('/admin') }}">
-                    <i class="feather icon-home"></i>
-                    <span class="menu-title" data-i18n="Dashboard">
-                        Dashboard
-                    </span>
-                </a>
-            </li>
 
             <li class=" navigation-header"><span>Modules</span>
             </li>
@@ -70,6 +62,14 @@
                 </ul>
             </li>
             @else
+            <li class=" nav-item {{ request()->segment(2) == 'dashboard' ? 'active' : '' }}">
+                <a href="{{ url('/admin') }}">
+                    <i class="feather icon-home"></i>
+                    <span class="menu-title" data-i18n="Dashboard">
+                        Dashboard
+                    </span>
+                </a>
+            </li>
             <li class="nav-item {{ request()->segment(2) == 'administrators' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Administrators</span></a>
                 <ul class="menu-content">
                     <li class="{{ (request()->segment(2) == 'administrators' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.administrators.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
