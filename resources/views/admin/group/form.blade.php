@@ -120,7 +120,7 @@
 
     // Fetch users using AJAX for both dropdowns
     @if($data->id)
-        const eventId = '';
+        const eventId = '{{ $id }}';
         const groupId = '{{$data->id}}';
     @else
         const eventId = '{{ $id }}';
