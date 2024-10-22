@@ -32,7 +32,7 @@
                                                         class="btn btn-primary btn-sm waves-effect waves-light"><i
                                                             class="feather icon-edit"></i></a>
 
-                                                            <a href="" onclick="openModal('{{$result->id}}')" class="btn btn-primary btn-sm waves-effect waves-light"><i
+                                                            <a href="#" onclick="openModal('{{$result->id}}')" class="btn btn-primary btn-sm waves-effect waves-light"><i
                                                             class="feather icon-eye"></i></a>
 <!-- 
                                                     <button Name="button"
