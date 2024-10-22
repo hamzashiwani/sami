@@ -7,8 +7,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Flights</h4>
+                        <button style="
+    margin-right: -848px;" onclick="openModal();" type="button" class="btn btn-primary">Import</button>
                         <span><a href="{{ route('admin.event-flight.create',$id) }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a></span>
-                          <button onclick="openModal();" type="button" class="btn btn-primary">
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard">

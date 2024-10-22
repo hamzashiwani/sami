@@ -59,7 +59,8 @@
                                             <div class="form-group d-flex">
                                                 <div class="single-image position-relative">
                                                     <button id="removeImage" type="button" class="btn btn-danger position-absolute " style="display: none;border-radius:50%;padding: 5px; top: 3px; right:3px"><i class="fa fa-close"></i></button>
-                                                    <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 100px;">
+                                                    <img id="imagePreview" src="{{ asset('storage/' . $data->image) }}" alt="Image Preview" style="max-width: 100px;">
+
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -73,12 +74,13 @@
                                                 <label for="jobtitle">Document</label>
                                                 <input type="file" name="document" id="document" class="form-control">
                                             </div>
-                                            <!-- <div class="form-group d-flex">
+                                             <div class="form-group d-flex">
                                                 <div class="single-image position-relative">
                                                     <button id="removeImage" type="button" class="btn btn-danger position-absolute " style="display: none;border-radius:50%;padding: 5px; top: 3px; right:3px"><i class="fa fa-close"></i></button>
-                                                    <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 100px;">
+                                                    <a download href="{{ asset('storage/' . $data->document) }}"><img id="imagePreview" src="{{ asset('uploads/front/th.jpeg') }}" alt="Image Preview" style="max-width: 100px;">
+                                                    </a>
                                                 </div>
-                                            </div> -->
+                                            </div> 
                                             <div class="form-group">
                                                 <input type="hidden" name="previous_document" value="{{ $data->document }}" />
                                                 
