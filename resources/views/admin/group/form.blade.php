@@ -121,14 +121,16 @@
     // Fetch users using AJAX for both dropdowns
     @if($data->id)
         const eventId = '';
+        const groupId = '{{$data->id}}';
     @else
         const eventId = '{{ $id }}';
+        const groupId = '';
     @endif 
     function fetchUsers() {
         $.ajax({
             url: "{{route('admin.get-users')}}",
             method: 'GET',
-            data: { event_id: eventId },
+            data: { event_id: eventId ,group_id: groupId },
             success: function(data) {
                 data.forEach(function(user) {
                     let option1 = new Option(user.name, user.id, false, false);

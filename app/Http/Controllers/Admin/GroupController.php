@@ -227,6 +227,14 @@ class GroupController extends Controller
             ->unique(); // Get unique user IDs
     
             $users = User::whereNotIn('id', $groupMembers)->get();// Fetch all users
+        } elseif($request->group_id) {
+            $groupMembers = Group::where('id', $request->group_id)
+            ->with('members') // Assuming 'members' is the relationship to fetch users
+            ->get()
+            ->pluck('members.*.id') // Get all user IDs from group members
+            ->flatten()
+            ->unique(); 
+            $users = User::whereIn('id', $groupMembers)->get();
         } else {
             $users = User::get();// Fetch all users
         }
