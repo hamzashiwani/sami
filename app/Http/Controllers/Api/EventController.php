@@ -105,7 +105,7 @@ class EventController extends BaseController
             $getUserData['event'] = json_encode([]);
 
             // Retrieve all notifications
-            $allNotifications = Notification::orderBy('created_at', 'desc')->where('topic', 'Global')->limit(10)->get();
+            $allNotifications = Notification::where('topic', 'Guest')->orderBy('created_at', 'desc')->where('topic', 'Global')->limit(10)->get();
 
             // Map through notifications and check if the user has read them
             $notifications = $allNotifications->map(function ($notification) {

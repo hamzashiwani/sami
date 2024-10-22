@@ -15,7 +15,7 @@ class NotificationController extends BaseController
 
             if (!$user) {
                 $skip = $request->input('skip', 0); // Default to 0 if not provided
-                $allNotifications = Notification::orderBy('created_at', 'desc')
+                $allNotifications = Notification::where('topic', 'Guest')->orderBy('created_at', 'desc')
                     ->skip($skip)
                     ->take(10)
                     ->get();
