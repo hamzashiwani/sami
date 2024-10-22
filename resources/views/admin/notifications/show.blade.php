@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Blog Details <i class="feather icon-film"></i></h4>
+                    <h4 class="card-title">Notification Details <i class="feather icon-film"></i></h4>
                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -26,16 +26,16 @@
                                             <p><h5>Title: </h5>{!! $data->title !!}</p>
                                         </div>
                                         <div class="col-6">
-                                            <p><h5>Slug: </h5>{!! $data->slug !!}</p>
-                                        </div>
-                                        <div class="col-6">
                                             <p><h5>Description: </h5>{!! $data->description ?? '' !!}</p>
                                         </div>
                                         <div class="col-6">
-                                            <p><h5>Topic: </h5>{!! $data->topic ?? '' !!}</p>
+                                            <p><h5>Topic: </h5>{!! $data->topic == 'Internal' ? 'Users' : $data->topic !!}</p>
                                         </div>
                                         <div class="col-6">
-                                            <p><h5>Content: </h5>{!! $data->content ?? '' !!}</p>
+                                            <p><h5>Event: </h5>{!! $data->event->title ?? '' !!}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p><h5>Group: </h5>{!! $data->group->name ?? '' !!}</p>
                                         </div>
                                         <div class="col-6">
                                             <p><h5>Image: </h5>
@@ -44,7 +44,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="{!! route('admin.blog.index') !!}" style="margin-left: -1rem;
+                                        <a href="{!! route('admin.notification.index') !!}" style="margin-left: -1rem;
                                                     margin-top: 2rem;"
                                            class="btn btn-primary waves-effect waves-light">
                                             <i class="ti ti-check me-1"></i>Back

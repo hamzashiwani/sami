@@ -88,7 +88,8 @@ Route::name('admin.')->group(
         Route::get('event-timeline/destroy/{id}', [EventTimelineController::class, 'destroy'])->name('event-timeline.destroy');
 
 
-         Route::get('group/{id}', [GroupController::class, 'index'])->name('group.index');
+        Route::get('group/{id}', [GroupController::class, 'index'])->name('group.index');
+        Route::get('group/event/{id}', [GroupController::class, 'getGroupsByEvent'])->name('group.groupsByEvent');
         Route::get('group/create/{id}', [GroupController::class, 'create'])->name('group.create');
         Route::post('group/store/{id}', [GroupController::class, 'store'])->name('group.store');
         Route::get('group/edit/{id}', [GroupController::class, 'edit'])->name('group.edit');

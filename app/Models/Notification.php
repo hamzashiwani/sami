@@ -15,11 +15,21 @@ class Notification extends Model
     protected $guarded;
 
     protected $table = 'notifications';
-    protected $fillable = ['title', 'description', 'file', 'file_screenshot','file_type','topic'];
+    protected $fillable = ['event_id', 'group_id', 'title', 'description', 'file', 'file_screenshot','file_type','topic'];
 
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_notifications')->withTimestamps();
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
     }
 
     public static function sendPushNotification($topic, $title, $message, $id = "", $trigger_type = "home", $trigger_id = "", $job_id = "", $source = "")

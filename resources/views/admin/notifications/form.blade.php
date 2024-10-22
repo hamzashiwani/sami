@@ -21,7 +21,7 @@
                                             <div class="form-group">
                                                 <label for="title">Title *</label>
                                                 <input type="text" id="title" name="title"
-                                                       value="{{ old('title', $data->title) }}" class="form-control">
+                                                       value="{{ old('title', $data->title) }}" class="form-control" required>
                                             </div>
                                         </div>
                                         <!-- <div class="col-sm-6">
@@ -38,7 +38,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="short_description">Description</label>
-                                                <textarea type="text" name="description" maxlength="190" class="form-control">{{ old('description', $data->description) }}</textarea>
+                                                <textarea type="text" name="description" maxlength="190" class="form-control" required>{{ old('description', $data->description) }}</textarea>
                                             </div>
                                         </div>
                                         <!-- <div class="col-sm-12">
@@ -56,8 +56,36 @@
                                                 <label for="topic">Topic *</label>
                                                 <select id="topic" name="topic" class="form-control" required>
                                                     <option value="">Select Topic</option>
-                                                    <option value="Global" {{ ($data->topic == 'Global') ? 'selected': '' }}>All</option>
-                                                    <option value="Internal" {{ ($data->topic == 'Internal') ? 'selected': '' }}>Registered Users</option>
+                                                    <option value="Guest" {{ ($data->topic == 'Guest') ? 'selected': '' }}>Guest</option>
+                                                    <option value="Internal" {{ ($data->topic == 'Internal') ? 'selected': '' }}>Users</option>
+                                                    <option value="Group" {{ ($data->topic == 'Group') ? 'selected': '' }}>Group</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="events" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="event_id">Events *</label>
+                                                <select class="form-control" id="event_id" name="event_id">
+                                                    <option value="">Select Event</option>
+                                                    @foreach($events as $index => $event)
+                                                     <option value="{{ $index }}">{{$event}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="groups" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="group_id">Groups *</label>
+                                                <select class="form-control" id="group_id" name="group_id">
+                                                    <option value="">Select Group</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -117,5 +145,43 @@
             var value = $( this ).val();
             $('#slug').val(slugify(value));
         });
+
+        $('#topic').change(function(){
+            let topic = $(this).val();
+            if(topic == 'Group') {
+                $('.events').show();
+                $('#event_id').attr('required', true);
+                $('#group_id').attr('required', true);
+            } else {
+                $('.events').hide();
+                $('.groups').hide();
+                $('#event_id').removeAttr('required');
+                $('#group_id').removeAttr('required');
+            }
+        });
+
+        $('#event_id').change(async function(){
+            try {
+                let event_id = $(this).val();
+                const response = await fetch(`{{ route('admin.group.groupsByEvent', ':event_id') }}`.replace(':event_id', event_id));
+                const groups = await response.json();
+                populateGroupDropdown(groups);
+                $('.groups').show();
+            } catch (error) {
+                console.error('Error fetching groups:', error);
+            }
+        });
+
+        function populateGroupDropdown(groups) {
+            const dropdown = document.getElementById('group_id');
+            dropdown.innerHTML = '<option value="">Select Group</option>'; // Reset options
+
+            groups.forEach(group => {
+                const option = document.createElement('option');
+                option.value = group.id;
+                option.textContent = group.name;
+                dropdown.appendChild(option);
+            });
+        }
     </script>
 @endsection

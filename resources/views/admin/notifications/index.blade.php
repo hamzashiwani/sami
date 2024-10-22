@@ -17,6 +17,8 @@
                                         <tr>
                                             <th>Title</th>
                                             <th>Topic</th>
+                                            <th>Event</th>
+                                            <th>Group</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -25,16 +27,18 @@
                                         @foreach ($data as $key => $result)
                                             <tr>
                                                 <td>{!! Str::limit($result->title, 20, '...') !!}</td>
-                                                <td>{!! $result->topic == 'Global' ? 'All' : 'Registered Users' !!}</td>
+                                                <td>{!! $result->topic == 'Internal' ? 'Users' : $result->topic !!}</td>
+                                                <td>{!! $result->event->title ?? '' !!}</td>
+                                                <td>{!! $result->group->name ?? '' !!}</td>
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
                                                 <td>
 {{--                                                    <a href="{!! route('admin.notification.show', $result->id) !!}"--}}
 {{--                                                        class="btn btn-info btn-sm waves-effect waves-light"><i--}}
 {{--                                                            class="feather icon-search"></i></a>--}}
-
-                                                    <a href="{!! route('admin.notification.edit', $result->id) !!}"
+                                                    <a href="{!! route('admin.notification.show', $result->id) !!}" class="btn btn-info btn-sm waves-effect waves-light"><i class="feather icon-eye"></i></a>
+                                                    {{-- <a href="{!! route('admin.notification.edit', $result->id) !!}"
                                                         class="btn btn-primary btn-sm waves-effect waves-light"><i
-                                                            class="feather icon-edit"></i></a>
+                                                            class="feather icon-edit"></i></a> --}}
 
                                                     <button type="button"
                                                         class="btn btn-danger btn-sm waves-effect waves-light"

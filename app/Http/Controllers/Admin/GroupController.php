@@ -39,6 +39,12 @@ class GroupController extends Controller
         }
     }
 
+    public function getGroupsByEvent($id)
+    {
+        $data = Group::where('event_id',$id)->get();
+        return $data;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

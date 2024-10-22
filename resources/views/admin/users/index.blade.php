@@ -41,7 +41,6 @@
                                                 </div>
                                             </td> -->
                                             <td>
-                                                <a href="{!! route('admin.users.show', $user->id) !!}" class="btn btn-info btn-sm waves-effect waves-light"><i class="feather icon-eye"></i></a>
                                                     <a href="{!! route('admin.users.edit', $user->id) !!}" class="btn btn-primary btn-sm waves-effect waves-light"><i class="feather icon-edit"></i></a>
                                                 <button type="button"
                                                         class="btn btn-danger btn-sm waves-effect waves-light"
