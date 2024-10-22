@@ -54,7 +54,7 @@
                                         <div class="col-sm-6 user" >
                                             <div class="form-group">
                                                 <label for="user_id">Users *</label>
-                                                <select id="user_id" name="user_id" class="form-control" >
+                                                <select id="user_id" name="user_id" class="users_single_dropdown js-states form-control" >
                                                     <option value="">Select Users</option>
                                                     @foreach($users as $user)
                                                      <option value="{{$user->id}}" {!! $data->user_id == $user->id ? 'selected' : '' !!}>{{$user->name}}</option>
@@ -66,7 +66,7 @@
                                         <div class="col-sm-6 group" style="display:none">
                                             <div class="form-group">
                                                 <label for="user_id">Group *</label>
-                                                <select id="group_id" name="group_id" class="form-control" >
+                                                <select id="group_id" name="group_id" class="groups_single_dropdown js-states form-control" >
                                                     <option value="">Select Group</option>
                                                     @foreach($groups as $group)
                                                      <option value="{{$group->id}}" {!! $data->group_id == $group->id ? 'selected' : '' !!}>{{$group->name}}</option>
@@ -78,7 +78,7 @@
                                         <div class="col-sm-6 user" style="display:none">
                                             <div class="form-group">
                                                 <label for="user_id">Users *</label>
-                                                <select id="user_id" name="user_id" class="form-control" >
+                                                <select id="user_id" name="user_id" class="users_single_dropdown js-states form-control" >
                                                     <option value="">Select Users</option>
                                                     @foreach($users as $user)
                                                      <option value="{{$user->id}}" {!! $data->user_id == $user->id ? 'selected' : '' !!}>{{$user->name}}</option>
@@ -90,7 +90,7 @@
                                         <div class="col-sm-6 group" >
                                             <div class="form-group">
                                                 <label for="user_id">Group *</label>
-                                                <select id="group_id" name="group_id" class="form-control" >
+                                                <select id="group_id" name="group_id" class="groups_single_dropdown js-states form-control" >
                                                     <option value="">Select Group</option>
                                                     @foreach($groups as $group)
                                                      <option value="{{$group->id}}" {!! $data->group_id == $group->id ? 'selected' : '' !!}>{{$group->name}}</option>
@@ -140,11 +140,27 @@
             var selectedValue = $(this).val();
             if(selectedValue == "0") {
                 $('.user').show();
-                $('.group').hide();
+		$('.group').hide();
+		$(".users_single_dropdown").select2({
+                	placeholder: "Select User",
+                	allowClear: true
+        	});
             } else {
                 $('.user').hide();
-                $('.group').show();
+		$('.group').show();
+		$(".groups_single_dropdown").select2({
+                	placeholder: "Select Group",
+                	allowClear: true
+        	});
             }
+	});
+	$(".users_single_dropdown").select2({
+                placeholder: "Select User",
+                allowClear: true
+	});
+	$(".groups_single_dropdown").select2({
+                placeholder: "Select Group",
+                allowClear: true
         });
     </script>
 @endsection

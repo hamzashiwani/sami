@@ -43,7 +43,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="user_id">Users *</label>
-                                                <select id="user_id" name="user_id" class="form-control" required>
+                                                <select id="user_id" name="user_id" class="users_single_dropdown js-states form-control" required>
                                                     <option value="">Select Users</option>
                                                     @foreach($users as $user)
                                                      <option value="{{$user->id}}" {!! $data->user_id == $user->id ? 'selected' : '' !!}>{{$user->name}}</option>
@@ -86,6 +86,10 @@
         $("#title").on('blur', function (){
             var value = $( this ).val();
             $('#slug').val(slugify(value));
-        });
+	});
+	$(".users_single_dropdown").select2({
+    		placeholder: "Select User",
+    		allowClear: true
+	});
     </script>
 @endsection
