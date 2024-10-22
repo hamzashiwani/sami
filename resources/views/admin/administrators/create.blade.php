@@ -18,13 +18,13 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="first_name">First Name *</label>
-                                            <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control">
+                                            <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="last_name">Last Name *</label>
-                                            <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control">
+                                            <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -34,13 +34,13 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="phone">Contact Number *</label>
-                                            <input type="number" name="phone" value="{{ old('phone') }}" class="form-control">
+                                            <input type="number" name="phone" value="{{ old('phone') }}" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="email">Email *</label>
-                                            <input type="email" name="email" value="{{ old('email') }}" class="form-control">
+                                            <input type="email" name="email" value="{{ old('email') }}" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>

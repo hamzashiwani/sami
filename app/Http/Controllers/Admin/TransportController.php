@@ -79,23 +79,23 @@ class TransportController extends Controller
                 ]
             );
 
-            if($request->type == '0') {
-                $transport = EventTransport::where('event_id',$id)->where('user_id',$request->user_id)->first();
-                if($transport) {
-                    DB::rollBack();
-                    return redirect()
-                        ->back()
-                        ->with('error', 'Reacord Already Available On Selected User');
-                }
-            } else {
-                $transport = EventTransport::where('event_id',$id)->where('group_id',$request->group_id)->first();
-                if($transport) {
-                    DB::rollBack();
-                    return redirect()
-                        ->back()
-                        ->with('error', 'Reacord Already Available On Selected Group');
-                }
-            }
+            // if($request->type == '0') {
+            //     $transport = EventTransport::where('event_id',$id)->where('user_id',$request->user_id)->first();
+            //     if($transport) {
+            //         DB::rollBack();
+            //         return redirect()
+            //             ->back()
+            //             ->with('error', 'Reacord Already Available On Selected User');
+            //     }
+            // } else {
+            //     $transport = EventTransport::where('event_id',$id)->where('group_id',$request->group_id)->first();
+            //     if($transport) {
+            //         DB::rollBack();
+            //         return redirect()
+            //             ->back()
+            //             ->with('error', 'Reacord Already Available On Selected Group');
+            //     }
+            // }
             EventTransport::create($data);
             DB::commit();
         }catch (\Exception $exception) {

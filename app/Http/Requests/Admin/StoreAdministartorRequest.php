@@ -27,8 +27,9 @@ class StoreAdministartorRequest extends FormRequest
             'first_name' => 'required|max:32',
             'last_name'  => 'required|max:32',
             'phone'      => 'required|max:24',
+            'type'       => 'required|in:0,1,2',
             'email'      => 'required|email:strict,filter|unique:admins|max:128',
-            'is_active'  => 'required'
+            'password'   => 'required'
         ];
     }
 }

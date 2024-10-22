@@ -15,7 +15,7 @@
                                 <table class="table table-striped dataex-html5-selectors">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>Bus Name</th>
                                             <th>User</th>
                                             <th>Created At</th>
                                             <th>Actions</th>

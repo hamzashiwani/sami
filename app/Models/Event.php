@@ -21,8 +21,10 @@ class Event extends Model
     function getCordinatorAttribute() {
         $userId = auth()->id();
         $group = Group::where('event_id', $this->id)
-            ->whereHas('members', function ($query) use ($userId) {
-                $query->where('user_id', $userId);
+            ->where(function($q) use($userId) {
+                $q->whereHas('members', function ($query) use ($userId) {
+                    $query->where('user_id', $userId);
+                })->orWhere('cordinator_id', $userId);
             })
             ->first();
             if($group) {

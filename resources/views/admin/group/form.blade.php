@@ -59,10 +59,21 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="topic">Cordinator *</label>
+                                                <label for="topic">Coordinator *</label>
                                                 <select id="user-dropdown" name="cordinator_id" class="form-control" required>
                                                     <!-- Options will be populated by AJAX -->
                                                 </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="cordinator_phone">Coordinator Contact *</label>
+                                                <input type="number" id="cordinator_phone" name="cordinator_phone"
+                                                       value="{{ old('cordinator_phone', $data->cordinator_phone) }}" class="form-control">
                                             </div>
                                         </div>
                                     </div>
