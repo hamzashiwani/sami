@@ -15,7 +15,7 @@ class NotificationController extends BaseController
 
             if (!$user) {
                 $skip = $request->input('skip', 0); // Default to 0 if not provided
-                $allNotifications = Notification::orderBy('created_at', 'desc')
+                $allNotifications = Notification::where('topic', 'Guest')->orderBy('created_at', 'desc')
                     ->skip($skip)
                     ->take(10)
                     ->get();
@@ -37,7 +37,13 @@ class NotificationController extends BaseController
             } else {
                 $skip = 0;
                 $skip = $request->skip;
-                $allNotifications = Notification::orderBy('created_at', 'desc')->skip($skip)->take(10)->get();
+                $allNotifications = Notification::where(function($q) use($user) {
+                    $q->where('topic', 'Internal')->orWhereHas('group', function($qw) use($user) {
+                        $qw->whereHas('members', function($qwe) use($user) {
+                            $qwe->where('user_id', $user->id);
+                        });
+                    });
+                })->orderBy('created_at', 'desc')->skip($skip)->take(10)->get();
     
                 // Map through notifications and check if the user has read them
                 $notifications = $allNotifications->map(function ($notification) use ($user) {

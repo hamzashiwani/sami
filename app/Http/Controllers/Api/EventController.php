@@ -71,7 +71,13 @@ class EventController extends BaseController
             $user = $request->user();
 
             // Retrieve all notifications
-            $allNotifications = Notification::orderBy('created_at', 'desc')->limit(10)->get();
+            $allNotifications = Notification::where(function($q) use($user) {
+                $q->where('topic', 'Internal')->orWhereHas('group', function($qw) use($user) {
+                    $qw->whereHas('members', function($qwe) use($user) {
+                        $qwe->where('user_id', $user->id);
+                    });
+                });
+            })->orderBy('created_at', 'desc')->limit(10)->get();
 
             // Map through notifications and check if the user has read them
             $notifications = $allNotifications->map(function ($notification) use ($user) {
@@ -99,7 +105,7 @@ class EventController extends BaseController
             $getUserData['event'] = json_encode([]);
 
             // Retrieve all notifications
-            $allNotifications = Notification::orderBy('created_at', 'desc')->where('topic', 'Global')->limit(10)->get();
+            $allNotifications = Notification::where('topic', 'Guest')->orderBy('created_at', 'desc')->where('topic', 'Global')->limit(10)->get();
 
             // Map through notifications and check if the user has read them
             $notifications = $allNotifications->map(function ($notification) {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\StoreNotificationRequest;
 use App\Http\Requests\Admin\UpdateBlogRequest;
+use App\Models\Event;
+use App\Models\Group;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -54,8 +56,8 @@ class NotificationController extends Controller
             'action' => route('admin.notification.store'),
             'cancel_url' => route('admin.notification.index')
         ];
-
-        return view('admin.notifications.form', compact('data', 'form'));
+        $events = Event::pluck('title', 'id');
+        return view('admin.notifications.form', compact('data', 'form', 'events'));
     }
 
     /**
@@ -97,9 +99,10 @@ class NotificationController extends Controller
 
             $notification = Notification::create($data);
             DB::commit();
-            Notification::sendPushNotification($notification->topic, $notification->title, $notification->message, $notification->id, "notification", $notification->id);
+            if($notification->topic == 'Internal') {
+                Notification::sendPushNotification($notification->topic, $notification->title, $notification->message, $notification->id, "notification", $notification->id);
+            }
         }catch (\Exception $exception) {
-            // dd($exception->getMessage());
             DB::rollBack();
             return redirect()
                 ->back()
