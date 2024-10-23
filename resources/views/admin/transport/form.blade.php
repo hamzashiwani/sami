@@ -34,6 +34,13 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
+                                                <label for="time">Time *</label>
+                                                <input type="time" id="time" name="time"
+                                                value="{{ old('time', $data->time) }}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
                                                 <label for="room_no">Seat No *</label>
                                                 <input type="text" id="seat_no" name="seat_no"
                                                 value="{{ old('seat_no', $data->seat_no) }}" class="form-control">

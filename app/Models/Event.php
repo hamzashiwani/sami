@@ -8,6 +8,7 @@ use App\Models\EventHotel;
 use App\Models\EventFlight;
 use App\Models\EventListing;
 use App\Models\EventTransport;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class Event extends Model
@@ -48,6 +49,11 @@ class Event extends Model
         return $this->hasMany(EventListing::class,'event_id');
     }
 
+    public function eventGroups()
+    {
+        return $this->hasMany(Group::class,'event_id');
+    }
+
     public function hotel()
     {
         return $this->hasOne(EventHotel::class)->where('user_id', Auth::id());
@@ -60,6 +66,15 @@ class Event extends Model
 
     public function transports()
     {
-        return $this->hasOne(EventTransport::class)->where('user_id', Auth::id());
+        return $this->hasOne(EventTransport::class)->where(function($query) {
+            $query->where('user_id', Auth::id())->orWhereHas('event', function($e) {
+                $e->whereHas('eventGroups', function($q) {
+                    $q->whereHas('members', function($qw) {
+                        $qw->where('user_id', Auth::id());
+                    });
+                });
+            });
+        })->whereRaw("STR_TO_DATE(CONCAT(date, ' ', time), '%Y-%m-%d %H:%i:%s') > ?", [Carbon::now()])
+        ->orderByRaw("STR_TO_DATE(CONCAT(date, ' ', time), '%Y-%m-%d %H:%i:%s')");
     }
 }
