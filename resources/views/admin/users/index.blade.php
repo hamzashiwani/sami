@@ -5,13 +5,20 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Users <i class="feather icon-user"></i></h4>
-                        <button style="
-    margin-right: -848px;" onclick="openModal();" type="button" class="btn btn-primary">
-                Import
-            </button>
-            <a href="{{ route('admin.users.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add User</a>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="card-title">
+                            Users <i class="feather icon-user"></i>
+                        </h4>
+                    
+                        <div class="button-group">
+                            <button onclick="openModal();" type="button" class="btn btn-primary">
+                                <i class="fa fa-upload"></i> Import
+                            </button>
+                    
+                            <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
+                                <i class="fa fa-plus"></i> Add User
+                            </a>
+                        </div>
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard">
@@ -41,7 +48,8 @@
                                                 </div>
                                             </td> -->
                                             <td>
-                                                    <a href="{!! route('admin.users.edit', $user->id) !!}" class="btn btn-primary btn-sm waves-effect waves-light"><i class="feather icon-edit"></i></a>
+                                                <a href="{!! route('admin.users.show', $user->id) !!}" class="btn btn-info btn-sm waves-effect waves-light"><i class="feather icon-eye"></i></a>
+                                                <a href="{!! route('admin.users.edit', $user->id) !!}" class="btn btn-primary btn-sm waves-effect waves-light"><i class="feather icon-edit"></i></a>
                                                 <button type="button"
                                                         class="btn btn-danger btn-sm waves-effect waves-light"
                                                         onclick="deleteConfirmation({!! $user->id !!})"><i

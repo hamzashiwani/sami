@@ -35,7 +35,7 @@
                                             <td>Quiz</td>
                                             @endif
                                             <td>
-                                                <a href="{!! route('admin.administrators.show', $admin->id) !!}" class="btn btn-info btn-sm waves-effect waves-light"><i class="feather icon-search"></i></a>
+                                                <a href="{!! route('admin.administrators.show', $admin->id) !!}" class="btn btn-info btn-sm waves-effect waves-light"><i class="feather icon-eye"></i></a>
 
                                             @if(auth()->user()->is_system_admin == 1 || auth()->user()->id == $admin->id)
                                                 <a href="{!! route('admin.administrators.edit', $admin->id) !!}" class="btn btn-primary btn-sm waves-effect waves-light"><i class="feather icon-edit"></i></a>

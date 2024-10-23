@@ -53,7 +53,7 @@
             <li class=" navigation-header"><span>Modules</span>
             </li>
             @if(auth()->user()->type == 1)
-            <li class="nav-item {{ request()->segment(2) == 'notification' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Notifications</span></a>
+            <li class="nav-item {{ request()->segment(2) == 'notification' ? 'active' : '' }}"> <a href="#"><i class="feather icon-bell"></i><span class="menu-title" data-i18n="User">Notifications</span></a>
                 <ul class="menu-content">
                     <li class="{{ (request()->segment(2) == 'notification' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.notification.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
                     </li>
@@ -62,13 +62,21 @@
                 </ul>
             </li>
             @elseif(auth()->user()->type == 2)
-            <li class="nav-item {{ request()->segment(2) == 'event' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Events</span></a>
+            <li class="nav-item {{ request()->segment(2) == 'event' ? 'active' : '' }}"> <a href="#"><i class="feather icon-calendar"></i><span class="menu-title" data-i18n="User">Events</span></a>
                 <ul class="menu-content">
                     <li class="{{ (request()->segment(2) == 'event' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.event.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
                     </li>
                     <li class="{{ (request()->segment(2) == 'event' && request()->segment(3) != 'create') ? 'active' : '' }}"><a href="{{ route('admin.event.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">List</span></a>
                     </li>
                 </ul>
+            </li>
+            <li class=" nav-item {{ request()->segment(2) == 'quiz-control' ? 'active' : '' }}">
+                <a href="http://44.198.175.232:9876/" target="_blank">
+                    <i class="feather icon-book"></i>
+                    <span class="menu-title" data-i18n="Quiz">
+                        Quiz Control
+                    </span>
+                </a>
             </li>
             @else
             <li class=" nav-item {{ request()->segment(2) == 'dashboard' ? 'active' : '' }}">
@@ -79,7 +87,7 @@
                     </span>
                 </a>
             </li>
-            <li class="nav-item {{ request()->segment(2) == 'administrators' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Administrators</span></a>
+            <li class="nav-item {{ request()->segment(2) == 'administrators' ? 'active' : '' }}"> <a href="#"><i class="feather icon-shield"></i><span class="menu-title" data-i18n="User">Administrators</span></a>
                 <ul class="menu-content">
                     <li class="{{ (request()->segment(2) == 'administrators' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.administrators.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
                     </li>
@@ -96,7 +104,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item {{ request()->segment(2) == 'notification' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Notifications</span></a>
+            <li class="nav-item {{ request()->segment(2) == 'notification' ? 'active' : '' }}"> <a href="#"><i class="feather icon-bell"></i><span class="menu-title" data-i18n="User">Notifications</span></a>
                 <ul class="menu-content">
                     <li class="{{ (request()->segment(2) == 'notification' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.notification.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
                     </li>
@@ -106,13 +114,21 @@
             </li>
 
 
-            <li class="nav-item {{ request()->segment(2) == 'event' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Events</span></a>
+            <li class="nav-item {{ request()->segment(2) == 'event' ? 'active' : '' }}"> <a href="#"><i class="feather icon-calendar"></i><span class="menu-title" data-i18n="User">Events</span></a>
                 <ul class="menu-content">
                     <li class="{{ (request()->segment(2) == 'event' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.event.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
                     </li>
                     <li class="{{ (request()->segment(2) == 'event' && request()->segment(3) != 'create') ? 'active' : '' }}"><a href="{{ route('admin.event.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">List</span></a>
                     </li>
                 </ul>
+            </li>
+            <li class=" nav-item {{ request()->segment(2) == 'quiz-control' ? 'active' : '' }}">
+                <a href="http://44.198.175.232:9876/" target="_blank">
+                    <i class="feather icon-book"></i>
+                    <span class="menu-title" data-i18n="Quiz">
+                        Quiz Control
+                    </span>
+                </a>
             </li>
 
             @endif

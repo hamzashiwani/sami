@@ -19,10 +19,22 @@
                                         <p><h5>Email: </h5>{!! $data->email ?? 'N/A' !!}</p>
                                     </div>
                                     <div class="col-6">
-                                        <p><h5>Contact Number: </h5>{!! $data->contact ?? 'N/A' !!}</p>
+                                        <p><h5>Contact Number: </h5>{!! $data->phone ?? 'N/A' !!}</p>
                                     </div>
                                     <div class="col-6">
-                                        <p><h5>Status: </h5><small><span class="badge badge-{!! $data->is_active == 1 ? 'success' : 'danger' !!}">{!! $data->is_active == 1 ? 'Active' : 'Inactive' !!}</span></small></p>
+                                        <p><h5>Designation: </h5>{!! $data->designation ?? 'N/A' !!}</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p><h5>Employee ID: </h5>{!! $data->employee_id ?? 'N/A' !!}</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p><h5>Passport Number: </h5>{!! $data->passport_number ?? 'N/A' !!}</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p><h5>Division: </h5>{!! $data->division ?? 'N/A' !!}</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p><h5>Base Town: </h5>{!! $data->base_town ?? 'N/A' !!}</p>
                                     </div>
                                 </div>
                             </div>

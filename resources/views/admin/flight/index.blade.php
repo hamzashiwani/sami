@@ -5,11 +5,18 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title">Flights</h4>
-                        <button style="
-    margin-right: -848px;" onclick="openModal();" type="button" class="btn btn-primary">Import</button>
-                        <span><a href="{{ route('admin.event-flight.create',$id) }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a></span>
+                    
+                        <div class="button-group">
+                            <button onclick="openModal();" type="button" class="btn btn-primary">
+                                <i class="fa fa-upload"></i> Import
+                            </button>
+                    
+                            <a href="{{ route('admin.event-flight.create', $id) }}" class="btn btn-primary">
+                                <i class="fa fa-plus"></i> Add New
+                            </a>
+                        </div>
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard">
