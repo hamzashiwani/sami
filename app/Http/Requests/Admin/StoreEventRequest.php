@@ -27,7 +27,7 @@ class StoreEventRequest extends FormRequest
         return [
             'title' => 'required|max:32',
             'description'  => 'required',
-            'image'      => 'required|file|mimes:jpeg,jpg,png|max:5000',
+            // 'image'      => 'required|file|mimes:jpeg,jpg,png|max:5000',
              'date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:date'
         ];
