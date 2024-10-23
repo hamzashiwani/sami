@@ -152,6 +152,11 @@
                 $('.events').show();
                 $('#event_id').attr('required', true);
                 $('#group_id').attr('required', true);
+            } else if(topic == 'Internal') {
+                $('.events').show();
+                $('#event_id').attr('required', true);
+                $('.groups').hide();
+                $('#group_id').removeAttr('required');
             } else {
                 $('.events').hide();
                 $('.groups').hide();
@@ -166,7 +171,9 @@
                 const response = await fetch(`{{ route('admin.group.groupsByEvent', ':event_id') }}`.replace(':event_id', event_id));
                 const groups = await response.json();
                 populateGroupDropdown(groups);
-                $('.groups').show();
+                if($('#topic').val() == 'Group') {
+                    $('.groups').show();
+                }
             } catch (error) {
                 console.error('Error fetching groups:', error);
             }
