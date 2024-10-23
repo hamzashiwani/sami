@@ -56,6 +56,7 @@
                                                 <label for="jobtitle">Image</label>
                                                 <input type="file" name="image" id="image" class="form-control">
                                             </div>
+                                            @if(isset($data->id))
                                             <div class="form-group d-flex">
                                                 <div class="single-image position-relative">
                                                     <button id="removeImage" type="button" class="btn btn-danger position-absolute " style="display: none;border-radius:50%;padding: 5px; top: 3px; right:3px"><i class="fa fa-close"></i></button>
@@ -63,6 +64,15 @@
 
                                                 </div>
                                             </div>
+                                            @else
+                                            <div class="form-group d-flex">
+                                                <div class="single-image position-relative">
+                                                    <button id="removeImage" type="button" class="btn btn-danger position-absolute " style="display: none;border-radius:50%;padding: 5px; top: 3px; right:3px"><i class="fa fa-close"></i></button>
+                                                    <img id="imagePreview" src="#" alt="Image Preview" style="display: none;max-width: 100px;">
+
+                                                </div>
+                                            </div>
+                                            @endif
                                             <div class="form-group">
                                                 <input type="hidden" name="previous_image" value="{{ $data->image }}" />
                                             </div>
@@ -74,6 +84,7 @@
                                                 <label for="jobtitle">Document</label>
                                                 <input type="file" name="document" id="document" class="form-control">
                                             </div>
+                                            @if(isset($data->id))
                                              <div class="form-group d-flex">
                                                 <div class="single-image position-relative">
                                                     <button id="removeImage" type="button" class="btn btn-danger position-absolute " style="display: none;border-radius:50%;padding: 5px; top: 3px; right:3px"><i class="fa fa-close"></i></button>
@@ -81,6 +92,7 @@
                                                     </a>
                                                 </div>
                                             </div> 
+                                            @endif
                                             <div class="form-group">
                                                 <input type="hidden" name="previous_document" value="{{ $data->document }}" />
                                                 
