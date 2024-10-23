@@ -35,7 +35,7 @@
                             <form id="tag-form" method="POST" action="{!! $form['action'] !!}"
                                   class="number-tab-steps wizard-circle" enctype="multipart/form-data">
                                 <input type="hidden" name="id" value="{{ $data->id }}">
-                                <input type="hidden" name="attendance" value="No">
+                                <input type="hidden" id="attendance" name="attendance" value="Yes">
                                 @csrf
                                 <input type="hidden" name="_method" value="{!! $form['method'] !!}">
                                 <input type="hidden" name="event_id" value="{!! $id !!}">
@@ -48,40 +48,10 @@
                                                        value="{{ old('title', $data->title) }}" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="tags">Tags *</label>
-                                                <input type="text" id="tag-input" name="tags[]"
-                                                        @if(old('tags'))
-                                                       value="{{ is_array(old('tags')) ? implode(',', old('tags')) : old('tags') }}" 
-                                                       @else
-                                                       value="{{ is_array($data->tags) ? implode(',', $data->tags) : $data->tags }}" 
-                                                       @endif
-                                                       class="form-control">
-                                                <div id="tags-list" class="tags-list"></div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </fieldset>
                                 <fieldset>
                                     <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="short_description">Description</label>
-                                                <textarea type="text" name="description" maxlength="190" class="form-control">{{ old('description', $data->description) }}</textarea>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="long_description">Content</label>
-                                                <textarea name="content" maxlength="65000" rows="5" id="content" class="form-control editor-tinymce">{{ old('content', $data->content ?? '') }}</textarea>
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                </fieldset>
-                                <fieldset>
-                                    <div class="row">
-
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="content">Date</label>
@@ -93,6 +63,10 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="row">
 
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -101,24 +75,15 @@
                                                        value="{{ old('time', $data->time) }}" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-md-6 show-code" >
                                             <div class="form-group">
-                                                <label for="jobtitle">Image</label>
-                                                <input type="file" name="image" id="image" class="form-control">
-                                            </div>
-                                            <div class="form-group d-flex">
-                                                <div class="single-image position-relative">
-                                                    <button id="removeImage" type="button" class="btn btn-danger position-absolute " style="display: none;border-radius:50%;padding: 5px; top: 3px; right:3px"><i class="fa fa-close"></i></button>
-                                                    <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 100px;">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="hidden" name="previous_image" value="{{ $data->image }}" />
-                                                @if ($data->image)
-                                                    <div class="avatar mr-1 avatar-xl">
-                                                        <img src="{!! asset('storage/'. $data->image) !!}" alt="Page Image" title="Page Image" class="img-responsive" />
-                                                    </div>
-                                                @endif
+                                                <label for="content">Code</label>
+                                                <input readonly type="text" id="code" name="code"
+                                                       value="{{ old('code', $data->code) }}" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -159,6 +124,12 @@
                 document.getElementById('code').value = "";
             }
         }
+
+        $(function() {
+            @if(!$data->code)
+                showCode();
+            @endif
+        });
 
     </script>
 

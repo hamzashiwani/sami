@@ -57,6 +57,10 @@
                                                     class="btn btn-info btn-sm waves-effect waves-light">
                                                         <i class="feather icon-clock"></i> <!-- Icon for timeline -->
                                                     </a>
+                                                    <a title="Event Attendance" href="{!! route('admin.event-attendance.index', $result->id) !!}" 
+                                                        class="btn btn-info btn-sm waves-effect waves-light">
+                                                            <i class="feather icon-check-circle"></i> <!-- Icon for Attendance -->
+                                                    </a>
                                                     <a title="Edit" href="{!! route('admin.event.edit', $result->id) !!}" 
                                                     class="btn btn-primary btn-sm waves-effect waves-light">
                                                         <i class="feather icon-edit"></i> <!-- Icon for edit -->

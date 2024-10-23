@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\StoreEventTimelineRequest;
+use App\Http\Requests\Admin\StoreEventAttendanceRequest;
 use App\Http\Requests\Admin\UpdateBlogRequest;
 use App\Models\EventListing;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class EventTimelineController extends Controller
+class EventAttendanceController extends Controller
 {
     private $blog;
     /**
@@ -31,8 +31,8 @@ class EventTimelineController extends Controller
     public function index($id)
     {
         try{
-            $data = EventListing::where('event_id',$id)->where('attendance', 'No')->get();
-            return view('admin.event-timeline.index', compact('data','id'));
+            $data = EventListing::where('event_id',$id)->where('attendance', 'Yes')->get();
+            return view('admin.event-attendance.index', compact('data','id'));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
             return redirect()->back();
@@ -56,13 +56,13 @@ class EventTimelineController extends Controller
 
         $form = [
             'type' => 'create',
-            'heading' => 'Create Event Timeline',
+            'heading' => 'Create Event Attendance',
             'method' => 'POST',
-            'action' => route('admin.event-timeline.store',$id),
-            'cancel_url' => route('admin.event-timeline.index',$id)
+            'action' => route('admin.event-attendance.store',$id),
+            'cancel_url' => route('admin.event-attendance.index',$id)
         ];
 
-        return view('admin.event-timeline.form', compact('data', 'form','id','dates'));
+        return view('admin.event-attendance.form', compact('data', 'form','id','dates'));
     }
 
     /**
@@ -71,7 +71,7 @@ class EventTimelineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEventTimelineRequest $request,$id)
+    public function store(Request $request,$id)
     {
         try{
             DB::beginTransaction();
@@ -83,8 +83,6 @@ class EventTimelineController extends Controller
                     'tags'
                 ]
             );
-            
-            $data['tags'] = implode(',',$request->tags);
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
@@ -104,8 +102,8 @@ class EventTimelineController extends Controller
                 ->with('error', $exception->getMessage());
         }
         return redirect()
-            ->route('admin.event-timeline.index',$id)
-            ->with('success', 'Event Timeline has been added successfully.');
+            ->route('admin.event-attendance.index',$id)
+            ->with('success', 'Event Attendance has been added successfully.');
     }
     
 
@@ -118,7 +116,7 @@ class EventTimelineController extends Controller
     public function show($id)
     {
         $data = Event::find($id);
-        return view('admin.event-timeline.show', compact('data'));
+        return view('admin.event-attendance.show', compact('data'));
     }
 
     /**
@@ -141,12 +139,12 @@ class EventTimelineController extends Controller
 
         $form = [
             'type' => 'create',
-            'heading' => 'Edit Event Timeline',
+            'heading' => 'Edit Event Attendance',
             'method' => 'PUT',
-            'action' => route('admin.event-timeline.update', $ids),
-            'cancel_url' => route('admin.event-timeline.index',$data->event_id)
+            'action' => route('admin.event-attendance.update', $ids),
+            'cancel_url' => route('admin.event-attendance.index',$data->event_id)
         ];
-        return view('admin.event-timeline.form', compact('data', 'form','id','dates'));
+        return view('admin.event-attendance.form', compact('data', 'form','id','dates'));
     }
 
     private function generateDateRange($startDate, $endDate)
@@ -200,8 +198,8 @@ class EventTimelineController extends Controller
 
             DB::commit();
             return redirect()
-                ->route('admin.event-timeline.index',$blog->event_id)
-                ->with('success', 'Event Timeline has been updated successfully.');
+                ->route('admin.event-attendance.index',$blog->event_id)
+                ->with('success', 'Event Attendance has been updated successfully.');
         } catch (\Exception $exception) {
             DB::rollBack();
             return redirect()
@@ -224,8 +222,8 @@ class EventTimelineController extends Controller
             $event_id = $blog->event_id;
             $blog->delete();
             return redirect()
-                ->route('admin.event-timeline.index', $event_id)
-                ->with('success', 'Event Timeline has been deleted successfully.');
+                ->route('admin.event-attendance.index', $event_id)
+                ->with('success', 'Event Attendance has been deleted successfully.');
         }catch (\Exception $exception) {
             return redirect()
                 ->back()

@@ -22,7 +22,7 @@ class EventController extends BaseController
             if($request->date) {
                 $specificDate = $request->date;
                 $getUserData = Event::orderBy('id','desc')->with(['eventListings' => function($query) use ($specificDate) {
-                    $query->where('date', $specificDate); // Filter event listings by the requested date
+                    $query->where('date', $specificDate)->where('attendance', 'No'); // Filter event listings by the requested date
                 }])
                 ->where(function ($query) use ($specificDate) {
                     $query->where('date', '<=', $specificDate)
@@ -133,7 +133,7 @@ class EventController extends BaseController
         try {
             $event = Event::where('end_date', '>=', date('Y-m-d'))->first();
             if($event) {
-                $getUserData = EventListing::where('date',date('Y-m-d'))->where('time', '<=',date('H:i:s'))->get();
+                $getUserData = EventListing::where('attendance', 'Yes')->where('date',date('Y-m-d'))->where('time', '<=',date('H:i:s'))->get();
                 $user = $request->user();
             } else {
                 $getUserData = [];

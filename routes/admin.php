@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\EventTimelineController;
+use App\Http\Controllers\Admin\EventAttendanceController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\MainQuizController;
@@ -85,7 +86,15 @@ Route::name('admin.')->group(
         Route::get('event-timeline/edit/{id}', [EventTimelineController::class, 'edit'])->name('event-timeline.edit');
         Route::post('event-timeline/update/{id}', [EventTimelineController::class, 'update'])->name('event-timeline.update');
         Route::put('event-timeline/update/{id}', [EventTimelineController::class, 'update'])->name('event-timeline.update');
-        Route::get('event-timeline/destroy/{id}', [EventTimelineController::class, 'destroy'])->name('event-timeline.destroy');
+        Route::delete('event-timeline/destroy/{id}', [EventTimelineController::class, 'destroy'])->name('event-timeline.destroy');
+
+        Route::get('event-attendance/{id}', [EventAttendanceController::class, 'index'])->name('event-attendance.index');
+        Route::get('event-attendance/create/{id}', [EventAttendanceController::class, 'create'])->name('event-attendance.create');
+        Route::post('event-attendance/store/{id}', [EventAttendanceController::class, 'store'])->name('event-attendance.store');
+        Route::get('event-attendance/edit/{id}', [EventAttendanceController::class, 'edit'])->name('event-attendance.edit');
+        Route::post('event-attendance/update/{id}', [EventAttendanceController::class, 'update'])->name('event-attendance.update');
+        Route::put('event-attendance/update/{id}', [EventAttendanceController::class, 'update'])->name('event-attendance.update');
+        Route::delete('event-attendance/destroy/{id}', [EventAttendanceController::class, 'destroy'])->name('event-attendance.destroy');
 
 
         Route::get('group/{id}', [GroupController::class, 'index'])->name('group.index');
