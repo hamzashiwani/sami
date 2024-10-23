@@ -83,7 +83,7 @@ class EventTimelineController extends Controller
                     'tags'
                 ]
             );
-
+            
             $data['tags'] = implode(',',$request->tags);
 
             if ($request->hasFile('image')) {

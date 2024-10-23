@@ -51,8 +51,13 @@
                                             <div class="form-group">
                                                 <label for="tags">Tags *</label>
                                                 <input type="text" id="tag-input" name="tags[]"
-                                                       value="{!! old('tags', $data->tags) !!}" class="form-control">
-                                                       <div id="tags-list" class="tags-list"></div>
+                                                        @if(old('tags'))
+                                                       value="{{ is_array(old('tags')) ? implode(',', old('tags')) : old('tags') }}" 
+                                                       @else
+                                                       value="{{ is_array($data->tags) ? implode(',', $data->tags) : $data->tags }}" 
+                                                       @endif
+                                                       class="form-control">
+                                                <div id="tags-list" class="tags-list"></div>
                                             </div>
                                         </div>
                                     </div>
