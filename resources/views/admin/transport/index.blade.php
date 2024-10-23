@@ -36,16 +36,16 @@
                                                         class="btn btn-primary btn-sm waves-effect waves-light"><i
                                                             class="feather icon-edit"></i></a>
 
-                                                    <!-- <button type="button"
+                                                    <button type="button"
                                                         class="btn btn-danger btn-sm waves-effect waves-light"
                                                         onclick="deleteConfirmation({!! $result->id !!})"><i
                                                             class="feather icon-trash"></i></button>
 
-                                                    <form action="{!! URL::route('admin.event-hotel.destroy', $result->id) !!}" method="POST"
+                                                    <form action="{!! URL::route('admin.event-transport.destroy', $result->id) !!}" method="POST"
                                                         id="deleteForm{!! $result->id !!}">
                                                         @csrf
                                                         @method('DELETE')
-                                                    </form> -->
+                                                    </form>
 
                                                 </td>
                                             </tr>

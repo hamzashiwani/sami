@@ -131,7 +131,7 @@ Route::name('admin.')->group(
         Route::get('event-hotel/edit/{id}', [HotelController::class, 'edit'])->name('event-hotel.edit');
         Route::post('event-hotel/update/{id}', [HotelController::class, 'update'])->name('event-hotel.update');
         Route::put('event-hotel/update/{id}', [HotelController::class, 'update'])->name('event-hotel.update');
-        Route::get('event-hotel/destroy/{id}', [HotelController::class, 'destroy'])->name('event-hotel.destroy');
+        Route::delete('event-hotel/destroy/{id}', [HotelController::class, 'destroy'])->name('event-hotel.destroy');
         Route::post('event-hotel/import-csv/{id}', [HotelController::class, 'import_csv'])->name('event-hotel.import-csv');
 
 
@@ -141,7 +141,7 @@ Route::name('admin.')->group(
         Route::get('event-flight/edit/{id}', [FlightController::class, 'edit'])->name('event-flight.edit');
         Route::post('event-flight/update/{id}', [FlightController::class, 'update'])->name('event-flight.update');
         Route::put('event-flight/update/{id}', [FlightController::class, 'update'])->name('event-flight.update');
-        Route::get('event-flight/destroy/{id}', [FlightController::class, 'destroy'])->name('event-flight.destroy');
+        Route::delete('event-flight/destroy/{id}', [FlightController::class, 'destroy'])->name('event-flight.destroy');
          Route::post('event-flight/import-csv/{id}', [FlightController::class, 'import_csv'])->name('event-flight.import-csv');
 
 
@@ -151,7 +151,7 @@ Route::name('admin.')->group(
         Route::get('event-transport/edit/{id}', [TransportController::class, 'edit'])->name('event-transport.edit');
         Route::post('event-transport/update/{id}', [TransportController::class, 'update'])->name('event-transport.update');
         Route::put('event-transport/update/{id}', [TransportController::class, 'update'])->name('event-transport.update');
-        Route::get('event-transport/destroy/{id}', [TransportController::class, 'destroy'])->name('event-transport.destroy');
+        Route::delete('event-transport/destroy/{id}', [TransportController::class, 'destroy'])->name('event-transport.destroy');
 
 
         Route::post('upload-image', [

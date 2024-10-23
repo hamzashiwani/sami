@@ -174,8 +174,10 @@ class HotelController extends Controller
     {
         try {
             $faq = EventHotel::find($id);
+            $event_id = $faq->event_id;
+            $faq->delete();
             return redirect()
-                ->route('admin.event-hotel.index')
+                ->route('admin.event-hotel.index', $event_id)
                 ->with('success', 'EventHotel has been deleted successfully.');
         }catch (\Exception $exception) {
             return redirect()

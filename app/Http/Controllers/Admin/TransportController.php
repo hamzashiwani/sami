@@ -186,8 +186,10 @@ class TransportController extends Controller
     {
         try {
             $faq = EventTransport::find($id);
+            $event_id = $faq->event_id;
+            $faq->delete();
             return redirect()
-                ->route('admin.event-transport.index')
+                ->route('admin.event-transport.index', $event_id)
                 ->with('success', 'EventTransport has been deleted successfully.');
         }catch (\Exception $exception) {
             return redirect()

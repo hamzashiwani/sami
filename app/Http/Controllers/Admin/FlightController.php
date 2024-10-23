@@ -174,8 +174,10 @@ class FlightController extends Controller
     {
         try {
             $faq = EventFlight::find($id);
+            $event_id = $faq->event_id;
+            $faq->delete();
             return redirect()
-                ->route('admin.event-flight.index')
+                ->route('admin.event-flight.index', $event_id)
                 ->with('success', 'EventFlight has been deleted successfully.');
         }catch (\Exception $exception) {
             return redirect()

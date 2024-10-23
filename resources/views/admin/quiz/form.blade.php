@@ -27,13 +27,6 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="event_id">Code *</label>
-                                                <input readonly type="text" id="code" name="code"
-                                                value="{{ old('code', $data->code) }}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
                                                 <label for="answer_a">Answer A *</label>
                                                 <input type="text" id="answer_a" name="answer_a" required
                                                        value="{!! old('answer_a', $data->answer_a) !!}" class="form-control">
