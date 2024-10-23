@@ -44,7 +44,6 @@ class NotificationController extends BaseController
                         });
                     });
                 })->orderBy('created_at', 'desc')
-                    // ->skip($skip)->take(10)
                     ->get();
     
                 // Map through notifications and check if the user has read them
