@@ -88,9 +88,10 @@ class GroupController extends Controller
                 })->get();
 
                 if ($existingGroups->count() > 0) {
+                    $user = User::find($userId);
                     return redirect()
                         ->back()
-                        ->with('error', "User with ID $userId is already in another group.");
+                        ->with('error', "$user->name already exists in another group.");
                 }
             }
         }
