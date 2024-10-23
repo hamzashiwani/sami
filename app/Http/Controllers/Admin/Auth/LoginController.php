@@ -61,6 +61,15 @@ class LoginController extends Controller
         $this->validateLogin($request);
 
         if ($this->attemptLogin($request)) {
+            if (Auth::user()->type == 2) {
+                Auth::logout(); // Log the user out
+                return redirect()
+                    ->back()
+                    ->withErrors([
+                        'email' => 'Access denied. Your account is not allowed to log in.',
+                    ]);
+            }
+    
             return $this->sendLoginResponse($request);
         }
 
