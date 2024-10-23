@@ -16,8 +16,8 @@ class NotificationController extends BaseController
             if (!$user) {
                 $skip = $request->input('skip', 0); // Default to 0 if not provided
                 $allNotifications = Notification::where('topic', 'Guest')->orderBy('created_at', 'desc')
-                    ->skip($skip)
-                    ->take(10)
+                    // ->skip($skip)
+                    // ->take(10)
                     ->get();
         
                 // Map through notifications
@@ -43,7 +43,9 @@ class NotificationController extends BaseController
                             $qwe->where('user_id', $user->id);
                         });
                     });
-                })->orderBy('created_at', 'desc')->skip($skip)->take(10)->get();
+                })->orderBy('created_at', 'desc')
+                    // ->skip($skip)->take(10)
+                    ->get();
     
                 // Map through notifications and check if the user has read them
                 $notifications = $allNotifications->map(function ($notification) use ($user) {
