@@ -68,6 +68,18 @@ class EventController extends Controller
     {
         try{
             DB::beginTransaction();
+
+             $overlappingEvent = Event::where(function ($query) use ($request) {
+            $query->where('date', '<=', $request->end_date)
+                  ->where('end_date', '>=', $request->date);
+            })->exists();
+    
+            if ($overlappingEvent) {
+                return redirect()
+                    ->back()
+                    ->with('error', 'An event already exists between the selected dates.');
+            }
+            
             $data = $request->except(
                 [
                     '_method',
