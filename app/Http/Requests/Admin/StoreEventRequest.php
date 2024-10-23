@@ -28,21 +28,8 @@ class StoreEventRequest extends FormRequest
             'title' => 'required|max:32',
             'description'  => 'required',
             'image'      => 'required|file|mimes:jpeg,jpg,png|max:5000',
-           'date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:date',
-            'date_check' => [
-                'required',
-                function ($attribute, $value, $fail) {
-                    $exists = Event::where(function ($query) use ($value) {
-                        $query->where('date', '<=', request('end_date'))
-                              ->where('end_date', '>=', $value);
-                    })->exists();
-    
-                    if ($exists) {
-                        $fail('An event already exists between the selected dates.');
-                    }
-                },
-            ],
+             'date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:date'
         ];
     }
 }
