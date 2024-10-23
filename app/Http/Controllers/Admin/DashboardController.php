@@ -27,6 +27,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->type == 2) {
+            return redirect()->route('admin.event.index');
+        } elseif(auth()->user()->type == 1) {
+            return redirect()->route('admin.notification.index');
+        }
+        
         $usersCount = User::count();
         $usersActiveCount = User::where('is_active',1)->count();
         $blogsCount = Blog::count();

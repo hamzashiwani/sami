@@ -27,7 +27,13 @@
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
                                                 <!-- <td><small><span class="badge badge-{!! $result->status == 'published' ? 'success' : 'danger' !!}">{!! strtoupper($result->status) !!}</span></small></td> -->
                                                 <td>
-                                                <a title="Group" href="{!! route('admin.group.index', $result->id) !!}" 
+                                                    @if(auth()->user()->type == 2)
+                                                        <a title="Quiz" href="{!! route('admin.main-quiz.index', $result->id) !!}" 
+                                                            class="btn btn-info btn-sm waves-effect waves-light">
+                                                                <i class="feather icon-book-open"></i> <!-- Icon for quiz -->
+                                                        </a>
+                                                    @else
+                                                    <a title="Group" href="{!! route('admin.group.index', $result->id) !!}" 
                                                     class="btn btn-info btn-sm waves-effect waves-light">
                                                         <i class="feather icon-grid"></i> <!-- Icon for transport -->
                                                     </a>
@@ -55,6 +61,7 @@
                                                     class="btn btn-primary btn-sm waves-effect waves-light">
                                                         <i class="feather icon-edit"></i> <!-- Icon for edit -->
                                                     </a>
+                                                    @endif
                                                 </td>
 
                                             </tr>

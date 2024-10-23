@@ -64,14 +64,14 @@ class LoginController extends Controller
             $user = $this->guard()->user(); // Get the authenticated user
 
             // Check if the user type is 2
-            if ($user->type == 2) {
-                $this->guard()->logout(); // Log the user out
-                return redirect()
-                    ->back()
-                    ->withErrors([
-                        'email' => 'Access denied. Your account is not allowed to log in.',
-                    ]);
-            }
+            // if ($user->type == 2) {
+            //     $this->guard()->logout(); // Log the user out
+            //     return redirect()
+            //         ->back()
+            //         ->withErrors([
+            //             'email' => 'Access denied. Your account is not allowed to log in.',
+            //         ]);
+            // }
             return $this->sendLoginResponse($request);
         }
 

@@ -61,6 +61,15 @@
                     </li>
                 </ul>
             </li>
+            @elseif(auth()->user()->type == 2)
+            <li class="nav-item {{ request()->segment(2) == 'event' ? 'active' : '' }}"> <a href="#"><i class="feather icon-cast"></i><span class="menu-title" data-i18n="User">Events</span></a>
+                <ul class="menu-content">
+                    <li class="{{ (request()->segment(2) == 'event' && request()->segment(3) == 'create') ? 'active' : '' }}"><a href="{{ route('admin.event.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Add New</span></a>
+                    </li>
+                    <li class="{{ (request()->segment(2) == 'event' && request()->segment(3) != 'create') ? 'active' : '' }}"><a href="{{ route('admin.event.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">List</span></a>
+                    </li>
+                </ul>
+            </li>
             @else
             <li class=" nav-item {{ request()->segment(2) == 'dashboard' ? 'active' : '' }}">
                 <a href="{{ url('/admin') }}">
