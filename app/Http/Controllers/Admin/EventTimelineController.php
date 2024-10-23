@@ -130,7 +130,7 @@ class EventTimelineController extends Controller
     public function edit($ids)
     {
         $data = EventListing::find($ids);
-        $id = $data->id;
+        $id = $data->event_id;
 
         $event =  Event::find($data->event_id);
         $startDate = $event->date;
