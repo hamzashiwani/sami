@@ -83,8 +83,10 @@ class GroupController extends Controller
         if ($users) {
             foreach ($users as $userId) {
                 // Check if user is already in another group
-                $existingGroups = Group::where('event_id', $id)->where('cordinator_id',$userId)->orwhereHas('members', function ($query) use ($userId) {
-                    $query->where('user_id', $userId);
+                $existingGroups = Group::where('event_id', $id)->where(function($q) use($userId) {
+                    $q->where('cordinator_id',$userId)->orwhereHas('members', function ($query) use ($userId) {
+                        $query->where('user_id', $userId);
+                    });
                 })->get();
 
                 if ($existingGroups->count() > 0) {
@@ -171,6 +173,23 @@ class GroupController extends Controller
 
             $blog = Group::findOrFail($request->id);
             $users = $request->input('users', []);
+            if ($users) {
+                foreach ($users as $userId) {
+                    // Check if user is already in another group
+                    $existingGroups = Group::where('id', '!=', $id)->where('event_id', $blog->event_id)->where(function($q) use ($userId) {
+                        $q->where('cordinator_id',$userId)->orwhereHas('members', function ($query) use ($userId) {
+                            $query->where('user_id', $userId);
+                        });
+                    })->get();
+
+                    if ($existingGroups->count() > 0) {
+                        $user = User::find($userId);
+                        return redirect()
+                            ->back()
+                            ->with('error', "$user->name already exists in another group.");
+                    }
+                }
+            }
 
             $data = $request->except(
                 [
