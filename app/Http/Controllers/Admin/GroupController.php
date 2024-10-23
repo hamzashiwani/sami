@@ -152,7 +152,7 @@ class GroupController extends Controller
             'type' => 'create',
             'heading' => 'Edit Group',
             'method' => 'PUT',
-            'action' => route('admin.group.update', $id),
+            'action' => route('admin.group.update', $ids),
             'cancel_url' => route('admin.group.index',$id)
         ];
         $users = User::all(); 
@@ -176,11 +176,11 @@ class GroupController extends Controller
             if ($users) {
                 foreach ($users as $userId) {
                     // Check if user is already in another group
-                    $existingGroups = Group::where('id', '!=', $id)->where('event_id', $blog->event_id)->where(function($q) use ($userId) {
+                    $existingGroups = Group::where('event_id', $blog->event_id)->where(function($q) use ($userId) {
                         $q->where('cordinator_id',$userId)->orwhereHas('members', function ($query) use ($userId) {
                             $query->where('user_id', $userId);
                         });
-                    })->get();
+                    })->where('id', '!=', $id)->get();
 
                     if ($existingGroups->count() > 0) {
                         $user = User::find($userId);
@@ -204,7 +204,7 @@ class GroupController extends Controller
             $blog->members()->sync($users);
             DB::commit();
             return redirect()
-                ->route('admin.group.index',$id)
+                ->route('admin.group.index',$blog->event_id)
                 ->with('success', 'Group has been updated successfully.');
         } catch (\Exception $exception) {
             DB::rollBack();
