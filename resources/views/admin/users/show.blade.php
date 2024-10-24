@@ -13,7 +13,7 @@
                             <div class="table-responsive">
                                 <div class="row" style="width: 100%;">
                                     <div class="col-6">
-                                        <p><h5>Name: </h5>{!! $data->name ?? 'N/A' !!}</p>
+                                        <p><h5>Full Name: </h5>{!! $data->name ?? 'N/A' !!}</p>
                                     </div>
                                     <div class="col-6">
                                         <p><h5>Email: </h5>{!! $data->email ?? 'N/A' !!}</p>

@@ -54,7 +54,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="topic">Topic *</label>
-                                                <select id="topic" name="topic" class="form-control" required>
+                                                <select id="topic" name="Notification Type" class="form-control" required>
                                                     <option value="">Select Topic</option>
                                                     <option value="Guest" {{ ($data->topic == 'Guest') ? 'selected': '' }}>Guest</option>
                                                     <option value="Internal" {{ ($data->topic == 'Internal') ? 'selected': '' }}>Users</option>
@@ -68,7 +68,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="event_id">Events *</label>
+                                                <label for="event_id">Select Event *</label>
                                                 <select class="form-control" id="event_id" name="event_id">
                                                     <option value="">Select Event</option>
                                                     @foreach($events as $index => $event)
@@ -83,7 +83,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="group_id">Groups *</label>
+                                                <label for="group_id">Select Group *</label>
                                                 <select class="form-control" id="group_id" name="group_id">
                                                     <option value="">Select Group</option>
                                                 </select>
@@ -128,7 +128,7 @@
                                     </div>
                                 </fieldset>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Save Changes</button>
+                                    <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Send</button>
                                     <a href="{!! $form['cancel_url'] !!}" class="btn btn-danger mr-1 mb-1 waves-effect waves-light" style="color: white">Cancel</a>
                                 </div>
                             </form>

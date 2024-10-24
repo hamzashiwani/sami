@@ -16,7 +16,7 @@
                                     <thead>
                                         <tr>
                                             <th>Title</th>
-                                            <th>Topic</th>
+                                            <th>Notification Type</th>
                                             <th>Event</th>
                                             <th>Group</th>
                                             <th>Created At</th>

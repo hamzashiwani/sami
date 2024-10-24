@@ -32,7 +32,7 @@ class HotelController extends Controller
     public function index($id)
     {
         try{
-            $data = EventHotel::where('event_id',$id)->get();
+            $data = EventHotel::whereHas('user')->where('event_id',$id)->get();
             $users = User::get();
             return view('admin.hotel.index', compact('data','id','users'));
         } catch (\Exception $e) {
@@ -51,7 +51,7 @@ class HotelController extends Controller
         $data = new EventHotel();
         $form = [
             'type' => 'create',
-            'heading' => 'Add EventHotel',
+            'heading' => 'Add Hotel Details',
             'method' => 'POST',
             'action' => route('admin.event-hotel.store',$id),
             'cancel_url' => route('admin.event-hotel.index',$id)
@@ -122,7 +122,7 @@ class HotelController extends Controller
         $id = $data->event_id;
         $form = [
             'type' => 'create',
-            'heading' => 'Edit EventHotel',
+            'heading' => 'Edit Hotel Details',
             'method' => 'PUT',
             'action' => route('admin.event-hotel.update', $ids),
             'cancel_url' => route('admin.event-hotel.index',$id)

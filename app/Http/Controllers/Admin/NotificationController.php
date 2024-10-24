@@ -234,6 +234,7 @@ class NotificationController extends Controller
     {
         try {
             $blog = Notification::find($id);
+            $blog->delete();
             return redirect()
                 ->route('admin.notification.index')
                 ->with('success', 'Notification has been deleted successfully.');

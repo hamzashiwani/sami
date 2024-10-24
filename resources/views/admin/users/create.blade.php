@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Add User <i class="feather icon-user"></i></h4>
+                    <h4 class="card-title">Add User Information <i class="feather icon-user"></i></h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
@@ -17,7 +17,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="first_name"> Name *</label>
+                                            <label for="first_name"> Full Name *</label>
                                             <input type="text" name="name" value="{{ old('name') }}" class="form-control" required>
                                         </div>
                                     </div>

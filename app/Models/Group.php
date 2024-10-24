@@ -11,6 +11,11 @@ class Group extends Model
 
     protected $guarded = [];
 
+    public function cordinator()
+    {
+        return $this->belongsTo(User::class,'cordinator_id');
+    }
+    
     public function members()
     {
         return $this->belongsToMany(User::class,'group_members');

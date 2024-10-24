@@ -134,7 +134,7 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        $data = Group::find($id);
+        $data = Group::with('members','cordinator')->find($id);
         return view('admin.group.show', compact('data',));
     }
 
@@ -225,9 +225,10 @@ class GroupController extends Controller
     {
         try {
             $blog = Group::find($id);
+            $data = $blog->event_id;
             Group::where('id',$id)->delete();
             return redirect()
-                ->route('admin.group.index')
+                ->route('admin.group.index',$data)
                 ->with('success', 'Group has been deleted successfully.');
         }catch (\Exception $exception) {
             return redirect()

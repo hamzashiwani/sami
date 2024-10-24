@@ -19,7 +19,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="title">Title *</label>
+                                                <label for="title">Event Name *</label>
                                                 <input type="text" id="title" name="title"
                                                        value="{{ old('title', $data->title) }}" class="form-control">
                                             </div>
@@ -53,7 +53,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="jobtitle">Image</label>
+                                                <label for="jobtitle">Upload Event Picture</label>
                                                 <input type="file" name="image" id="image" class="form-control">
                                             </div>
                                             @if(isset($data->id))
@@ -81,7 +81,7 @@
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="jobtitle">Document</label>
+                                                <label for="jobtitle">Upload Event Guideline</label>
                                                 <input type="file" name="document" id="document" class="form-control">
                                             </div>
                                             @if(isset($data->id))
@@ -117,7 +117,7 @@
                                     </div>
                                 </fieldset>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Save Changes</button>
+                                    <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Create</button>
                                     <a href="{!! $form['cancel_url'] !!}" class="btn btn-danger mr-1 mb-1 waves-effect waves-light" style="color: white">Cancel</a>
                                 </div>
                             </form>

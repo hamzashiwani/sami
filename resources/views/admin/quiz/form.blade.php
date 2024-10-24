@@ -27,28 +27,28 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="answer_a">Answer A *</label>
+                                                <label for="answer_a">Option A *</label>
                                                 <input type="text" id="answer_a" name="answer_a" required
                                                        value="{!! old('answer_a', $data->answer_a) !!}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="answer_b">Answer B *</label>
+                                                <label for="answer_b">Option B *</label>
                                                 <input type="text" id="answer_b" name="answer_b" required
                                                        value="{!! old('answer_b', $data->answer_b) !!}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="answer_c">Answer C *</label>
+                                                <label for="answer_c">Option C *</label>
                                                 <input type="text" id="answer_c" name="answer_c" required
                                                        value="{!! old('answer_c', $data->answer_c) !!}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="answer_d">Answer D *</label>
+                                                <label for="answer_d">Option D *</label>
                                                 <input type="text" id="answer_d" name="answer_d" required
                                                        value="{!! old('answer_d', $data->answer_d) !!}" class="form-control">
                                             </div>

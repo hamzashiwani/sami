@@ -50,17 +50,25 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="tags">Tags *</label>
+                                                <label for="tags">Hashtag *</label>
                                                 <input type="text" id="tag-input" name="tags[]"
-                                                        @if(old('tags'))
-                                                       value="{{ is_array(old('tags')) ? implode(',', old('tags')) : old('tags') }}" 
-                                                       @else
-                                                       value="{{ is_array($data->tags) ? implode(',', $data->tags) : $data->tags }}" 
-                                                       @endif
-                                                       class="form-control">
-                                                <div id="tags-list" class="tags-list"></div>
+                                                    class="form-control">
+                                                <div id="tags-list" class="tags-list">
+                                                    @php
+                                                        $tagsArray = is_string($data->tags) ? explode(',', $data->tags) : ($data->tags ?? []);
+                                                    @endphp
+                                        
+                                                    @foreach($tagsArray as $tag)
+                                                        <div class="tag">
+                                                            {{ $tag }}
+                                                            <span class="remove-tag" onclick="removeTag(this)">×</span>
+                                                            <input type="hidden" name="tags[]" value="{{ $tag }}">
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </fieldset>
                                 <fieldset>
@@ -124,7 +132,7 @@
                                     </div>
                                 </fieldset>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Save Changes</button>
+                                    <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Add</button>
                                     <a href="{!! $form['cancel_url'] !!}" class="btn btn-danger mr-1 mb-1 waves-effect waves-light" style="color: white">Cancel</a>
                                 </div>
                             </form>

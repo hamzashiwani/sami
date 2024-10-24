@@ -51,11 +51,11 @@ class Handler extends ExceptionHandler
         // if ($this->isHttpException($e)) {
         if ($request->is('api/*') && strpos(class_basename($e), 'Exception') !== false) {
             $response = [
-                'statusCode' => 500,
+                'statusCode' => 401,
                 'data'       => json_decode('{}'),
                 'message'    => $e->getMessage()
             ];
-            return response()->json($response, 500);
+            return response()->json($response, 401);
         } else {
             return parent::render($request, $e);
         }
