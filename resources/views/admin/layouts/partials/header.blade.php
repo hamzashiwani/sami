@@ -71,7 +71,7 @@
                 </ul>
             </li>
             <li class=" nav-item {{ request()->segment(2) == 'quiz-control' ? 'active' : '' }}">
-                <a href="http://44.198.175.232:9876/" target="_blank">
+                <a href="http://44.198.175.232:9877/" target="_blank">
                     <i class="feather icon-book"></i>
                     <span class="menu-title" data-i18n="Quiz">
                         Quiz Control
@@ -123,7 +123,7 @@
                 </ul>
             </li>
             <li class=" nav-item {{ request()->segment(2) == 'quiz-control' ? 'active' : '' }}">
-                <a href="http://44.198.175.232:9876/" target="_blank">
+                <a href="http://44.198.175.232:9877/" target="_blank">
                     <i class="feather icon-book"></i>
                     <span class="menu-title" data-i18n="Quiz">
                         Quiz Control
