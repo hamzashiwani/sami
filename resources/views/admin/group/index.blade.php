@@ -32,6 +32,10 @@
                                                         class="btn btn-primary btn-sm waves-effect waves-light"><i
                                                             class="feather icon-edit"></i></a>
 
+                                                     <a href="{!! route('admin.group.show', $result->id) !!}"
+                                                        class="btn btn-primary btn-sm waves-effect waves-light"><i
+                                                            class="feather icon-eye"></i></a>
+
                                                             <a href="#" onclick="openModal('{{$result->id}}')" class="btn btn-primary btn-sm waves-effect waves-light"><i
                                                             class="feather icon-upload"></i></a> 
                                                     <button Name="button"
