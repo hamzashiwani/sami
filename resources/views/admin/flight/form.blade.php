@@ -20,52 +20,6 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="question">From To *</label>
-                                                <input type="text" id="from_to" name="from_to" required
-                                                       value="{{ old('from_to', $data->from_to) }}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="event_id">Date *</label>
-                                                <input type="date" id="date" name="date"
-                                                value="{{ old('date', $data->date) }}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="room_no">Ticket No *</label>
-                                                <input type="text" id="ticket_no" name="ticket_no"
-                                                value="{{ old('ticket_no', $data->ticket_no) }}" class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="room_no">Flight No *</label>
-                                                <input type="text" id="seat_no" name="seat_no"
-                                                value="{{ old('seat_no', $data->seat_no) }}" class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="room_no">From Date Time *</label>
-                                                <input type="datetime-local" id="from_date_time" name="from_date_time"
-                                                value="{{ old('from_date_time', $data->from_date_time) }}" class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="room_no">To Date Time *</label>
-                                                <input type="datetime-local" id="to_date_time" name="to_date_time"
-                                                value="{{ old('to_date_time', $data->to_date_time) }}" class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
                                                 <label for="user_id">Users *</label>
                                                 <select class="users_single_dropdown js-states form-control" id="user_id" name="user_id" required>
                                                     <option value="">Select Users</option>
@@ -77,6 +31,145 @@
                                         </div>
                                     </div>
                                 </fieldset>
+                                <section style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label><h4>Departure</h4></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="departure_airline">Airline *</label>
+                                                    <input type="text" id="departure_airline" name="departure_airline" required
+                                                        value="{{ old('departure_airline', $data->departure_airline) }}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="departure_flight_no">Flight No *</label>
+                                                    <input type="text" id="departure_flight_no" name="departure_flight_no" required
+                                                        value="{{ old('departure_flight_no', $data->departure_flight_no) }}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="departure_fly_from">Fly From *</label>
+                                                    <input type="text" id="departure_fly_from" name="departure_fly_from" required
+                                                        value="{{ old('departure_fly_from', $data->departure_fly_from) }}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="departure_takeoff_date">Takeoff Date *</label>
+                                                    <input type="date" id="departure_takeoff_date" name="departure_takeoff_date"
+                                                    value="{{ old('departure_takeoff_date', $data->departure_takeoff_date) }}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="departure_takeoff_time">Takeoff Time *</label>
+                                                    <input type="time" id="departure_takeoff_time" name="departure_takeoff_time"
+                                                    value="{{ old('departure_takeoff_time', $data->departure_takeoff_time) }}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="departure_destination">Destination *</label>
+                                                    <input type="text" id="departure_destination" name="departure_destination"
+                                                    value="{{ old('departure_destination', $data->departure_destination) }}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="departure_landing_date">Landing Date *</label>
+                                                    <input type="date" id="departure_landing_date" name="departure_landing_date"
+                                                    value="{{ old('departure_landing_date', $data->departure_landing_date) }}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="departure_landing_time">Landing Time *</label>
+                                                    <input type="time" id="departure_landing_time" name="departure_landing_time"
+                                                    value="{{ old('departure_landing_time', $data->departure_landing_time) }}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </section>
+
+                                <section style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label><h4>Arrival</h4></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="arrival_airline">Airline *</label>
+                                                    <input type="text" id="arrival_airline" name="arrival_airline" required
+                                                        value="{{ old('arrival_airline', $data->arrival_airline) }}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="arrival_flight_no">Flight No *</label>
+                                                    <input type="text" id="arrival_flight_no" name="arrival_flight_no" required
+                                                        value="{{ old('arrival_flight_no', $data->arrival_flight_no) }}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="arrival_fly_from">Fly From *</label>
+                                                    <input type="text" id="arrival_fly_from" name="arrival_fly_from" required
+                                                        value="{{ old('arrival_fly_from', $data->arrival_fly_from) }}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="arrival_takeoff_date">Takeoff Date *</label>
+                                                    <input type="date" id="arrival_takeoff_date" name="arrival_takeoff_date"
+                                                    value="{{ old('arrival_takeoff_date', $data->arrival_takeoff_date) }}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="arrival_takeoff_time">Takeoff Time *</label>
+                                                    <input type="time" id="arrival_takeoff_time" name="arrival_takeoff_time"
+                                                    value="{{ old('arrival_takeoff_time', $data->arrival_takeoff_time) }}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="arrival_destination">Destination *</label>
+                                                    <input type="text" id="arrival_destination" name="arrival_destination"
+                                                    value="{{ old('arrival_destination', $data->arrival_destination) }}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="arrival_landing_date">Landing Date *</label>
+                                                    <input type="date" id="arrival_landing_date" name="arrival_landing_date"
+                                                    value="{{ old('arrival_landing_date', $data->arrival_landing_date) }}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="arrival_landing_time">Landing Time *</label>
+                                                    <input type="time" id="arrival_landing_time" name="arrival_landing_time"
+                                                    value="{{ old('arrival_landing_time', $data->arrival_landing_time) }}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </section>
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Save Changes</button>
                                     <a href="{!! $form['cancel_url'] !!}" class="btn btn-danger mr-1 mb-1 waves-effect waves-light" style="color: white">Cancel</a>

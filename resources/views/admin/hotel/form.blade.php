@@ -27,26 +27,39 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="event_id">Date *</label>
-                                                <input type="date" id="date" name="date"
-                                                value="{{ old('date', $data->date) }}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="time">Time *</label>
-                                                <input type="time" id="time" name="time"
-                                                value="{{ old('time', $data->time) }}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
                                                 <label for="room_no">Room No *</label>
                                                 <input type="text" id="room_no" name="room_no"
                                                 value="{{ old('room_no', $data->room_no) }}" class="form-control">
                                             </div>
                                         </div>
-
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="checkin_date">Checkin Date *</label>
+                                                <input type="date" id="checkin_date" name="checkin_date"
+                                                value="{{ old('checkin_date', $data->checkin_date) }}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="checkin_time">Checkin Time *</label>
+                                                <input type="time" id="checkin_time" name="checkin_time"
+                                                value="{{ old('checkin_time', $data->checkin_time) }}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="checkout_date">Checkout Date *</label>
+                                                <input type="date" id="checkout_date" name="checkout_date"
+                                                value="{{ old('checkout_date', $data->checkout_date) }}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="checkout_time">Checkout Time *</label>
+                                                <input type="time" id="checkout_time" name="checkout_time"
+                                                value="{{ old('checkout_time', $data->checkout_time) }}" class="form-control">
+                                            </div>
+                                        </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="user_id">Users *</label>

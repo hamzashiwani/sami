@@ -24,8 +24,8 @@
                                 <table class="table table-striped dataex-html5-selectors">
                                     <thead>
                                         <tr>
-                                            <th>From To</th>
-                                            <th>Date</th>
+                                            <th>Departure</th>
+                                            <th>Arrival</th>
                                             <th>User</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
@@ -34,8 +34,8 @@
                                     <tbody>
                                         @foreach ($data as $key => $result)
                                             <tr>
-                                                <td>{!! Str::limit($result->from_to, 20, '...') !!}</td>
-                                                <td>{!! $result->date !!}</td>
+                                                <td>{!! $result->departure_takeoff_date !!}</td>
+                                                <td>{!! $result->arrival_takeoff_date !!}</td>
                                                 <td>{!! $result->user->name !!}</td>
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
                                                 <td>

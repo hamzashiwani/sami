@@ -56,7 +56,9 @@ class FlightController extends Controller
             'action' => route('admin.event-flight.store',$id),
             'cancel_url' => route('admin.event-flight.index',$id)
         ];
-        $users = User::get();
+        $users = User::whereDoesntHave('flights', function ($query) use ($id) {
+            $query->where('event_id', $id);
+        })->get();
         return view('admin.flight.form', compact('data', 'form','id','users'));
     }
 
@@ -127,7 +129,9 @@ class FlightController extends Controller
             'action' => route('admin.event-flight.update', $ids),
             'cancel_url' => route('admin.event-flight.index',$id)
         ];
-        $users = User::get();
+        $users = User::whereDoesntHave('flights', function ($query) use ($id) {
+            $query->where('event_id', $id);
+        })->orWhere('id', $data->user_id)->get();
         return view('admin.flight.form', compact('data', 'form','id','users'));
     }
 

@@ -61,7 +61,7 @@ class Event extends Model
 
     public function flights()
     {
-        return $this->hasMany(EventFlight::class)->where('user_id', Auth::id());
+        return $this->hasOne(EventFlight::class)->where('user_id', Auth::id());
     }
 
     public function transports()

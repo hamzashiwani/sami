@@ -57,7 +57,7 @@ class TransportController extends Controller
             'cancel_url' => route('admin.event-transport.index',$id)
         ];
         $users = User::get();
-        $groups = Group::get();
+        $groups = Group::where('event_id', $id)->get();
         return view('admin.transport.form', compact('data', 'form','id','users','groups'));
     }
 
@@ -139,7 +139,7 @@ class TransportController extends Controller
             'cancel_url' => route('admin.event-transport.index',$id)
         ];
         $users = User::get();
-        $groups = Group::get();
+        $groups = Group::where('event_id', $id)->get();
         return view('admin.transport.form', compact('data', 'form','id','users','groups'));
     }
 
