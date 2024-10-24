@@ -33,12 +33,11 @@
                                                             class="feather icon-edit"></i></a>
 
                                                             <a href="#" onclick="openModal('{{$result->id}}')" class="btn btn-primary btn-sm waves-effect waves-light"><i
-                                                            class="feather icon-upload"></i></a>
-<!-- 
+                                                            class="feather icon-upload"></i></a> 
                                                     <button Name="button"
                                                         class="btn btn-danger btn-sm waves-effect waves-light"
                                                         onclick="deleteConfirmation({!! $result->id !!})"><i
-                                                            class="feather icon-trash"></i></button> -->
+                                                            class="feather icon-trash"></i></button>
 
                                                     <form action="{!! URL::route('admin.group.destroy', $result->id) !!}" method="POST"
                                                         id="deleteForm{!! $result->id !!}">
