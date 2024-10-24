@@ -134,7 +134,7 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        $data = Group::find($id);
+        $data = Group::with('members','cordinator')->find($id);
         return view('admin.group.show', compact('data',));
     }
 
