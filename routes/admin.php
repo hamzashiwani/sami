@@ -104,6 +104,7 @@ Route::name('admin.')->group(
         Route::get('group/edit/{id}', [GroupController::class, 'edit'])->name('group.edit');
         Route::post('group/update/{id}', [GroupController::class, 'update'])->name('group.update');
         Route::put('group/update/{id}', [GroupController::class, 'update'])->name('group.update');
+        Route::get('group/show/{id}', [GroupController::class, 'show'])->name('group.show');
         Route::get('group/destroy/{id}', [GroupController::class, 'destroy'])->name('group.destroy');
         Route::post('group/import-csv/{id}', [GroupController::class, 'import_csv'])->name('group.import-csv');
 
