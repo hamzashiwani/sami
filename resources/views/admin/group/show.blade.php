@@ -34,14 +34,14 @@
                                         <div class="col-6">
                                             <p><h5>Cordinator Phone: </h5>{!! $data->cordinator_phone ?? '' !!}</p>
                                         </div>
-                                        <div class="col-6">
-                                           <div class="container">
+                                       <div class="col-6">
+                                            <div class="container">
                                                 <h5>Members:</h5>
                                                 <div class="d-flex flex-wrap">
                                                     @foreach ($data->members as $member)
                                                         <span class="badge bg-primary me-2 mb-2">
                                                             {!! $member->name ?? '' !!}
-                                                        </span><br><br>
+                                                        </span>
                                                     @endforeach
                                                 </div>
                                             </div>
