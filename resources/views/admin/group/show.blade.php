@@ -35,6 +35,18 @@
                                             <p><h5>Cordinator Phone: </h5>{!! $data->cordinator_phone ?? '' !!}</p>
                                         </div>
                                         <div class="col-6">
+                                           <div class="container">
+                                                <h5>Coordinators:</h5>
+                                                <div class="d-flex flex-wrap">
+                                                    @foreach ($data->members as $member)
+                                                        <span class="badge bg-primary me-2 mb-2">
+                                                            {!! $member>name ?? '' !!}
+                                                        </span>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
                                             <p><h5>Content: </h5>{!! $data->content ?? '' !!}</p>
                                         </div>
                                     </div>
