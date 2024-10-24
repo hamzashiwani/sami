@@ -15,7 +15,7 @@
                                 <table class="table table-striped dataex-html5-selectors">
                                     <thead>
                                         <tr>
-                                            <th>Title</th>
+                                            <th>Attendance Title</th>
                                             <th>Date</th>
                                             <th>Time</th>
                                             <th>Code</th>

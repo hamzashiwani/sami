@@ -29,7 +29,7 @@
                                             <p><h5>Description: </h5>{!! $data->description ?? '' !!}</p>
                                         </div>
                                         <div class="col-6">
-                                            <p><h5>Topic: </h5>{!! $data->topic == 'Internal' ? 'Users' : $data->topic !!}</p>
+                                            <p><h5>Notification Type: </h5>{!! $data->topic == 'Internal' ? 'Users' : $data->topic !!}</p>
                                         </div>
                                         <div class="col-6">
                                             <p><h5>Event: </h5>{!! $data->event->title ?? '' !!}</p>

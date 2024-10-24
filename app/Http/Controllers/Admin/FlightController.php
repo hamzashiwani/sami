@@ -32,7 +32,7 @@ class FlightController extends Controller
     public function index($id)
     {
         try{
-            $data = EventFlight::where('event_id',$id)->get();
+            $data = EventFlight::whereHas('user')->where('event_id',$id)->get();
             $users = User::get();
             return view('admin.flight.index', compact('data','id','users'));
         } catch (\Exception $e) {
@@ -51,7 +51,7 @@ class FlightController extends Controller
         $data = new EventFlight();
         $form = [
             'type' => 'create',
-            'heading' => 'Add EventFlight',
+            'heading' => 'Add Flights Details',
             'method' => 'POST',
             'action' => route('admin.event-flight.store',$id),
             'cancel_url' => route('admin.event-flight.index',$id)
@@ -124,7 +124,7 @@ class FlightController extends Controller
         $id = $data->event_id;
         $form = [
             'type' => 'create',
-            'heading' => 'Edit EventFlight',
+            'heading' => 'Edit Flights Details',
             'method' => 'PUT',
             'action' => route('admin.event-flight.update', $ids),
             'cancel_url' => route('admin.event-flight.index',$id)

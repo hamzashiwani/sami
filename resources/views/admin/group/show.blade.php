@@ -23,20 +23,20 @@
                                 <div class="table-responsive">
                                     <div class="row" style="width: 100%;">
                                         <div class="col-6">
-                                            <p><h5>Name: </h5>{!! $data->name !!}</p>
+                                            <p><h5>Group Name: </h5>{!! $data->name !!}</p>
                                         </div>
                                         <div class="col-6">
                                             <p><h5>Description: </h5>{!! $data->description ?? '' !!}</p>
                                         </div>
                                         <div class="col-6">
-                                            <p><h5>Cordinator: </h5>{!! $data->cordinator->name ?? '' !!}</p>
+                                            <p><h5>Group Coordinator: </h5>{!! $data->cordinator->name ?? '' !!}</p>
                                         </div>
                                         <div class="col-6">
-                                            <p><h5>Cordinator Phone: </h5>{!! $data->cordinator_phone ?? '' !!}</p>
+                                            <p><h5>Cordinator Phone Number: </h5>{!! $data->cordinator_phone ?? '' !!}</p>
                                         </div>
                                        <div class="col-6">
                                             <div class="container">
-                                                <h5>Members:</h5>
+                                                <h5>Group Members:</h5>
                                                 <div class="d-flex flex-wrap">
                                                     @foreach ($data->members as $member)
                                                         <span class="badge bg-primary me-2 mb-2">
@@ -45,9 +45,6 @@
                                                     @endforeach
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <p><h5>Content: </h5>{!! $data->content ?? '' !!}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6">

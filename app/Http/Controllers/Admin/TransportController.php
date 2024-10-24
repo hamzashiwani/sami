@@ -32,7 +32,9 @@ class TransportController extends Controller
     public function index($id)
     {
         try{
-            $data = EventTransport::where('event_id',$id)->get();
+            $data = EventTransport::where(function($q) {
+                $q->whereHas('user')->orWhereHas('group');
+            })->where('event_id',$id)->get();
             $users = User::get();
             return view('admin.transport.index', compact('data','id','users'));
         } catch (\Exception $e) {
@@ -51,7 +53,7 @@ class TransportController extends Controller
         $data = new EventTransport();
         $form = [
             'type' => 'create',
-            'heading' => 'Add EventTransport',
+            'heading' => 'Add Transport Details',
             'method' => 'POST',
             'action' => route('admin.event-transport.store',$id),
             'cancel_url' => route('admin.event-transport.index',$id)
@@ -133,7 +135,7 @@ class TransportController extends Controller
         $id = $data->event_id;
         $form = [
             'type' => 'create',
-            'heading' => 'Edit EventTransport',
+            'heading' => 'Edit Transport Details',
             'method' => 'PUT',
             'action' => route('admin.event-transport.update', $ids),
             'cancel_url' => route('admin.event-transport.index',$id)

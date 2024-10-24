@@ -25,7 +25,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="title">Name *</label>
+                                                <label for="title">Group Name *</label>
                                                 <input type="text" id="name" name="name"
                                                        value="{{ old('name', $data->name) }}" class="form-control">
                                             </div>
@@ -59,7 +59,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="topic">Coordinator *</label>
+                                                <label for="topic">Select Group Coordinator *</label>
                                                 <select id="user-dropdown" name="cordinator_id" class="form-control" required>
                                                     <!-- Options will be populated by AJAX -->
                                                 </select>
@@ -71,7 +71,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="cordinator_phone">Coordinator Contact *</label>
+                                                <label for="cordinator_phone">Coordinator Phone Number *</label>
                                                 <input type="number" id="cordinator_phone" name="cordinator_phone"
                                                        value="{{ old('cordinator_phone', $data->cordinator_phone) }}" class="form-control">
                                             </div>
@@ -82,7 +82,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="topic">Members *</label>
+                                                <label for="topic">Select Group Members </label>
                                                 <select id="user-dropdown1" name="users[]" multiple  class="form-control" >
                                                    
                                                     <!-- Options will be populated by AJAX -->
@@ -92,7 +92,7 @@
                                     </div>
                                 </fieldset>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Save Changes</button>
+                                    <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Save</button>
                                     <a href="{!! $form['cancel_url'] !!}" class="btn btn-danger mr-1 mb-1 waves-effect waves-light" style="color: white">Cancel</a>
                                 </div>
                             </form>

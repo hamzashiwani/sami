@@ -20,7 +20,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="question">Bus Name *</label>
+                                                <label for="question">Vehicle Name or Number *</label>
                                                 <input type="text" id="name" name="name" required
                                                        value="{{ old('name', $data->name) }}" class="form-control">
                                             </div>
@@ -49,7 +49,7 @@
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="user_id">Type *</label>
+                                                <label for="user_id">Assign by *</label>
                                                 <select id="type" name="type" class="form-control" required>
                                                     <option value="">Select Type</option>
                                                     <option value="0" {!! $data->type == "0" ? 'selected' : '' !!}>User</option>
@@ -60,9 +60,9 @@
                                         @if($data->type == 0)
                                         <div class="col-sm-6 user" >
                                             <div class="form-group">
-                                                <label for="user_id">Users *</label>
+                                                <label for="user_id">Select User *</label>
                                                 <select id="user_id" name="user_id" class="users_single_dropdown js-states form-control" >
-                                                    <option value="">Select Users</option>
+                                                    <option value="">Select User</option>
                                                     @foreach($users as $user)
                                                      <option value="{{$user->id}}" {!! $data->user_id == $user->id ? 'selected' : '' !!}>{{$user->name}}</option>
                                                     @endforeach
@@ -72,7 +72,7 @@
 
                                         <div class="col-sm-6 group" style="display:none">
                                             <div class="form-group">
-                                                <label for="user_id">Group *</label>
+                                                <label for="user_id">Select Group *</label>
                                                 <select id="group_id" name="group_id" class="groups_single_dropdown js-states form-control" >
                                                     <option value="">Select Group</option>
                                                     @foreach($groups as $group)
@@ -84,9 +84,9 @@
                                         @else
                                         <div class="col-sm-6 user" style="display:none">
                                             <div class="form-group">
-                                                <label for="user_id">Users *</label>
+                                                <label for="user_id">Select User *</label>
                                                 <select id="user_id" name="user_id" class="users_single_dropdown js-states form-control" >
-                                                    <option value="">Select Users</option>
+                                                    <option value="">Select User</option>
                                                     @foreach($users as $user)
                                                      <option value="{{$user->id}}" {!! $data->user_id == $user->id ? 'selected' : '' !!}>{{$user->name}}</option>
                                                     @endforeach
@@ -96,7 +96,7 @@
 
                                         <div class="col-sm-6 group" >
                                             <div class="form-group">
-                                                <label for="user_id">Group *</label>
+                                                <label for="user_id">Select Group *</label>
                                                 <select id="group_id" name="group_id" class="groups_single_dropdown js-states form-control" >
                                                     <option value="">Select Group</option>
                                                     @foreach($groups as $group)
@@ -109,7 +109,7 @@
                                     </div>
                                 </fieldset>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Save Changes</button>
+                                    <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Save</button>
                                     <a href="{!! $form['cancel_url'] !!}" class="btn btn-danger mr-1 mb-1 waves-effect waves-light" style="color: white">Cancel</a>
                                 </div>
                             </form>

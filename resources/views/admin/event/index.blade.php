@@ -15,7 +15,8 @@
                                 <table class="table table-striped dataex-html5-selectors">
                                     <thead>
                                         <tr>
-                                            <th>Title</th>
+                                            <th>Event Name</th>
+                                            <th>Event Date</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -24,6 +25,7 @@
                                         @foreach ($data as $key => $result)
                                             <tr>
                                                 <td>{!! Str::limit($result->title, 20, '...') !!}</td>
+                                                <td><span style="display: none">{!! strtotime($result->date) !!}</span>{!! date('d/m/Y', strtotime($result->date)) !!}</td>
                                                 <td><span style="display: none">{!! strtotime($result->created_at) !!}</span>{!! date('d/m/Y H:i:A', strtotime($result->created_at)) !!}</td>
                                                 <!-- <td><small><span class="badge badge-{!! $result->status == 'published' ? 'success' : 'danger' !!}">{!! strtoupper($result->status) !!}</span></small></td> -->
                                                 <td>

@@ -20,7 +20,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="question">Title *</label>
+                                                <label for="question">Quiz Name *</label>
                                                 <input type="text" id="title" name="title" required
                                                        value="{{ old('title', $data->title) }}" class="form-control">
                                             </div>
