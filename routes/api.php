@@ -23,7 +23,7 @@ Route::post('login', 'ApiController@login');
 		Route::get('show-guest', 'EventController@index');
 	});
 
-    Route::group(['prefix' => 'notification'], function () {
+    Route::group(['prefix' => 'guest-notification'], function () {
 		Route::get('show', 'NotificationController@index');
 		Route::get('detail', 'NotificationController@detail');
 	});
@@ -90,9 +90,3 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 		Route::post('save-device-token', 'Auth\PassportAuthController@saveDeviceToken');
 	});
 });
-
-
-    Route::group(['prefix' => 'notification'], function () {
-		Route::get('show', 'NotificationController@index');
-		Route::get('detail', 'NotificationController@detail');
-	});
