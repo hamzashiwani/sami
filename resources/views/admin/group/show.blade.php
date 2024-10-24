@@ -40,7 +40,7 @@
                                                 <div class="d-flex flex-wrap">
                                                     @foreach ($data->members as $member)
                                                         <span class="badge bg-primary me-2 mb-2">
-                                                            {!! $member>name ?? '' !!}
+                                                            {!! $member->name ?? '' !!}
                                                         </span>
                                                     @endforeach
                                                 </div>
