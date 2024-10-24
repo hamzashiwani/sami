@@ -71,7 +71,7 @@ class Event extends Model
                 $e->whereHas('eventGroups', function($q) {
                     $q->whereHas('members', function($qw) {
                         $qw->where('user_id', Auth::id());
-                    });
+                    })->orWhere('cordinator_id', Auth::id());
                 });
             });
         })->whereRaw("STR_TO_DATE(CONCAT(date, ' ', time), '%Y-%m-%d %H:%i:%s') > ?", [Carbon::now()])
