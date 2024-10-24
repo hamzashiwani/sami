@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Blog Details <i class="feather icon-film"></i></h4>
+                    <h4 class="card-title">Group Details <i class="feather icon-film"></i></h4>
                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -23,28 +23,23 @@
                                 <div class="table-responsive">
                                     <div class="row" style="width: 100%;">
                                         <div class="col-6">
-                                            <p><h5>Title: </h5>{!! $data->title !!}</p>
-                                        </div>
-                                        <div class="col-6">
-                                            <p><h5>Slug: </h5>{!! $data->slug !!}</p>
+                                            <p><h5>Name: </h5>{!! $data->name !!}</p>
                                         </div>
                                         <div class="col-6">
                                             <p><h5>Description: </h5>{!! $data->description ?? '' !!}</p>
                                         </div>
                                         <div class="col-6">
-                                            <p><h5>Topic: </h5>{!! $data->topic ?? '' !!}</p>
+                                            <p><h5>Cordinator: </h5>{!! $data->cordinator->name ?? '' !!}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p><h5>Cordinator Phone: </h5>{!! $data->cordinator_phone ?? '' !!}</p>
                                         </div>
                                         <div class="col-6">
                                             <p><h5>Content: </h5>{!! $data->content ?? '' !!}</p>
                                         </div>
-                                        <div class="col-6">
-                                            <p><h5>Image: </h5>
-                                            <td><img src="{{$data->image_url}}" height="50px;"></td>
-                                                </p>
-                                        </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="{!! route('admin.blog.index') !!}" style="margin-left: -1rem;
+                                        <a href="{!! route('admin.group.index',$data->event_id) !!}" style="margin-left: -1rem;
                                                     margin-top: 2rem;"
                                            class="btn btn-primary waves-effect waves-light">
                                             <i class="ti ti-check me-1"></i>Back
