@@ -36,12 +36,12 @@
                                         </div>
                                         <div class="col-6">
                                            <div class="container">
-                                                <h5>Coordinators:</h5>
+                                                <h5>Members:</h5>
                                                 <div class="d-flex flex-wrap">
                                                     @foreach ($data->members as $member)
                                                         <span class="badge bg-primary me-2 mb-2">
                                                             {!! $member->name ?? '' !!}
-                                                        </span>
+                                                        </span><br>
                                                     @endforeach
                                                 </div>
                                             </div>
