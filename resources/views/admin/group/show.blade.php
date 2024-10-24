@@ -41,7 +41,7 @@
                                                     @foreach ($data->members as $member)
                                                         <span class="badge bg-primary me-2 mb-2">
                                                             {!! $member->name ?? '' !!}
-                                                        </span><br>
+                                                        </span><br><br>
                                                     @endforeach
                                                 </div>
                                             </div>
