@@ -55,22 +55,25 @@
                                                     @if(old('tags'))
                                                         value="{{ is_array(old('tags')) ? implode(',', old('tags')) : old('tags') }}" 
                                                     @else
-                                                        value="{{ is_array($data->tags) ? implode(',', $data->tags) : $data->tags }}" 
+                                                        value="{{ is_array($data->tags) ? implode(',', $data->tags) : (is_string($data->tags) ? $data->tags : '') }}" 
                                                     @endif
                                                     class="form-control">
                                                 <div id="tags-list" class="tags-list">
-                                                    @if($data->tags)
-                                                        @foreach($data->tags as $tag)
-                                                            <div class="tag">
-                                                                {{ $tag }}
-                                                                <span class="remove-tag" onclick="removeTag(this)">×</span>
-                                                                <input type="hidden" name="tags[]" value="{{ $tag }}">
-                                                            </div>
-                                                        @endforeach
-                                                    @endif
+                                                    @php
+                                                        $tagsArray = is_string($data->tags) ? explode(',', $data->tags) : ($data->tags ?? []);
+                                                    @endphp
+                                        
+                                                    @foreach($tagsArray as $tag)
+                                                        <div class="tag">
+                                                            {{ $tag }}
+                                                            <span class="remove-tag" onclick="removeTag(this)">×</span>
+                                                            <input type="hidden" name="tags[]" value="{{ $tag }}">
+                                                        </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </fieldset>
                                 <fieldset>
