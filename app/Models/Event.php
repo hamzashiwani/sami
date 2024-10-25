@@ -36,11 +36,7 @@ class Event extends Model
                     "contact" => $user->phone
                 ];
             } else {
-                return [
-                    "name" => "",
-                    "group" => "",
-                    "contact" => ""
-                ];
+                return null;
             }
     }
 
